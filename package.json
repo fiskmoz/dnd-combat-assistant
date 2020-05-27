@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "postinstall": "cd front-end && ng build --prod"
+  }
+}
