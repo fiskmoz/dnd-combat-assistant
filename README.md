@@ -17,10 +17,8 @@ Install python 3
 Navigate to project root  
 `python app.py`
 
-If changes to FE has been made, and deployment should be made use command:  
-`ng build --prod`  
-To update the current angular dist located in static.
-Dont forget to also include this in the commit.
+navigate to front-end map:  
+`ng serve --proxy-config proxy.config.json`
 
 ### Credits
 

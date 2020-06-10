@@ -1,5 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
+import { HttpClientModule } from "@angular/common/http";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -11,6 +12,8 @@ import { CheckboxComponent } from "./components/inputs/checkbox/checkbox.compone
 import { DropdownComponent } from "./components/inputs/dropdown/dropdown.component";
 import { TextboxComponent } from "./components/inputs/textbox/textbox.component";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { PlayersService } from "./services/players.service";
+import { RouterModule } from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -21,17 +24,17 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
     CheckboxComponent,
     DropdownComponent,
     TextboxComponent,
-    ReactiveFormsModule,
-    FormsModule,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    HttpClientModule,
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
+    AppRoutingModule,
+    RouterModule,
   ],
-  providers: [],
+  providers: [PlayersService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
