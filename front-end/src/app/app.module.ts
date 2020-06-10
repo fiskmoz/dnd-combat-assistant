@@ -6,7 +6,6 @@ import { AppComponent } from "./app.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { HomePageComponent } from "./components/pages/home-page/home-page.component";
 import { ButtonComponent } from "./components/inputs/button/button.component";
-import { ConfirmationModalComponent } from "./components/inputs/confirmation-modal/confirmation-modal.component";
 import { RadioButtonsComponent } from "./components/inputs/radio-buttons/radio-buttons.component";
 import { CheckboxComponent } from "./components/inputs/checkbox/checkbox.component";
 import { DropdownComponent } from "./components/inputs/dropdown/dropdown.component";
@@ -18,7 +17,6 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
     AppComponent,
     HomePageComponent,
     ButtonComponent,
-    ConfirmationModalComponent,
     RadioButtonsComponent,
     CheckboxComponent,
     DropdownComponent,
