@@ -1,0 +1,10 @@
+<div [formGroup]="parentForm">
+  <input
+    class="form-control"
+    [ngClass]="invalid ? 'is-invalid' : ''"
+    type="{{ type }}"
+    placeholder="{{ placeholder }}"
+    [attr.id]="id"
+    [formControlName]="formControlKey"
+  />
+</div>

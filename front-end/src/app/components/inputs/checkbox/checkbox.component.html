@@ -1,0 +1,16 @@
+<div
+  class="custom-control custom-checkbox"
+  [class.custom-control-inline]="inline"
+  [class.disabled]="disabled"
+>
+  <input
+    type="checkbox"
+    class="custom-control-input"
+    [attr.id]="id"
+    [checked]="checked"
+    (change)="onChange($event)"
+    [name]="name"
+    [disabled]="disabled"
+  />
+  <label class="custom-control-label" [attr.for]="id">{{ text }}</label>
+</div>

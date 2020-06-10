@@ -1,0 +1,19 @@
+<div
+  [ngClass]="
+    horizontal
+      ? 'custom-control custom-radio custom-control-inline'
+      : 'custom-control custom-radio'
+  "
+  *ngFor="let label of labels; let i = index"
+>
+  <input
+    (change)="onRadioChange($event)"
+    type="radio"
+    class="custom-control-input radio-font-size"
+    [attr.checked]="firstSelected && i == 0 ? '' : null"
+    [value]="i"
+    [name]="name"
+    [attr.id]="id + i"
+  />
+  <label class="custom-control-label" [attr.for]="id + i">{{ label }}</label>
+</div>
