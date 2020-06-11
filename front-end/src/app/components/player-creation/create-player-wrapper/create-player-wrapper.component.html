@@ -1,20 +1,50 @@
 <p>create-player-wrapper works!</p>
 <div class="container">
-  <app-button
-    [text]="'Add Player'"
-    [small]="true"
-    [type]="'secondary'"
-    (clicked$)="onPlayerAdd()"
-  ></app-button>
-
-  <app-button
-    [text]="'Remove Player'"
-    [small]="true"
-    [type]="'secondary'"
-    (clicked$)="onPlayerRemove()"
-  ></app-button>
-
-  <div *ngFor="let player of playerSerivce.playerList" class="row">
-    <app-create-player [player]="player"></app-create-player>
+  <div class="row">
+    <div class="card">
+      <div class="card-body">
+        <h4>Encounter difficulty</h4>
+        <p>
+          Easy: {{ playerSerivce.easyEncounter }}xp Medium:
+          {{ playerSerivce.mediumEncounter }}xp Hard:
+          {{ playerSerivce.hardEncounter }}xp Deadly:
+          {{ playerSerivce.deadlyEncounter }}xp
+        </p>
+        <div class="d-flex">
+          <div class="pr-2">
+            <app-button
+              [text]="'Add Player'"
+              [small]="true"
+              [type]="'primary'"
+              (clicked$)="onPlayerAdd()"
+            ></app-button>
+          </div>
+          <div class="px-2">
+            <app-button
+              [text]="'Remove Player'"
+              [small]="true"
+              [type]="'secondary'"
+              (clicked$)="onPlayerRemove()"
+            ></app-button>
+          </div>
+          <div class="px-2">
+            <app-button
+              [text]="'Save'"
+              [small]="true"
+              [type]="'primary'"
+              (clicked$)="onSave()"
+            ></app-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div *ngFor="let player of playerSerivce.playerList">
+      <app-create-player
+        [player]="player"
+        (playerChanged$)="onPlayerChanged()"
+      ></app-create-player>
+    </div>
   </div>
 </div>

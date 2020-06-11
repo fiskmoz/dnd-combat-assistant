@@ -11,14 +11,15 @@ export class PlayersService {
   public playerXpTable: IPlayerXpTable = {
     levels: [],
   };
-  public easyEncounter: number;
-  public mediumEncounter: number;
-  public hardEncounter: number;
-  public deadlyEncounter: number;
+  public easyEncounter = 0;
+  public mediumEncounter = 0;
+  public hardEncounter = 0;
+  public deadlyEncounter = 0;
 
   constructor(private http: HttpClient) {}
 
-  CalculateEncounterDifficulty(): IPlayerXpRow {
+  CalculateEncounterDifficulty() {
+    this.SetPlayerXPthreshhold();
     let totalEasyEncounterXp = 0;
     let totalMediumEncounterXp = 0;
     let totalHardEncounterXp = 0;
@@ -29,20 +30,19 @@ export class PlayersService {
       totalHardEncounterXp += player.xpthreshhold.hard;
       totalDeadlyEncounterXp += player.xpthreshhold.deadly;
     });
-    return {
-      easy: totalEasyEncounterXp,
-      medium: totalMediumEncounterXp,
-      hard: totalHardEncounterXp,
-      deadly: totalDeadlyEncounterXp,
-    } as IPlayerXpRow;
+    this.easyEncounter = totalEasyEncounterXp;
+    this.mediumEncounter = totalMediumEncounterXp;
+    this.hardEncounter = totalHardEncounterXp;
+    this.deadlyEncounter = totalDeadlyEncounterXp;
   }
 
   SetPlayerXPthreshhold() {
     if (!this.playerList) {
+      console.log("failed to set player xp threshhold");
       return;
     }
     this.playerList.forEach((player: Player) => {
-      player.xpthreshhold = this.playerXpTable[player.level];
+      player.xpthreshhold = this.playerXpTable["levels"][player.level];
     });
   }
 
@@ -53,9 +53,11 @@ export class PlayersService {
     } as Player;
     if (!this.playerList) {
       this.playerList = [mrDefault];
-      return;
+    } else {
+      this.playerList.push(mrDefault);
     }
-    this.playerList.push(mrDefault);
+    this.SetPlayerXPthreshhold();
+    this.CalculateEncounterDifficulty();
   }
 
   init() {

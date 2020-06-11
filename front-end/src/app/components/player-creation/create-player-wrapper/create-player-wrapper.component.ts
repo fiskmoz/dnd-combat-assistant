@@ -13,12 +13,21 @@ export class CreatePlayerWrapperComponent implements OnInit {
 
   onPlayerAdd() {
     this.playerSerivce.AddNewPlayer();
-    console.log(this.playerSerivce.playerList);
   }
 
   onPlayerRemove() {
     if (!!this.playerSerivce.playerList) {
       this.playerSerivce.playerList.pop();
     }
+    this.playerSerivce.CalculateEncounterDifficulty();
+  }
+
+  onPlayerChanged() {
+    this.playerSerivce.CalculateEncounterDifficulty();
+  }
+
+  onSave() {
+    // TODO
+    // EITHER SAVE TO FUTURE DB OR LOCALSTORE IN BROWSER
   }
 }
