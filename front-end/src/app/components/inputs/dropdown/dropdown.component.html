@@ -1,8 +1,9 @@
-<div [formGroup]="parentForm">
+<div>
   <select
     [attr.id]="id"
     class="form-control"
-    [formControlName]="formControlKey"
+    [ngModel]="defaultSelection"
+    (ngModelChange)="onChange($event)"
   >
     <option *ngFor="let string of list">{{ string }}</option>
   </select>

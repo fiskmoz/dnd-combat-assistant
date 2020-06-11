@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
 @Component({
@@ -12,7 +12,19 @@ export class DropdownComponent implements OnInit {
   @Input() parentForm: FormGroup;
   @Input() formControlKey: string;
 
+  @Output() change$ = new EventEmitter<string>();
+
+  defaultSelection = "1";
+
   constructor() {}
 
   ngOnInit(): void {}
+
+  onChange(target: string) {
+    if (!target) {
+      return;
+    }
+
+    this.change$.emit(target);
+  }
 }

@@ -1,0 +1,20 @@
+<p>create-player-wrapper works!</p>
+<div class="container">
+  <app-button
+    [text]="'Add Player'"
+    [small]="true"
+    [type]="'secondary'"
+    (clicked$)="onPlayerAdd()"
+  ></app-button>
+
+  <app-button
+    [text]="'Remove Player'"
+    [small]="true"
+    [type]="'secondary'"
+    (clicked$)="onPlayerRemove()"
+  ></app-button>
+
+  <div *ngFor="let player of playerSerivce.playerList" class="row">
+    <app-create-player [player]="player"></app-create-player>
+  </div>
+</div>

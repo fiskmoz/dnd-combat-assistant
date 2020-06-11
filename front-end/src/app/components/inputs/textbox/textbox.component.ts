@@ -11,8 +11,6 @@ export class TextboxComponent implements OnInit {
   @Input() placeholder: string;
   @Input() invalid: boolean;
   @Input() id: string;
-  @Input() parentForm: FormGroup;
-  @Input() formControlKey: string;
 
   @Output() textChanged$ = new EventEmitter<string>();
 
@@ -20,13 +18,11 @@ export class TextboxComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onTextChange(event: Event) {
-    const target = event.target as HTMLElement;
-
-    if (!target) {
+  onTextChange(name: string) {
+    if (!name) {
       return;
     }
 
-    this.textChanged$.emit(target.textContent);
+    this.textChanged$.emit(name);
   }
 }

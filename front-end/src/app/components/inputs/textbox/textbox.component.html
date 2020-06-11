@@ -1,10 +1,11 @@
-<div [formGroup]="parentForm">
+<div>
   <input
     class="form-control"
     [ngClass]="invalid ? 'is-invalid' : ''"
     type="{{ type }}"
     placeholder="{{ placeholder }}"
     [attr.id]="id"
-    [formControlName]="formControlKey"
+    [ngModel]="''"
+    (ngModelChange)="onTextChange($event)"
   />
 </div>

@@ -38,9 +38,24 @@ export class PlayersService {
   }
 
   SetPlayerXPthreshhold() {
+    if (!this.playerList) {
+      return;
+    }
     this.playerList.forEach((player: Player) => {
       player.xpthreshhold = this.playerXpTable[player.level];
     });
+  }
+
+  AddNewPlayer() {
+    const mrDefault = {
+      level: 1,
+      name: "mrs default",
+    } as Player;
+    if (!this.playerList) {
+      this.playerList = [mrDefault];
+      return;
+    }
+    this.playerList.push(mrDefault);
   }
 
   init() {
