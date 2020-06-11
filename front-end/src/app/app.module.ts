@@ -14,8 +14,8 @@ import { TextboxComponent } from "./components/inputs/textbox/textbox.component"
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { PlayersService } from "./services/players.service";
 import { RouterModule } from "@angular/router";
-import { CreatePlayerWrapperComponent } from './components/player-creation/create-player-wrapper/create-player-wrapper.component';
-import { CreatePlayerComponent } from './components/player-creation/create-player/create-player.component';
+import { CreatePlayerWrapperComponent } from "./components/player-creation/create-player-wrapper/create-player-wrapper.component";
+import { CreatePlayerComponent } from "./components/player-creation/create-player/create-player.component";
 
 @NgModule({
   declarations: [
