@@ -27,21 +27,27 @@ with open('./data/encounter_thresholds.json') as file:
 
 # CONSTANTS
 possible_locations = ["city", "village", "mountain", "sea", "sky", "cave",
-                      "plain", "desert", "frostlands", "swamp", "forrest", "underdark"]
+                      "plain", "frostlands", "swamp", "forest", "underdark"]
 # Extend possible types
-possible_types_city = ["construct", "elemental", "humanoid, undead"]
-possible_types_village = ["humanoid"]
-possible_types_mointain = ["gigant", "dragon"]
-possible_types_sea = ["monstrosity", "beast"]
-possible_types_sky = ["celestrial", "monstrosity"]
-possible_types_cave = ["monstrosity"]
-possible_types_plain = ["humanoid", "beast", "undead"]
-possible_types_frostlands = ["monstrosity", "beast"]
-possible_types_swamp = ["gigant", "ooze"]
-possible_types_forrest = ["beast", "ooze", "plant", "swarm of tiny beasts"]
-possible_types_underdark = ["undead", "fiend", "humanoid"]
+possible_types_dict = {
+    "city": ["construct", "elemental", "humanoid, undead", 'aberration'],
+    "village": ["humanoid", "dragon", 'monstrosity', 'giant', 'aberration'],
+    "mountain": ["giant", "dragon", 'monstrosity', 'humanoid'],
+    "sea": ["monstrosity", "beast", "dragon", 'humanoid', 'aberration', "fey"],
+    "sky": ["celestial", "monstrosity", "dragon"],
+    "cave": ["monstrosity", "dragon", 'elemental', 'plant', 'giant', 'aberration', 'swarm of Tiny beasts'],
+    "plain": ["humanoid", "beast", "undead", "dragon", 'elemental', 'humanoid', 'plant', 'swarm of Tiny beasts'],
+    "frostlands": ["monstrosity", "beast", 'elemental'],
+    "swamp": ["giant", "ooze", 'monstrosity', 'swarm of Tiny beasts'],
+    "forest": ["beast", "ooze", "plant", "swarm of tiny beasts,'monstrosity", 'humanoid', 'fey'],
+    "underdark": ["undead", "fiend", "humanoid", "dragon"],
+}
+
 possible_allignments = ["lawful good", "neutral good", "chaotic good", "lawful neutral",
                         "neutral", "chaotic neutral", "lawful evil", "neutral evil", "chaotic good", "unaligned"]
+#
+possible_types_all = ['dragon', 'elemental', 'monstrosity', 'construct', 'beast', 'humanoid', 'plant',
+                      'fiend', 'ooze', 'fey', 'giant', 'celestial', 'aberration', 'undead', 'swarm of Tiny beasts']
 
 
 @app.route('/')
@@ -74,35 +80,47 @@ def generate():
     partyxp = request.args.get('partyxp')
     monsters = request.args.get('monsters')
     locations = request.args.get('locations')
-    alignment = request.args.get('alignment')
-    origins = request.args.get('origins').split('-')
+    origins = request.args.get('origins')
 
-    # IF ALIGNMENT PROVIDED IS VALID.
-    # VALIDATE ALL PROPS
-    challenge_ratings = GetChallengeRatings(str(partyxp), str(monsters))
+    if partyxp == None or monsters == None or locations == None or origins == None:
+        return SendBadRequest('Invalid request parameters')
 
-    # EXTEND WITH:
-    # description and speed recognicion of key words, such as speed: swimming or darkvision or languages
+    # should validate partyxp and monsters, non ints will not cause crash here.
+    challenge_ratings = GetChallengeRatings(int(partyxp), int(monsters))
     response_json = {}
     response_index = 0
     possible_types = []
-    if locations != None:
-        for location in locations.split('-'):
-            possible_types = possible_types + GetValidTypes(location)
+    search_words = []
+    locations_list = locations.split('-')
+
+    if 'sea' in locations_list:
+        search_words.append('sea')
+    for location in locations_list:
+        if location in possible_locations:
+            possible_types = possible_types + possible_types_dict[location]
+
+    # REMOVE DUPLICATES
+    possible_types = list(dict.fromkeys(possible_types))
     random.shuffle(monster_data)
+
     for key in range(len(monster_data)):
-        if monster_data[key]['challenge_rating'] in challenge_ratings and not monster_data[key]['named'] and monster_data[key]['origin'] in origins:
-            if locations != None:
-                if monster_data[key]['type'] not in possible_types:
-                    continue
+        if not monster_data[key]['challenge_rating'] in challenge_ratings or monster_data[key]['named'] or not monster_data[key]['origin'] in origins:
+            continue
+        if monster_data[key]['type'] not in possible_types:
+            continue
+        isOceanMonster = IsOceanMonster(monster_data, key)
+        if 'sea' in search_words:
+            if not isOceanMonster:
+                continue
+        else:
+            if isOceanMonster:
+                continue
+        while True:
             response_json[response_index] = monster_data[key]
-            response_index += 1
             challenge_ratings.remove(monster_data[key]['challenge_rating'])
-            # ONLY IF LOWEST CR IN MONSTER PARTY
-            while monster_data[key]['challenge_rating'] in challenge_ratings and random.randint(0, 100) < 50:
-                response_json[response_index] = monster_data[key]
-                challenge_ratings.remove(monster_data[key]['challenge_rating'])
-                response_index += 1
+            response_index += 1
+            if not monster_data[key]['challenge_rating'] in challenge_ratings or random.randint(0, 100) <= 35:
+                break
 
     if len(challenge_ratings) > 0:
         print("failed to assign all monsters, try duplicating?")
@@ -122,8 +140,6 @@ def serve_static(path):
 
 
 def GetChallengeRatings(partyxp, members):
-    partyxp = int(partyxp)
-    members = int(members)
     if members == 1:
         return [ChallengeRatingByExperience(partyxp)]
     challenge_ratings = []
@@ -134,7 +150,7 @@ def GetChallengeRatings(partyxp, members):
                 str(ChallengeRatingByExperience(remainingxp)))
             continue
         # Adjust these for more fair encounters.
-        random_percentage = random.randint(25, 75) / 100
+        random_percentage = random.randint(30, 60) / 100
         challenge_ratings.append(
             str(ChallengeRatingByExperience(remainingxp*random_percentage)))
         remainingxp = remainingxp * (1 - random_percentage)
@@ -142,105 +158,35 @@ def GetChallengeRatings(partyxp, members):
 
 
 def ChallengeRatingByExperience(experience):
-    if experience < 11500:
-        if experience < 2300:
-            if experience < 10:
-                return "0"
-            elif experience <= 25:
-                return "1/8"
-            elif experience <= 50:
-                return "1/4"
-            elif experience <= 100:
-                return "1/2"
-            elif experience <= 200:
-                return "1"
-            elif experience <= 450:
-                return "2"
-            elif experience <= 700:
-                return "3"
-            elif experience <= 1100:
-                return "4"
-            elif experience <= 1800:
-                return "5"
-            elif experience <= 2300:
-                return "6"
+    previous_cr = None
+    for cr in cr_to_xp_table:
+        if previous_cr == None:
+            if experience <= int(cr_to_xp_table[cr]):
+                return cr
+            previous_cr = cr
         else:
-            if experience <= 2900:
-                return "7"
-            elif experience <= 3900:
-                return "8"
-            elif experience <= 5000:
-                return "9"
-            elif experience <= 5900:
-                return "10"
-            elif experience <= 7200:
-                return "11"
-            elif experience <= 8400:
-                return "12"
-            elif experience <= 10000:
-                return "13"
-            elif experience <= 11500:
-                return "14"
-    else:
-        if experience < 41000:
-            if experience < 13000:
-                return "15"
-            elif experience <= 15000:
-                return "16"
-            elif experience <= 18000:
-                return "17"
-            elif experience <= 20000:
-                return "18"
-            elif experience <= 22000:
-                return "19"
-            elif experience <= 25000:
-                return "20"
-            elif experience <= 33000:
-                return "21"
-            elif experience <= 41000:
-                return "22"
-        else:
-            if experience <= 50000:
-                return "23"
-            elif experience <= 62000:
-                return "24"
-            elif experience <= 75000:
-                return "25"
-            elif experience <= 90000:
-                return "26"
-            elif experience <= 105000:
-                return "27"
-            elif experience <= 120000:
-                return "28"
-            elif experience <= 135000:
-                return "29"
-            elif experience <= 155000:
-                return "30"
+            if experience <= int(cr_to_xp_table[cr]) + (int(cr_to_xp_table[cr]) - int(cr_to_xp_table[previous_cr])) / 1.5:
+                return cr
 
 
-def GetValidTypes(location):
-    if location == "city":
-        return possible_types_city
-    elif location == "forrest":
-        return possible_types_forrest
-    elif location == "village":
-        return possible_types_village
-    elif location == "mountain":
-        return possible_types_mointain
-    elif location == "sea":
-        return possible_types_sea
-    elif location == "sky":
-        return possible_types_sky
-    elif location == "cave":
-        return possible_types_cave
-    elif location == "plain":
-        return possible_types_plain
-    elif location == "frostland":
-        return possible_types_frostlands
-    elif location == "swamp":
-        return possible_types_swamp
-    elif location == "underdark":
-        return possible_types_underdark
+def IsOceanMonster(monster_data, key):
+    if 'swim' in monster_data[key]['speed_json']:
+        return True
+    if not 'special_abilities' in monster_data[key]:
+        return False
+    for ability in monster_data[key]['special_abilities']:
+        if ability['name'] == 'Amphibious':
+            return True
+    return False
+
+
+def SendBadRequest(text):
+    response = app.response_class(
+        response=text,
+        status=400,
+        mimetype='application/text'
+    )
+    return response
 
 
 if __name__ == "__main__":

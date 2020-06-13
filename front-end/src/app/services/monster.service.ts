@@ -39,7 +39,7 @@ export class MonsterService {
       apiUrl = apiUrl + "&alignment=" + alignment;
     }
     if (!!locations) {
-      apiUrl = apiUrl + "&location=" + locations.join("-");
+      apiUrl = apiUrl + "&locations=" + locations.join("-");
     }
     this.http.get<IMonsterIndex[]>(apiUrl).subscribe((r) => {
       Object.assign(this.currentEncounter, r);
