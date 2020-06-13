@@ -1,14 +1,17 @@
 # Dnd Combat Assistant
 
-TEMP
+Generate balanced encounters for your party given parameters for exmaple, number of players, location, encounter difficulty etc.
 
 ### Backlog:
 
-TEMP
+Style app container.
+Favicons
+Initiative generator
+IUA => postgres?
 
 ### The Stack:
 
-Flask + Angular
+Flask + Angular 9
 
 ### Getting started localhost:
 
@@ -18,8 +21,6 @@ Navigate to project root
 `python app.py`
 
 navigate to front-end map:  
+`npm start`
+or   
 `ng serve --proxy-config proxy.config.json`
-
-### Credits
-
-TEMP
