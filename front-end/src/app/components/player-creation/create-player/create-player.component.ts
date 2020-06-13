@@ -21,5 +21,6 @@ export class CreatePlayerComponent implements OnInit {
 
   nameChanged(name: string) {
     this.player.name = name;
+    this.playerChanged$.emit();
   }
 }

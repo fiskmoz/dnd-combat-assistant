@@ -2,7 +2,7 @@
   <select
     [attr.id]="id"
     class="form-control"
-    [ngModel]="defaultSelection"
+    [ngModel]="default"
     (ngModelChange)="onChange($event)"
   >
     <option *ngFor="let string of list">{{ string }}</option>

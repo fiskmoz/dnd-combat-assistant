@@ -16,7 +16,23 @@ export class PlayersService {
   public hardEncounter = 0;
   public deadlyEncounter = 0;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.http.get("/api/encounter/thresholds").subscribe((data: JSON) => {
+      for (const key in data) {
+        if (data.hasOwnProperty(key)) {
+          this.playerXpTable.levels[key] = {
+            easy: data[key].easy,
+            medium: data[key].medium,
+            hard: data[key].hard,
+            deadly: data[key].deadly,
+          } as IPlayerXpRow;
+        }
+      }
+      this.ReadLocalStorage();
+      this.SetPlayerXPthreshhold();
+      this.CalculateEncounterDifficulty();
+    });
+  }
 
   CalculateEncounterDifficulty() {
     this.SetPlayerXPthreshhold();
@@ -34,6 +50,7 @@ export class PlayersService {
     this.mediumEncounter = totalMediumEncounterXp;
     this.hardEncounter = totalHardEncounterXp;
     this.deadlyEncounter = totalDeadlyEncounterXp;
+    this.UpdateLocalStorage();
   }
 
   SetPlayerXPthreshhold() {
@@ -58,6 +75,7 @@ export class PlayersService {
     }
     this.SetPlayerXPthreshhold();
     this.CalculateEncounterDifficulty();
+    this.UpdateLocalStorage();
   }
 
   GetEncounterDifficulty(difficulty: string): string {
@@ -75,19 +93,21 @@ export class PlayersService {
     }
   }
 
-  init() {
-    this.http.get("/api/encounter/thresholds").subscribe((data: JSON) => {
-      for (const key in data) {
-        if (data.hasOwnProperty(key)) {
-          this.playerXpTable.levels[key] = {
-            easy: data[key].easy,
-            medium: data[key].medium,
-            hard: data[key].hard,
-            deadly: data[key].deadly,
-          } as IPlayerXpRow;
-        }
-      }
-      this.SetPlayerXPthreshhold();
-    });
+  private UpdateLocalStorage() {
+    localStorage.setItem(
+      "player_service_data",
+      JSON.stringify({
+        playerList: this.playerList,
+      })
+    );
+  }
+
+  private ReadLocalStorage() {
+    let storageJson = localStorage.getItem("player_service_data");
+    if (!storageJson) return;
+    storageJson = JSON.parse(storageJson);
+    if (!!storageJson.hasOwnProperty("playerList")) {
+      this.playerList = storageJson["playerList"];
+    }
   }
 }

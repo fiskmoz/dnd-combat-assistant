@@ -8,6 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 export class DropdownComponent implements OnInit {
   @Input() list: string[];
   @Input() id: string;
+  @Input() default: string;
 
   @Output() change$ = new EventEmitter<string>();
 
@@ -16,7 +17,7 @@ export class DropdownComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.defaultSelection = this.list[0];
+    this.defaultSelection = this.list[parseInt(this.default)];
   }
 
   onChange(target: string) {

@@ -7,7 +7,7 @@
         [id]="'SRDref'"
         [text]="'Basic 5e'"
         [name]="'SRD'"
-        [checked]="true"
+        [checked]="!!origins.includes('SRD')"
         [inline]="true"
         (changed$)="refChange($event)"
       ></app-checkbox>
@@ -15,7 +15,7 @@
         [id]="'CCref'"
         [name]="'CC'"
         [text]="'Creature Codex'"
-        [checked]="false"
+        [checked]="!!origins.includes('CC')"
         [inline]="true"
         (changed$)="refChange($event)"
       ></app-checkbox>
@@ -23,7 +23,7 @@
         [id]="'TOBref'"
         [name]="'TOB'"
         [text]="'Tome of beasts'"
-        [checked]="false"
+        [checked]="!!origins.includes('TOB')"
         [inline]="true"
         (changed$)="refChange($event)"
       ></app-checkbox>
@@ -49,6 +49,7 @@
               '12'
             ]"
             [id]="'monstertotal'"
+            [default]="monsterTotal"
             (change$)="monsterTotalChange($event)"
           >
           </app-dropdown>
@@ -58,6 +59,7 @@
           <app-dropdown
             [list]="['easy', 'medium', 'hard', 'deadly']"
             [id]="'encounterdiff'"
+            [default]="difficulty"
             (change$)="encounterDifficultyChange($event)"
           >
           </app-dropdown>
@@ -70,7 +72,7 @@
         [id]="'caveref'"
         [text]="'cave'"
         [name]="'cave'"
-        [checked]="false"
+        [checked]="locations.includes('cave')"
         [inline]="true"
         (changed$)="locationChange($event)"
       ></app-checkbox>
@@ -78,7 +80,7 @@
         [id]="'cityref'"
         [text]="'city'"
         [name]="'city'"
-        [checked]="false"
+        [checked]="locations.includes('city')"
         [inline]="true"
         (changed$)="locationChange($event)"
       ></app-checkbox>
@@ -86,7 +88,7 @@
         [id]="'villageref'"
         [text]="'village'"
         [name]="'village'"
-        [checked]="false"
+        [checked]="locations.includes('village')"
         [inline]="true"
         (changed$)="locationChange($event)"
       ></app-checkbox>
@@ -94,7 +96,7 @@
         [id]="'mountainref'"
         [text]="'mountain'"
         [name]="'mountain'"
-        [checked]="false"
+        [checked]="locations.includes('mountain')"
         [inline]="true"
         (changed$)="locationChange($event)"
       ></app-checkbox>
@@ -102,7 +104,7 @@
         [id]="'searef'"
         [text]="'sea'"
         [name]="'sea'"
-        [checked]="false"
+        [checked]="locations.includes('sea')"
         [inline]="true"
         (changed$)="locationChange($event)"
       ></app-checkbox>
@@ -110,7 +112,7 @@
         [id]="'skyref'"
         [text]="'sky'"
         [name]="'sky'"
-        [checked]="false"
+        [checked]="locations.includes('sky')"
         [inline]="true"
         (changed$)="locationChange($event)"
       ></app-checkbox>
@@ -118,7 +120,7 @@
         [id]="'plainref'"
         [text]="'plain'"
         [name]="'plain'"
-        [checked]="true"
+        [checked]="locations.includes('plain')"
         [inline]="true"
         (changed$)="locationChange($event)"
       ></app-checkbox>
@@ -126,7 +128,7 @@
         [id]="'desertref'"
         [text]="'desert'"
         [name]="'desert'"
-        [checked]="false"
+        [checked]="locations.includes('desert')"
         [inline]="true"
         (changed$)="locationChange($event)"
       ></app-checkbox>
@@ -134,7 +136,7 @@
         [id]="'frostlandsref'"
         [text]="'frostlands'"
         [name]="'frostlands'"
-        [checked]="false"
+        [checked]="locations.includes('frostlands')"
         [inline]="true"
         (changed$)="locationChange($event)"
       ></app-checkbox>
@@ -142,7 +144,7 @@
         [id]="'swampref'"
         [text]="'swamp'"
         [name]="'swamp'"
-        [checked]="false"
+        [checked]="locations.includes('swamp')"
         [inline]="true"
         (changed$)="locationChange($event)"
       ></app-checkbox>
@@ -150,7 +152,7 @@
         [id]="'forrestref'"
         [text]="'forrest'"
         [name]="'forrest'"
-        [checked]="false"
+        [checked]="locations.includes('forrest')"
         [inline]="true"
         (changed$)="locationChange($event)"
       ></app-checkbox>
@@ -158,7 +160,7 @@
         [id]="'underdarkref'"
         [text]="'underdark'"
         [name]="'underdark'"
-        [checked]="false"
+        [checked]="locations.includes('underdark')"
         [inline]="true"
         (changed$)="locationChange($event)"
       ></app-checkbox>

@@ -9,7 +9,5 @@ import { PlayersService } from "src/app/services/players.service";
 export class HomePageComponent implements OnInit {
   constructor(private playerService: PlayersService) {}
 
-  ngOnInit(): void {
-    this.playerService.init();
-  }
+  ngOnInit(): void {}
 }

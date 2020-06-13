@@ -3,6 +3,7 @@
     Character name:
     <app-textbox
       [placeholder]="'enter character name...'"
+      [type]="'text'"
       (textChanged$)="nameChanged($event)"
     ></app-textbox>
     Character level:
@@ -29,6 +30,7 @@
         '19',
         '20'
       ]"
+      [default]="player.level"
       (change$)="levelChanged($event)"
     ></app-dropdown>
   </div>
