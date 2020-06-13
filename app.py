@@ -31,8 +31,8 @@ possible_locations = ["city", "village", "mountain", "sea", "sky", "cave",
 # Extend possible types
 possible_types_city = ["construct", "elemental", "humanoid, undead"]
 possible_types_village = ["humanoid"]
-possible_types_mointain = ["gigant"]
-possible_types_sea = ["monstrosity"]
+possible_types_mointain = ["gigant", "dragon"]
+possible_types_sea = ["monstrosity", "beast"]
 possible_types_sky = ["celestrial", "monstrosity"]
 possible_types_cave = ["monstrosity"]
 possible_types_plain = ["humanoid", "beast", "undead"]
@@ -73,7 +73,7 @@ def crtable():
 def generate():
     partyxp = request.args.get('partyxp')
     monsters = request.args.get('monsters')
-    location = request.args.get('location')
+    locations = request.args.get('locations')
     alignment = request.args.get('alignment')
     origins = request.args.get('origins').split('-')
 
@@ -85,12 +85,14 @@ def generate():
     # description and speed recognicion of key words, such as speed: swimming or darkvision or languages
     response_json = {}
     response_index = 0
-    if location != None:
-        possible_types = GetValidTypes(location)
+    possible_types = []
+    if locations != None:
+        for location in locations.split('-'):
+            possible_types = possible_types + GetValidTypes(location)
     random.shuffle(monster_data)
     for key in range(len(monster_data)):
         if monster_data[key]['challenge_rating'] in challenge_ratings and not monster_data[key]['named'] and monster_data[key]['origin'] in origins:
-            if location != None:
+            if locations != None:
                 if monster_data[key]['type'] not in possible_types:
                     continue
             response_json[response_index] = monster_data[key]

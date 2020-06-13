@@ -9,16 +9,16 @@ import { FormGroup } from "@angular/forms";
 export class DropdownComponent implements OnInit {
   @Input() list: string[];
   @Input() id: string;
-  @Input() parentForm: FormGroup;
-  @Input() formControlKey: string;
 
   @Output() change$ = new EventEmitter<string>();
 
-  defaultSelection = "1";
+  defaultSelection = "0";
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.defaultSelection = this.list[0];
+  }
 
   onChange(target: string) {
     if (!target) {

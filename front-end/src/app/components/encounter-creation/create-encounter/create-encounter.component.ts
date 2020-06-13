@@ -15,15 +15,31 @@ export class CreateEncounterComponent implements OnInit {
   ) {}
 
   origins = ["SRD"];
+  locations = [
+    "city",
+    "village",
+    "mountain",
+    "sea",
+    "sky",
+    "cave",
+    "plain",
+    "desert",
+    "frostlands",
+    "swamp",
+    "forrest",
+    "underdark",
+  ];
+  monsterTotal = "1";
+  difficulty = "easy";
 
   ngOnInit(): void {}
   onRandomEncounter() {
     this.monsterService.GenerateRandomEncounter(
-      "2",
-      this.playerService.mediumEncounter.toString(),
+      this.monsterTotal,
+      this.playerService.GetEncounterDifficulty(this.difficulty),
       this.origins,
       null,
-      null
+      this.locations
     );
   }
 
@@ -33,5 +49,19 @@ export class CreateEncounterComponent implements OnInit {
     } else {
       this.origins = this.origins.filter((o) => o !== event.name);
     }
+  }
+
+  locationChange(event: ICheckboxChangeEvent) {
+    if (event.checked && this.locations.indexOf(event.name) === -1) {
+      this.locations.push(event.name);
+    } else {
+      this.locations = this.locations.filter((o) => o !== event.name);
+    }
+  }
+  monsterTotalChange(event: string) {
+    this.monsterTotal = event;
+  }
+  encounterDifficultyChange(event: string) {
+    this.difficulty = event;
   }
 }
