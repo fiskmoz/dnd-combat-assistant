@@ -16,6 +16,10 @@ import { PlayersService } from "./services/players.service";
 import { RouterModule } from "@angular/router";
 import { CreatePlayerWrapperComponent } from "./components/player-creation/create-player-wrapper/create-player-wrapper.component";
 import { CreatePlayerComponent } from "./components/player-creation/create-player/create-player.component";
+import { MonsterService } from "./services/monster.service";
+import { CreateEncounterComponent } from "./components/encounter-creation/create-encounter/create-encounter.component";
+import { MonsterCardComponent } from "./components/encounter-creation/monster-card/monster-card.component";
+import { FloorPipe } from "./pipes/floor.pipe";
 
 @NgModule({
   declarations: [
@@ -28,6 +32,9 @@ import { CreatePlayerComponent } from "./components/player-creation/create-playe
     TextboxComponent,
     CreatePlayerWrapperComponent,
     CreatePlayerComponent,
+    CreateEncounterComponent,
+    MonsterCardComponent,
+    FloorPipe,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +45,7 @@ import { CreatePlayerComponent } from "./components/player-creation/create-playe
     AppRoutingModule,
     RouterModule,
   ],
-  providers: [PlayersService],
+  providers: [PlayersService, MonsterService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

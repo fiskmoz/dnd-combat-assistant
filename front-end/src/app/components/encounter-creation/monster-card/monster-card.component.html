@@ -1,0 +1,72 @@
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <div class="header">
+          <h3>{{ monster.name }}</h3>
+          <p>
+            <i>{{ monster.type }}, {{ monster.alignment }}</i>
+          </p>
+        </div>
+        <div>
+          <p><b>Armor class: </b>{{ monster.armor_class }}</p>
+          <p>
+            <b>Hit Points: </b>{{ monster.hit_points }} ({{ monster.hit_dice }})
+          </p>
+          <p><b>Speed: </b>{{ monster.speed }}</p>
+        </div>
+        <div>
+          <p>
+            <b>STR </b> {{ monster.strength }}({{
+              (monster.strength - 10) / 2 | floor
+            }}) <b>DEX </b> {{ monster.dexterity }}({{
+              (monster.dexterity - 10) / 2 | floor
+            }}) <b>CON </b> {{ monster.constitution }}({{
+              (monster.constitution - 10) / 2 | floor
+            }})
+          </p>
+          <p>
+            <b>INT </b> {{ monster.intelligence }}({{
+              (monster.intelligence - 10) / 2 | floor
+            }}) <b>WIS </b> {{ monster.wisdom }}({{
+              (monster.wisdom - 10) / 2 | floor
+            }}) <b>CHA </b> {{ monster.charisma }}({{
+              (monster.charisma - 10) / 2 | floor
+            }})
+          </p>
+        </div>
+        <div>
+          <p><b>Senses: </b> {{ monster.senses }}</p>
+          <p><b>Languages: </b> {{ monster.languages }}</p>
+          <p><b>Challenge: </b> {{ monster.challenge_rating }}</p>
+        </div>
+        <div>
+          <div *ngIf="!!monster.special_abilities">
+            <div *ngFor="let ability of monster.special_abilities">
+              <p>
+                <b>{{ ability.name }}: </b> {{ ability.desc }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <div>
+          <img
+            src="https://aidedd.org/dnd/images/{{
+              monster.name.replace(' ', '-') | lowercase
+            }}.jpeg"
+            alt=""
+          />
+        </div>
+        <div *ngIf="!!monster.actions">
+          <div *ngFor="let ability of monster.actions">
+            <p>
+              <b>{{ ability.name }}: </b> {{ ability.desc }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
