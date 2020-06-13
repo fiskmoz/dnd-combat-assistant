@@ -124,7 +124,7 @@
     "special_abilities": [
       {
         "name": "Spellcasting",
-        "desc": "The acolyte is a 1st-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 12, +4 to hit with spell attacks). The acolyte has following cleric spells prepared:\n\nâ€¢ Cantrips (at will): light, sacred flame, thaumaturgy\nâ€¢ 1st level (3 slots): bless, cure wounds, sanctuary",
+        "desc": "The acolyte is a 1st-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 12, +4 to hit with spell attacks). The acolyte has following cleric spells prepared:\n\n Cantrips (at will): light, sacred flame, thaumaturgy\n 1st level (3 slots): bless, cure wounds, sanctuary",
         "attack_bonus": 0
       }
     ],
@@ -2420,7 +2420,7 @@
       },
       {
         "name": "Spellcasting",
-        "desc": "The sphinx is a 12th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 18, +10 to hit with spell attacks). It requires no material components to cast its spells. The sphinx has the following cleric spells prepared:\n\nâ€¢ Cantrips (at will): sacred flame, spare the dying, thaumaturgy\nâ€¢ 1st level (4 slots): command, detect evil and good, detect magic\nâ€¢ 2nd level (3 slots): lesser restoration, zone of truth\nâ€¢ 3rd level (3 slots): dispel magic, tongues\nâ€¢ 4th level (3 slots): banishment, freedom of movement\nâ€¢ 5th level (2 slots): flame strike, greater restoration\nâ€¢ 6th level (1 slot): heroes' feast",
+        "desc": "The sphinx is a 12th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 18, +10 to hit with spell attacks). It requires no material components to cast its spells. The sphinx has the following cleric spells prepared:\n\n Cantrips (at will): sacred flame, spare the dying, thaumaturgy\n 1st level (4 slots): command, detect evil and good, detect magic\n 2nd level (3 slots): lesser restoration, zone of truth\n 3rd level (3 slots): dispel magic, tongues\n 4th level (3 slots): banishment, freedom of movement\n 5th level (2 slots): flame strike, greater restoration\n 6th level (1 slot): heroes' feast",
         "attack_bonus": 0
       }
     ],
@@ -2678,7 +2678,7 @@
       },
       {
         "name": "Spellcasting",
-        "desc": "The archmage is an 18th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 17, +9 to hit with spell attacks). The archmage can cast disguise self and invisibility at will and has the following wizard spells prepared:\n\nâ€¢ Cantrips (at will): fire bolt, light, mage hand, prestidigitation, shocking grasp\nâ€¢ 1st level (4 slots): detect magic, identify, mage armor*, magic missile\nâ€¢ 2nd level (3 slots): detect thoughts, mirror image, misty step\nâ€¢ 3rd level (3 slots): counterspell,fly, lightning bolt\nâ€¢ 4th level (3 slots): banishment, fire shield, stoneskin*\nâ€¢ 5th level (3 slots): cone of cold, scrying, wall of force\nâ€¢ 6th level (1 slot): globe of invulnerability\nâ€¢ 7th level (1 slot): teleport\nâ€¢ 8th level (1 slot): mind blank*\nâ€¢ 9th level (1 slot): time stop\n* The archmage casts these spells on itself before combat.",
+        "desc": "The archmage is an 18th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 17, +9 to hit with spell attacks). The archmage can cast disguise self and invisibility at will and has the following wizard spells prepared:\n\n Cantrips (at will): fire bolt, light, mage hand, prestidigitation, shocking grasp\n 1st level (4 slots): detect magic, identify, mage armor*, magic missile\n 2nd level (3 slots): detect thoughts, mirror image, misty step\n 3rd level (3 slots): counterspell,fly, lightning bolt\n 4th level (3 slots): banishment, fire shield, stoneskin*\n 5th level (3 slots): cone of cold, scrying, wall of force\n 6th level (1 slot): globe of invulnerability\n 7th level (1 slot): teleport\n 8th level (1 slot): mind blank*\n 9th level (1 slot): time stop\n* The archmage casts these spells on itself before combat.",
         "attack_bonus": 0
       }
     ],
@@ -5383,7 +5383,7 @@
       },
       {
         "name": "Spellcasting",
-        "desc": "The fanatic is a 4th-level spellcaster. Its spell casting ability is Wisdom (spell save DC 11, +3 to hit with spell attacks). The fanatic has the following cleric spells prepared:\n\nCantrips (at will): light, sacred flame, thaumaturgy\nâ€¢ 1st level (4 slots): command, inflict wounds, shield of faith\nâ€¢ 2nd level (3 slots): hold person, spiritual weapon",
+        "desc": "The fanatic is a 4th-level spellcaster. Its spell casting ability is Wisdom (spell save DC 11, +3 to hit with spell attacks). The fanatic has the following cleric spells prepared:\n\nCantrips (at will): light, sacred flame, thaumaturgy\n 1st level (4 slots): command, inflict wounds, shield of faith\n 2nd level (3 slots): hold person, spiritual weapon",
         "attack_bonus": 0
       }
     ],
@@ -6314,7 +6314,7 @@
     "special_abilities": [
       {
         "name": "Spellcasting",
-        "desc": "The druid is a 4th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 12, +4 to hit with spell attacks). It has the following druid spells prepared:\n\nâ€¢ Cantrips (at will): druidcraft, produce flame, shillelagh\nâ€¢ 1st level (4 slots): entangle, longstrider, speak with animals, thunderwave\nâ€¢ 2nd level (3 slots): animal messenger, barkskin",
+        "desc": "The druid is a 4th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 12, +4 to hit with spell attacks). It has the following druid spells prepared:\n\n Cantrips (at will): druidcraft, produce flame, shillelagh\n 1st level (4 slots): entangle, longstrider, speak with animals, thunderwave\n 2nd level (3 slots): animal messenger, barkskin",
         "attack_bonus": 0
       }
     ],
@@ -9926,7 +9926,7 @@
       },
       {
         "name": "Shared Spellcasting (Coven Only)",
-        "desc": "While all three members of a hag coven are within 30 feet of one another, they can each cast the following spells from the wizard's spell list but must share the spell slots among themselves:\n\nâ€¢ 1st level (4 slots): identify, ray of sickness\nâ€¢ 2nd level (3 slots): hold person, locate object\nâ€¢ 3rd level (3 slots): bestow curse, counterspell, lightning bolt\nâ€¢ 4th level (3 slots): phantasmal killer, polymorph\nâ€¢ 5th level (2 slots): contact other plane, scrying\nâ€¢ 6th level (1 slot): eye bite\n\nFor casting these spells, each hag is a 12th-level spellcaster that uses Intelligence as her spellcasting ability. The spell save DC is 12+the hag's Intelligence modifier, and the spell attack bonus is 4+the hag's Intelligence modifier.",
+        "desc": "While all three members of a hag coven are within 30 feet of one another, they can each cast the following spells from the wizard's spell list but must share the spell slots among themselves:\n\n 1st level (4 slots): identify, ray of sickness\n 2nd level (3 slots): hold person, locate object\n 3rd level (3 slots): bestow curse, counterspell, lightning bolt\n 4th level (3 slots): phantasmal killer, polymorph\n 5th level (2 slots): contact other plane, scrying\n 6th level (1 slot): eye bite\n\nFor casting these spells, each hag is a 12th-level spellcaster that uses Intelligence as her spellcasting ability. The spell save DC is 12+the hag's Intelligence modifier, and the spell attack bonus is 4+the hag's Intelligence modifier.",
         "attack_bonus": 0
       },
       {
@@ -10231,7 +10231,7 @@
       },
       {
         "name": "Spellcasting",
-        "desc": "The naga is an 11th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 16, +8 to hit with spell attacks), and it needs only verbal components to cast its spells. It has the following cleric spells prepared:\n\nâ€¢ Cantrips (at will): mending, sacred flame, thaumaturgy\nâ€¢ 1st level (4 slots): command, cure wounds, shield of faith\nâ€¢ 2nd level (3 slots): calm emotions, hold person\nâ€¢ 3rd level (3 slots): bestow curse, clairvoyance\nâ€¢ 4th level (3 slots): banishment, freedom of movement\nâ€¢ 5th level (2 slots): flame strike, geas\nâ€¢ 6th level (1 slot): true seeing",
+        "desc": "The naga is an 11th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 16, +8 to hit with spell attacks), and it needs only verbal components to cast its spells. It has the following cleric spells prepared:\n\n Cantrips (at will): mending, sacred flame, thaumaturgy\n 1st level (4 slots): command, cure wounds, shield of faith\n 2nd level (3 slots): calm emotions, hold person\n 3rd level (3 slots): bestow curse, clairvoyance\n 4th level (3 slots): banishment, freedom of movement\n 5th level (2 slots): flame strike, geas\n 6th level (1 slot): true seeing",
         "attack_bonus": 0
       }
     ],
@@ -10315,7 +10315,7 @@
       },
       {
         "name": "Spellcasting",
-        "desc": "The sphinx is a 9th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 16, +8 to hit with spell attacks). It requires no material components to cast its spells. The sphinx has the following wizard spells prepared:\n\nâ€¢ Cantrips (at will): mage hand, minor illusion, prestidigitation\nâ€¢ 1st level (4 slots): detect magic, identify, shield\nâ€¢ 2nd level (3 slots): darkness, locate object, suggestion\nâ€¢ 3rd level (3 slots): dispel magic, remove curse, tongues\nâ€¢ 4th level (3 slots): banishment, greater invisibility\nâ€¢ 5th level (1 slot): legend lore",
+        "desc": "The sphinx is a 9th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 16, +8 to hit with spell attacks). It requires no material components to cast its spells. The sphinx has the following wizard spells prepared:\n\n Cantrips (at will): mage hand, minor illusion, prestidigitation\n 1st level (4 slots): detect magic, identify, shield\n 2nd level (3 slots): darkness, locate object, suggestion\n 3rd level (3 slots): dispel magic, remove curse, tongues\n 4th level (3 slots): banishment, greater invisibility\n 5th level (1 slot): legend lore",
         "attack_bonus": 0
       }
     ],
@@ -11991,7 +11991,7 @@
       },
       {
         "name": "Spellcasting",
-        "desc": "The lich is an 18th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 20, +12 to hit with spell attacks). The lich has the following wizard spells prepared:\n\nâ€¢ Cantrips (at will): mage hand, prestidigitation, ray of frost\nâ€¢ 1st level (4 slots): detect magic, magic missile, shield, thunderwave\nâ€¢ 2nd level (3 slots): detect thoughts, invisibility, Melf's acid arrow, mirror image\nâ€¢ 3rd level (3 slots): animate dead, counterspell, dispel magic, fireball\nâ€¢ 4th level (3 slots): blight, dimension door\nâ€¢ 5th level (3 slots): cloudkill, scrying\nâ€¢ 6th level (1 slot): disintegrate, globe of invulnerability\nâ€¢ 7th level (1 slot): finger of death, plane shift\nâ€¢ 8th level (1 slot): dominate monster, power word stun\nâ€¢ 9th level (1 slot): power word kill",
+        "desc": "The lich is an 18th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 20, +12 to hit with spell attacks). The lich has the following wizard spells prepared:\n\n Cantrips (at will): mage hand, prestidigitation, ray of frost\n 1st level (4 slots): detect magic, magic missile, shield, thunderwave\n 2nd level (3 slots): detect thoughts, invisibility, Melf's acid arrow, mirror image\n 3rd level (3 slots): animate dead, counterspell, dispel magic, fireball\n 4th level (3 slots): blight, dimension door\n 5th level (3 slots): cloudkill, scrying\n 6th level (1 slot): disintegrate, globe of invulnerability\n 7th level (1 slot): finger of death, plane shift\n 8th level (1 slot): dominate monster, power word stun\n 9th level (1 slot): power word kill",
         "attack_bonus": 0
       },
       {
@@ -12280,7 +12280,7 @@
     "special_abilities": [
       {
         "name": "Spellcasting",
-        "desc": "The mage is a 9th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 14, +6 to hit with spell attacks). The mage has the following wizard spells prepared:\n\nâ€¢ Cantrips (at will): fire bolt, light, mage hand, prestidigitation\nâ€¢ 1st level (4 slots): detect magic, mage armor, magic missile, shield\nâ€¢ 2nd level (3 slots): misty step, suggestion\nâ€¢ 3rd level (3 slots): counterspell, fireball, fly\nâ€¢ 4th level (3 slots): greater invisibility, ice storm\nâ€¢ 5th level (1 slot): cone of cold",
+        "desc": "The mage is a 9th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 14, +6 to hit with spell attacks). The mage has the following wizard spells prepared:\n\n Cantrips (at will): fire bolt, light, mage hand, prestidigitation\n 1st level (4 slots): detect magic, mage armor, magic missile, shield\n 2nd level (3 slots): misty step, suggestion\n 3rd level (3 slots): counterspell, fireball, fly\n 4th level (3 slots): greater invisibility, ice storm\n 5th level (1 slot): cone of cold",
         "attack_bonus": 0
       }
     ],
@@ -13206,7 +13206,7 @@
       },
       {
         "name": "Spellcasting",
-        "desc": "The mummy lord is a 10th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 17, +9 to hit with spell attacks). The mummy lord has the following cleric spells prepared:\n\nâ€¢ Cantrips (at will): sacred flame, thaumaturgy\nâ€¢ 1st level (4 slots): command, guiding bolt, shield of faith\nâ€¢ 2nd level (3 slots): hold person, silence, spiritual weapon\nâ€¢ 3rd level (3 slots): animate dead, dispel magic\nâ€¢ 4th level (3 slots): divination, guardian of faith\nâ€¢ 5th level (2 slots): contagion, insect plague\nâ€¢ 6th level (1 slot): harm",
+        "desc": "The mummy lord is a 10th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 17, +9 to hit with spell attacks). The mummy lord has the following cleric spells prepared:\n\n Cantrips (at will): sacred flame, thaumaturgy\n 1st level (4 slots): command, guiding bolt, shield of faith\n 2nd level (3 slots): hold person, silence, spiritual weapon\n 3rd level (3 slots): animate dead, dispel magic\n 4th level (3 slots): divination, guardian of faith\n 5th level (2 slots): contagion, insect plague\n 6th level (1 slot): harm",
         "attack_bonus": 0
       }
     ],
@@ -13411,7 +13411,7 @@
       },
       {
         "name": "Shared Spellcasting (Coven Only)",
-        "desc": "While all three members of a hag coven are within 30 feet of one another, they can each cast the following spells from the wizard's spell list but must share the spell slots among themselves:\n\nâ€¢ 1st level (4 slots): identify, ray of sickness\nâ€¢ 2nd level (3 slots): hold person, locate object\nâ€¢ 3rd level (3 slots): bestow curse, counterspell, lightning bolt\nâ€¢ 4th level (3 slots): phantasmal killer, polymorph\nâ€¢ 5th level (2 slots): contact other plane, scrying\nâ€¢ 6th level (1 slot): eye bite\n\nFor casting these spells, each hag is a 12th-level spellcaster that uses Intelligence as her spellcasting ability. The spell save DC is 12+the hag's Intelligence modifier, and the spell attack bonus is 4+the hag's Intelligence modifier.",
+        "desc": "While all three members of a hag coven are within 30 feet of one another, they can each cast the following spells from the wizard's spell list but must share the spell slots among themselves:\n\n 1st level (4 slots): identify, ray of sickness\n 2nd level (3 slots): hold person, locate object\n 3rd level (3 slots): bestow curse, counterspell, lightning bolt\n 4th level (3 slots): phantasmal killer, polymorph\n 5th level (2 slots): contact other plane, scrying\n 6th level (1 slot): eye bite\n\nFor casting these spells, each hag is a 12th-level spellcaster that uses Intelligence as her spellcasting ability. The spell save DC is 12+the hag's Intelligence modifier, and the spell attack bonus is 4+the hag's Intelligence modifier.",
         "attack_bonus": 0
       },
       {
@@ -14672,7 +14672,7 @@
       },
       {
         "name": "Spellcasting",
-        "desc": "The priest is a 5th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 13, +5 to hit with spell attacks). The priest has the following cleric spells prepared:\n\nâ€¢ Cantrips (at will): light, sacred flame, thaumaturgy\nâ€¢ 1st level (4 slots): cure wounds, guiding bolt, sanctuary\nâ€¢ 2nd level (3 slots): lesser restoration, spiritual weapon\nâ€¢ 3rd level (2 slots): dispel magic, spirit guardians",
+        "desc": "The priest is a 5th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 13, +5 to hit with spell attacks). The priest has the following cleric spells prepared:\n\n Cantrips (at will): light, sacred flame, thaumaturgy\n 1st level (4 slots): cure wounds, guiding bolt, sanctuary\n 2nd level (3 slots): lesser restoration, spiritual weapon\n 3rd level (2 slots): dispel magic, spirit guardians",
         "attack_bonus": 0
       }
     ],
@@ -16016,7 +16016,7 @@
       },
       {
         "name": "Shared Spellcasting (Coven Only)",
-        "desc": "While all three members of a hag coven are within 30 feet of one another, they can each cast the following spells from the wizard's spell list but must share the spell slots among themselves:\n\nâ€¢ 1st level (4 slots): identify, ray of sickness\nâ€¢ 2nd level (3 slots): hold person, locate object\nâ€¢ 3rd level (3 slots): bestow curse, counterspell, lightning bolt\nâ€¢ 4th level (3 slots): phantasmal killer, polymorph\nâ€¢ 5th level (2 slots): contact other plane, scrying\nâ€¢ 6th level (1 slot): eye bite\n\nFor casting these spells, each hag is a 12th-level spellcaster that uses Intelligence as her spellcasting ability. The spell save DC is 12+the hag's Intelligence modifier, and the spell attack bonus is 4+the hag's Intelligence modifier.",
+        "desc": "While all three members of a hag coven are within 30 feet of one another, they can each cast the following spells from the wizard's spell list but must share the spell slots among themselves:\n\n 1st level (4 slots): identify, ray of sickness\n 2nd level (3 slots): hold person, locate object\n 3rd level (3 slots): bestow curse, counterspell, lightning bolt\n 4th level (3 slots): phantasmal killer, polymorph\n 5th level (2 slots): contact other plane, scrying\n 6th level (1 slot): eye bite\n\nFor casting these spells, each hag is a 12th-level spellcaster that uses Intelligence as her spellcasting ability. The spell save DC is 12+the hag's Intelligence modifier, and the spell attack bonus is 4+the hag's Intelligence modifier.",
         "attack_bonus": 0
       },
       {
@@ -16687,7 +16687,7 @@
       },
       {
         "name": "Spellcasting",
-        "desc": "The naga is a 10th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 14, +6 to hit with spell attacks), and it needs only verbal components to cast its spells. It has the following wizard spells prepared:\n\nâ€¢ Cantrips (at will): mage hand, minor illusion, ray of frost\nâ€¢ 1st level (4 slots): charm person, detect magic, sleep\nâ€¢ 2nd level (3 slots): detect thoughts, hold person\nâ€¢ 3rd level (3 slots): lightning bolt, water breathing\nâ€¢ 4th level (3 slots): blight, dimension door\nâ€¢ 5th level (2 slots): dominate person",
+        "desc": "The naga is a 10th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 14, +6 to hit with spell attacks), and it needs only verbal components to cast its spells. It has the following wizard spells prepared:\n\n Cantrips (at will): mage hand, minor illusion, ray of frost\n 1st level (4 slots): charm person, detect magic, sleep\n 2nd level (3 slots): detect thoughts, hold person\n 3rd level (3 slots): lightning bolt, water breathing\n 4th level (3 slots): blight, dimension door\n 5th level (2 slots): dominate person",
         "attack_bonus": 0
       }
     ],

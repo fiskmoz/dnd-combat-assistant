@@ -7,7 +7,13 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 })
 export class MonsterService {
   public currentEncounter: IMonsterIndex[];
-  constructor(private http: HttpClient) {}
+  public crToXpTable: JSON;
+
+  constructor(private http: HttpClient) {
+    this.http.get("/api/encounter/crtable").subscribe((data: JSON) => {
+      this.crToXpTable = data;
+    });
+  }
 
   GenerateRandomEncounter(
     monsters: string,
