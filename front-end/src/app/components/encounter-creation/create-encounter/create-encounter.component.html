@@ -1,0 +1,40 @@
+<p>create-encounter works!</p>
+
+<app-button
+  [text]="'Create Random Encounter'"
+  [small]="true"
+  [type]="'primary'"
+  (clicked$)="onRandomEncounter()"
+>
+</app-button>
+
+<div>
+  <app-checkbox
+    [id]="'SRDref'"
+    [text]="'System Reference Document'"
+    [name]="'SRD'"
+    [checked]="true"
+    [inline]="true"
+    (changed$)="refChange($event)"
+  ></app-checkbox>
+  <app-checkbox
+    [id]="'CCref'"
+    [name]="'CC'"
+    [text]="'Creature Codex'"
+    [checked]="false"
+    [inline]="true"
+    (changed$)="refChange($event)"
+  ></app-checkbox>
+  <app-checkbox
+    [id]="'TOBref'"
+    [name]="'TOB'"
+    [text]="'Tome of beasts'"
+    [checked]="false"
+    [inline]="true"
+    (changed$)="refChange($event)"
+  ></app-checkbox>
+</div>
+
+<div *ngFor="let monster of monsterService.currentEncounter">
+  <app-monster-card [monster]="monster"></app-monster-card>
+</div>
