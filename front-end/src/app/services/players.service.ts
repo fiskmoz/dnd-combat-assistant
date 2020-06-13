@@ -60,6 +60,21 @@ export class PlayersService {
     this.CalculateEncounterDifficulty();
   }
 
+  GetEncounterDifficulty(difficulty: string): string {
+    switch (difficulty) {
+      case "easy":
+        return this.easyEncounter.toString();
+      case "medium":
+        return this.mediumEncounter.toString();
+      case "hard":
+        return this.hardEncounter.toString();
+      case "deadly":
+        return this.deadlyEncounter.toString();
+      default:
+        console.log("String format incorrect");
+    }
+  }
+
   init() {
     this.http.get("/api/encounter/thresholds").subscribe((data: JSON) => {
       for (const key in data) {

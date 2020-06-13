@@ -14,7 +14,7 @@ export class MonsterService {
     partyxp: string,
     origins: string[],
     alignment?: string,
-    location?: string
+    locations?: string[]
   ) {
     if (!monsters || !partyxp || !origins || origins.length === 0) {
       console.log("Missing parameters for request");
@@ -32,8 +32,8 @@ export class MonsterService {
     if (!!alignment) {
       apiUrl = apiUrl + "&alignment=" + alignment;
     }
-    if (!!location) {
-      apiUrl = apiUrl + "&location=" + location;
+    if (!!locations) {
+      apiUrl = apiUrl + "&location=" + locations.join("-");
     }
     this.http.get<IMonsterIndex[]>(apiUrl).subscribe((r) => {
       Object.assign(this.currentEncounter, r);

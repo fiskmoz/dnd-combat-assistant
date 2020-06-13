@@ -1,38 +1,178 @@
 <p>create-encounter works!</p>
+<div class="card">
+  <div class="card-body">
+    <div>
+      <h5>Monster Referenses:</h5>
+      <app-checkbox
+        [id]="'SRDref'"
+        [text]="'Basic 5e'"
+        [name]="'SRD'"
+        [checked]="true"
+        [inline]="true"
+        (changed$)="refChange($event)"
+      ></app-checkbox>
+      <app-checkbox
+        [id]="'CCref'"
+        [name]="'CC'"
+        [text]="'Creature Codex'"
+        [checked]="false"
+        [inline]="true"
+        (changed$)="refChange($event)"
+      ></app-checkbox>
+      <app-checkbox
+        [id]="'TOBref'"
+        [name]="'TOB'"
+        [text]="'Tome of beasts'"
+        [checked]="false"
+        [inline]="true"
+        (changed$)="refChange($event)"
+      ></app-checkbox>
+    </div>
 
-<app-button
-  [text]="'Create Random Encounter'"
-  [small]="true"
-  [type]="'primary'"
-  (clicked$)="onRandomEncounter()"
->
-</app-button>
-
-<div>
-  <app-checkbox
-    [id]="'SRDref'"
-    [text]="'System Reference Document'"
-    [name]="'SRD'"
-    [checked]="true"
-    [inline]="true"
-    (changed$)="refChange($event)"
-  ></app-checkbox>
-  <app-checkbox
-    [id]="'CCref'"
-    [name]="'CC'"
-    [text]="'Creature Codex'"
-    [checked]="false"
-    [inline]="true"
-    (changed$)="refChange($event)"
-  ></app-checkbox>
-  <app-checkbox
-    [id]="'TOBref'"
-    [name]="'TOB'"
-    [text]="'Tome of beasts'"
-    [checked]="false"
-    [inline]="true"
-    (changed$)="refChange($event)"
-  ></app-checkbox>
+    <div>
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <h5>Number of monsters:</h5>
+          <app-dropdown
+            [list]="[
+              '1',
+              '2',
+              '3',
+              '4',
+              '5',
+              '6',
+              '7',
+              '8',
+              '9',
+              '10',
+              '11',
+              '12'
+            ]"
+            [id]="'monstertotal'"
+            (change$)="monsterTotalChange($event)"
+          >
+          </app-dropdown>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <h5>Encounter Difficulty:</h5>
+          <app-dropdown
+            [list]="['easy', 'medium', 'hard', 'deadly']"
+            [id]="'encounterdiff'"
+            (change$)="encounterDifficultyChange($event)"
+          >
+          </app-dropdown>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h5>Locations:</h5>
+      <app-checkbox
+        [id]="'caveref'"
+        [text]="'cave'"
+        [name]="'cave'"
+        [checked]="false"
+        [inline]="true"
+        (changed$)="locationChange($event)"
+      ></app-checkbox>
+      <app-checkbox
+        [id]="'cityref'"
+        [text]="'city'"
+        [name]="'city'"
+        [checked]="false"
+        [inline]="true"
+        (changed$)="locationChange($event)"
+      ></app-checkbox>
+      <app-checkbox
+        [id]="'villageref'"
+        [text]="'village'"
+        [name]="'village'"
+        [checked]="false"
+        [inline]="true"
+        (changed$)="locationChange($event)"
+      ></app-checkbox>
+      <app-checkbox
+        [id]="'mountainref'"
+        [text]="'mountain'"
+        [name]="'mountain'"
+        [checked]="false"
+        [inline]="true"
+        (changed$)="locationChange($event)"
+      ></app-checkbox>
+      <app-checkbox
+        [id]="'searef'"
+        [text]="'sea'"
+        [name]="'sea'"
+        [checked]="false"
+        [inline]="true"
+        (changed$)="locationChange($event)"
+      ></app-checkbox>
+      <app-checkbox
+        [id]="'skyref'"
+        [text]="'sky'"
+        [name]="'sky'"
+        [checked]="false"
+        [inline]="true"
+        (changed$)="locationChange($event)"
+      ></app-checkbox>
+      <app-checkbox
+        [id]="'plainref'"
+        [text]="'plain'"
+        [name]="'plain'"
+        [checked]="true"
+        [inline]="true"
+        (changed$)="locationChange($event)"
+      ></app-checkbox>
+      <app-checkbox
+        [id]="'desertref'"
+        [text]="'desert'"
+        [name]="'desert'"
+        [checked]="false"
+        [inline]="true"
+        (changed$)="locationChange($event)"
+      ></app-checkbox>
+      <app-checkbox
+        [id]="'frostlandsref'"
+        [text]="'frostlands'"
+        [name]="'frostlands'"
+        [checked]="false"
+        [inline]="true"
+        (changed$)="locationChange($event)"
+      ></app-checkbox>
+      <app-checkbox
+        [id]="'swampref'"
+        [text]="'swamp'"
+        [name]="'swamp'"
+        [checked]="false"
+        [inline]="true"
+        (changed$)="locationChange($event)"
+      ></app-checkbox>
+      <app-checkbox
+        [id]="'forrestref'"
+        [text]="'forrest'"
+        [name]="'forrest'"
+        [checked]="false"
+        [inline]="true"
+        (changed$)="locationChange($event)"
+      ></app-checkbox>
+      <app-checkbox
+        [id]="'underdarkref'"
+        [text]="'underdark'"
+        [name]="'underdark'"
+        [checked]="false"
+        [inline]="true"
+        (changed$)="locationChange($event)"
+      ></app-checkbox>
+    </div>
+    <div class="col-12 text-center pt-2">
+      <app-button
+        [text]="'Create Random Encounter'"
+        [small]="true"
+        [type]="'primary'"
+        (clicked$)="onRandomEncounter()"
+      >
+      </app-button>
+    </div>
+  </div>
 </div>
 
 <div *ngFor="let monster of monsterService.currentEncounter">
