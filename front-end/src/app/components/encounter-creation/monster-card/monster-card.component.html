@@ -38,7 +38,12 @@
         <div>
           <p><b>Senses: </b> {{ monster.senses }}</p>
           <p><b>Languages: </b> {{ monster.languages }}</p>
-          <p><b>Challenge: </b> {{ monster.challenge_rating }}</p>
+          <p>
+            <b>Challenge: </b> {{ monster.challenge_rating }} ({{
+              crToXPTable[monster.challenge_rating]
+            }}
+            xp)
+          </p>
         </div>
         <div>
           <div *ngIf="!!monster.special_abilities">
@@ -48,17 +53,20 @@
               </p>
             </div>
           </div>
+          <div *ngIf="!!monster.legendary_desc">
+            <p><b>Legendary Description:</b></p>
+            <p>{{ monster.legendary_desc }}</p>
+          </div>
+          <div *ngIf="!!monster.legendary_actions">
+            <div *ngFor="let ability of monster.legendary_actions">
+              <p>
+                <b>{{ ability.name }}: </b> {{ ability.desc }}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
       <div class="col-md-6 col-sm-12">
-        <div>
-          <img
-            src="https://aidedd.org/dnd/images/{{
-              monster.name.replace(' ', '-') | lowercase
-            }}.jpeg"
-            alt=""
-          />
-        </div>
         <div *ngIf="!!monster.actions">
           <div *ngFor="let ability of monster.actions">
             <p>

@@ -10,20 +10,24 @@ export interface IMonsterIndex {
   hit_dice: string;
   speed: string;
   strength?: number;
-  intelligence?: number;
-  wisdom?: number;
   dexterity?: number;
   constitution?: number;
+  intelligence?: number;
+  wisdom?: number;
   charisma?: number;
-  dexterity_save?: number;
-  stealth?: number;
+  damage_vulnerabilities?: string;
+  damage_resistances?: string;
+  damage_immunities?: string;
+  condition_immunities?: string;
   senses?: string;
   languages?: string;
   challenge_rating: string;
   special_abilities?: IAbility[];
   actions?: IAbility[];
-  damage_immunities?: string;
-  damage_vulnerabilities?: string;
+  legendary_desc?: string;
+  legendary_actions?: IAbility[];
+  spells?: string[];
+
   // EXTEND WITH LEGENDARY STUFF LATER
 }
 

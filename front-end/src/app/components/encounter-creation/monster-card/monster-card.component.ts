@@ -8,6 +8,7 @@ import { IMonsterIndex } from "src/app/interfaces/monster-index";
 })
 export class MonsterCardComponent implements OnInit {
   @Input() monster: IMonsterIndex;
+  @Input() crToXPTable: JSON;
   constructor() {}
 
   ngOnInit(): void {}

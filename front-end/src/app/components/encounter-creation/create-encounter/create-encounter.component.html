@@ -176,5 +176,8 @@
 </div>
 
 <div *ngFor="let monster of monsterService.currentEncounter">
-  <app-monster-card [monster]="monster"></app-monster-card>
+  <app-monster-card
+    [monster]="monster"
+    [crToXPTable]="monsterService.crToXpTable"
+  ></app-monster-card>
 </div>
