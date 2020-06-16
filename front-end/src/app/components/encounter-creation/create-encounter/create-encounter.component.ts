@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { MonsterService } from "src/app/services/monster.service";
 import { PlayersService } from "src/app/services/players.service";
 import { ICheckboxChangeEvent } from "src/app/interfaces/checkbox-change";
+import { IRadioButtonChangeEvent } from "src/app/interfaces/radio-change";
 
 @Component({
   selector: "app-create-encounter",
@@ -14,7 +15,9 @@ export class CreateEncounterComponent implements OnInit {
     private playerService: PlayersService
   ) {}
 
+  possibleGeoLocations = ["land", "sea", "sky"];
   origins = ["SRD"];
+  geolocation = "land";
   locations = ["plain"];
   monsterTotal = "1";
   difficulty = "easy";
@@ -28,7 +31,8 @@ export class CreateEncounterComponent implements OnInit {
       this.playerService.GetEncounterDifficulty(this.difficulty),
       this.origins,
       null,
-      this.locations
+      this.locations,
+      this.geolocation
     );
   }
 
@@ -56,6 +60,10 @@ export class CreateEncounterComponent implements OnInit {
   encounterDifficultyChange(event: string) {
     this.difficulty = event;
     this.UpdateLocalStorage();
+  }
+
+  geoLocationChange(event: IRadioButtonChangeEvent) {
+    this.geolocation = this.possibleGeoLocations[parseInt(event.id)];
   }
 
   private UpdateLocalStorage() {

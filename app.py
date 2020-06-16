@@ -81,8 +81,9 @@ def generate():
     monsters = request.args.get('monsters')
     locations = request.args.get('locations')
     origins = request.args.get('origins')
+    geolocation = request.args.get('geolocation')
 
-    if partyxp == None or monsters == None or locations == None or origins == None:
+    if partyxp == None or monsters == None or locations == None or origins == None or geolocation == None:
         return SendBadRequest('Invalid request parameters')
 
     # should validate partyxp and monsters, non ints will not cause crash here.
@@ -90,11 +91,8 @@ def generate():
     response_json = {}
     response_index = 0
     possible_types = []
-    search_words = []
     locations_list = locations.split('-')
 
-    if 'sea' in locations_list:
-        search_words.append('sea')
     for location in locations_list:
         if location in possible_locations:
             possible_types = possible_types + possible_types_dict[location]
@@ -108,13 +106,8 @@ def generate():
             continue
         if monster_data[key]['type'] not in possible_types:
             continue
-        isOceanMonster = IsOceanMonster(monster_data, key)
-        if 'sea' in search_words:
-            if not isOceanMonster:
-                continue
-        else:
-            if isOceanMonster:
-                continue
+        if not monsterFitsGeolocation(monster_data, key, geolocation):
+            continue
         while True:
             response_json[response_index] = monster_data[key]
             challenge_ratings.remove(monster_data[key]['challenge_rating'])
@@ -169,15 +162,26 @@ def ChallengeRatingByExperience(experience):
                 return cr
 
 
-def IsOceanMonster(monster_data, key):
-    if 'swim' in monster_data[key]['speed_json']:
-        return True
-    if not 'special_abilities' in monster_data[key]:
-        return False
-    for ability in monster_data[key]['special_abilities']:
-        if ability['name'] == 'Amphibious':
+def monsterFitsGeolocation(monster_data, key, geolocation):
+    if geolocation == 'sea':
+        if 'swim' in monster_data[key]['speed_json']:
             return True
-    return False
+        if not 'special_abilities' in monster_data[key]:
+            return False
+        for ability in monster_data[key]['special_abilities']:
+            if ability['name'] == 'Amphibious':
+                return True
+        return False
+    elif geolocation == 'sky':
+        if 'fly' in monster_data[key]['speed_json']:
+            return True
+        return False
+    elif geolocation == 'land':
+        if 'walk' in monster_data[key]['speed_json']:
+            if monster_data[key]['speed_json']['walk'] != "0":
+                return True
+        return False
+    return True
 
 
 def SendBadRequest(text):
