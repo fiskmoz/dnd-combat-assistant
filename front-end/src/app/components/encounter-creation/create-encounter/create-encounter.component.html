@@ -66,6 +66,19 @@
         </div>
       </div>
     </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <h5>Geolocation:</h5>
+        <app-radio-buttons
+          [name]="'geolocations'"
+          [labels]="possibleGeoLocations"
+          [id]="'geolocations'"
+          [firstSelected]="true"
+          [horizontal]="true"
+          (radioChange$)="geoLocationChange($event)"
+        ></app-radio-buttons>
+      </div>
+    </div>
     <div>
       <h5>Locations:</h5>
       <app-checkbox
@@ -97,22 +110,6 @@
         [text]="'mountain'"
         [name]="'mountain'"
         [checked]="locations.includes('mountain')"
-        [inline]="true"
-        (changed$)="locationChange($event)"
-      ></app-checkbox>
-      <app-checkbox
-        [id]="'searef'"
-        [text]="'sea'"
-        [name]="'sea'"
-        [checked]="locations.includes('sea')"
-        [inline]="true"
-        (changed$)="locationChange($event)"
-      ></app-checkbox>
-      <app-checkbox
-        [id]="'skyref'"
-        [text]="'sky'"
-        [name]="'sky'"
-        [checked]="locations.includes('sky')"
         [inline]="true"
         (changed$)="locationChange($event)"
       ></app-checkbox>

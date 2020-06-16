@@ -20,7 +20,8 @@ export class MonsterService {
     partyxp: string,
     origins: string[],
     alignment?: string,
-    locations?: string[]
+    locations?: string[],
+    geolocation?: string
   ) {
     if (!monsters || !partyxp || !origins || origins.length === 0) {
       console.log("Missing parameters for request");
@@ -33,6 +34,8 @@ export class MonsterService {
       monsters +
       "&partyxp=" +
       partyxp +
+      "&geolocation=" +
+      geolocation +
       "&origins=" +
       origins.join("-");
     if (!!alignment) {
