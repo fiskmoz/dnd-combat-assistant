@@ -25,20 +25,22 @@ with open('./data/challenge_rating_to_xp.json') as file:
 with open('./data/encounter_thresholds.json') as file:
     encounter_thresholds = json.load(file)
 
+# LOAD MONSTERS MULTIPLIER
+with open('./data/monsters_multiplier.json') as file:
+    monsters_multiplier = json.load(file)
+
 # CONSTANTS
-possible_locations = ["city", "village", "mountain", "sea", "sky", "cave",
+possible_locations = ["city", "village", "mountain", "cave",
                       "plain", "frostlands", "swamp", "forest", "underdark"]
 # Extend possible types
 possible_types_dict = {
     "city": ["construct", "elemental", "humanoid, undead", 'aberration'],
     "village": ["humanoid", "dragon", 'monstrosity', 'giant', 'aberration'],
     "mountain": ["giant", "dragon", 'monstrosity', 'humanoid'],
-    "sea": ["monstrosity", "beast", "dragon", 'humanoid', 'aberration', "fey"],
-    "sky": ["celestial", "monstrosity", "dragon"],
-    "cave": ["monstrosity", "dragon", 'elemental', 'plant', 'giant', 'aberration', 'swarm of Tiny beasts'],
+    "cave": ["monstrosity", "dragon", 'elemental', 'plant', 'giant', 'aberration', 'swarm of Tiny beasts', "beasts", "humanoid"],
     "plain": ["humanoid", "beast", "undead", "dragon", 'elemental', 'humanoid', 'plant', 'swarm of Tiny beasts'],
-    "frostlands": ["monstrosity", "beast", 'elemental'],
-    "swamp": ["giant", "ooze", 'monstrosity', 'swarm of Tiny beasts'],
+    "frostlands": ["monstrosity", "beast", 'elemental', "humanoid"],
+    "swamp": ["giant", "ooze", 'monstrosity', 'swarm of Tiny beasts', "humanoid"],
     "forest": ["beast", "ooze", "plant", "swarm of tiny beasts,'monstrosity", 'humanoid', 'fey'],
     "underdark": ["undead", "fiend", "humanoid", "dragon"],
 }
@@ -87,10 +89,12 @@ def generate():
         return SendBadRequest('Invalid request parameters')
 
     # should validate partyxp and monsters, non ints will not cause crash here.
+
     challenge_ratings = GetChallengeRatings(int(partyxp), int(monsters))
     response_json = {}
     response_index = 0
     possible_types = []
+    previous_type = ""
     locations_list = locations.split('-')
 
     for location in locations_list:
@@ -106,17 +110,25 @@ def generate():
             continue
         if monster_data[key]['type'] not in possible_types:
             continue
-        if not monsterFitsGeolocation(monster_data, key, geolocation):
+        if not monsterFitsGeolocation(key, geolocation):
             continue
+        if not monsterFitsPreviousType(key, previous_type):
+            if monster_data[key]['type'] != 'humanoid':
+                continue
         while True:
             response_json[response_index] = monster_data[key]
             challenge_ratings.remove(monster_data[key]['challenge_rating'])
             response_index += 1
-            if not monster_data[key]['challenge_rating'] in challenge_ratings or random.randint(0, 100) <= 35:
+            previous_type = monster_data[key]['type']
+            if not monster_data[key]['challenge_rating'] in challenge_ratings or random.randint(0, 100) <= 25:
                 break
 
     if len(challenge_ratings) > 0:
-        print("failed to assign all monsters, try duplicating?")
+        for rating in challenge_ratings:
+            for monster_key in range(len(response_json)):
+                if response_json[monster_key]['challenge_rating'] == rating:
+                    response_json[response_index] = response_json[monster_key]
+                    response_index += 1
 
     response = app.response_class(
         response=json.dumps(response_json),
@@ -133,6 +145,7 @@ def serve_static(path):
 
 
 def GetChallengeRatings(partyxp, members):
+    partyxp = partyxp / monsters_multiplier[str(members)]
     if members == 1:
         return [ChallengeRatingByExperience(partyxp)]
     challenge_ratings = []
@@ -143,7 +156,7 @@ def GetChallengeRatings(partyxp, members):
                 str(ChallengeRatingByExperience(remainingxp)))
             continue
         # Adjust these for more fair encounters.
-        random_percentage = random.randint(30, 60) / 100
+        random_percentage = (random.randint(20, 50) / 100) / (members / 2)
         challenge_ratings.append(
             str(ChallengeRatingByExperience(remainingxp*random_percentage)))
         remainingxp = remainingxp * (1 - random_percentage)
@@ -162,7 +175,7 @@ def ChallengeRatingByExperience(experience):
                 return cr
 
 
-def monsterFitsGeolocation(monster_data, key, geolocation):
+def monsterFitsGeolocation(key, geolocation):
     if geolocation == 'sea':
         if 'swim' in monster_data[key]['speed_json']:
             return True
@@ -172,16 +185,26 @@ def monsterFitsGeolocation(monster_data, key, geolocation):
             if ability['name'] == 'Amphibious':
                 return True
         return False
-    elif geolocation == 'sky':
+
+    # Remove sea creatures
+    if not 'walk' in monster_data[key]['speed_json'] or monster_data[key]['speed_json']['walk'] == 0 or monster_data[key]['subtype'] == 'merfolk':
+        return False
+
+    if geolocation == 'sky':
         if 'fly' in monster_data[key]['speed_json']:
             return True
         return False
-    elif geolocation == 'land':
-        if 'walk' in monster_data[key]['speed_json']:
-            if monster_data[key]['speed_json']['walk'] != "0":
-                return True
-        return False
+    if geolocation == 'land':
+        return True
     return True
+
+
+def monsterFitsPreviousType(key, previous_type):
+    if previous_type == "":
+        return True
+    if monster_data[key]['type'] == previous_type:
+        return True
+    return False
 
 
 def SendBadRequest(text):
