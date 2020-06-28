@@ -5,7 +5,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { HomePageComponent } from "./components/pages/home-page/home-page.component";
+import { HomePageComponent } from "./components/layout/home-page/home-page.component";
 import { ButtonComponent } from "./components/inputs/button/button.component";
 import { RadioButtonsComponent } from "./components/inputs/radio-buttons/radio-buttons.component";
 import { CheckboxComponent } from "./components/inputs/checkbox/checkbox.component";
@@ -22,6 +22,7 @@ import { MonsterCardComponent } from "./components/encounter-creation/monster-ca
 import { FloorPipe } from "./pipes/floor.pipe";
 import { MonsterSearchComponent } from "./components/monster-search/monster-search.component";
 import { TypeaheadComponent } from "./components/inputs/typeahead/typeahead.component";
+import { HeaderComponent } from "./components/layout/header/header.component";
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { TypeaheadComponent } from "./components/inputs/typeahead/typeahead.comp
     FloorPipe,
     MonsterSearchComponent,
     TypeaheadComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

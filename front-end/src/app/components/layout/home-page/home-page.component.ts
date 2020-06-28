@@ -9,5 +9,21 @@ import { PlayersService } from "src/app/services/players.service";
 export class HomePageComponent implements OnInit {
   constructor(private playerService: PlayersService) {}
 
+  navigation = "search";
+
   ngOnInit(): void {}
+
+  onPageChange($event) {
+    switch ($event.target.id) {
+      case "nav_search":
+        this.navigation = "search";
+        break;
+      case "nav_generate":
+        this.navigation = "generate";
+        break;
+      case "nav_initiative":
+        this.navigation = "initiative";
+        break;
+    }
+  }
 }
