@@ -20,6 +20,8 @@ import { MonsterService } from "./services/monster.service";
 import { CreateEncounterComponent } from "./components/encounter-creation/create-encounter/create-encounter.component";
 import { MonsterCardComponent } from "./components/encounter-creation/monster-card/monster-card.component";
 import { FloorPipe } from "./pipes/floor.pipe";
+import { MonsterSearchComponent } from "./components/monster-search/monster-search.component";
+import { TypeaheadComponent } from "./components/inputs/typeahead/typeahead.component";
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { FloorPipe } from "./pipes/floor.pipe";
     CreateEncounterComponent,
     MonsterCardComponent,
     FloorPipe,
+    MonsterSearchComponent,
+    TypeaheadComponent,
   ],
   imports: [
     BrowserModule,

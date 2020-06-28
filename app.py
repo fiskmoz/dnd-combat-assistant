@@ -77,7 +77,37 @@ def crtable():
     return response
 
 
-@app.route('/api/encounters/generate')
+@app.route('/api/encounter/names')
+def names():
+    response = app.response_class(
+        response=json.dumps(
+            sorted([value['name'] for value in monster_data])
+        ),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
+
+
+@app.route('/api/encounter/monster')
+def name():
+    name = request.args.get('name').lower()
+    if name is None:
+        return SendBadRequest('name is not set propperly')
+
+    monster = [value for value in monster_data if name ==
+               value['name'].lower()]
+    if monster is None:
+        return SendBadRequest('could not find monster with that name')
+    response = app.response_class(
+        response=json.dumps(monster),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
+
+
+@app.route('/api/encounter/generate')
 def generate():
     partyxp = request.args.get('partyxp')
     monsters = request.args.get('monsters')
@@ -89,7 +119,6 @@ def generate():
         return SendBadRequest('Invalid request parameters')
 
     # should validate partyxp and monsters, non ints will not cause crash here.
-
     challenge_ratings = GetChallengeRatings(int(partyxp), int(monsters))
     response_json = {}
     response_index = 0
