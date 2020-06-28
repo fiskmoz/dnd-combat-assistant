@@ -7,11 +7,15 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 })
 export class MonsterService {
   public currentEncounter: IMonsterIndex[];
+  public monsterNames: string[];
   public crToXpTable: JSON;
 
   constructor(private http: HttpClient) {
     this.http.get("/api/encounter/crtable").subscribe((data: JSON) => {
       this.crToXpTable = data;
+    });
+    this.http.get("/api/encounter/names").subscribe((data: JSON) => {
+      this.monsterNames = Object.values(data);
     });
   }
 
@@ -30,7 +34,7 @@ export class MonsterService {
 
     this.currentEncounter = [];
     let apiUrl =
-      "/api/encounters/generate?monsters=" +
+      "/api/encounter/generate?monsters=" +
       monsters +
       "&partyxp=" +
       partyxp +
@@ -47,5 +51,15 @@ export class MonsterService {
     this.http.get<IMonsterIndex[]>(apiUrl).subscribe((r) => {
       Object.assign(this.currentEncounter, r);
     });
+  }
+
+  GetMonsterDataByName(monster: string): Promise<IMonsterIndex> {
+    if (!monster) {
+      console.log("Missing parameters for request");
+      return;
+    }
+    return this.http
+      .get<IMonsterIndex>("/api/encounter/monster?name=" + monster)
+      .toPromise();
   }
 }

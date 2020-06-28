@@ -29,7 +29,6 @@ export class PlayersService {
         }
       }
       this.ReadLocalStorage();
-      this.SetPlayerXPthreshhold();
       this.CalculateEncounterDifficulty();
     });
   }
@@ -55,7 +54,7 @@ export class PlayersService {
 
   SetPlayerXPthreshhold() {
     if (!this.playerList) {
-      console.log("failed to set player xp threshhold");
+      this.AddNewPlayer();
       return;
     }
     this.playerList.forEach((player: Player) => {
