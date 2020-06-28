@@ -1,13 +1,18 @@
-<p>monster-search works!</p>
 <div class="row">
   <div class="col-md-6">
-    <app-typeahead
-      *ngIf="monsterService.monsterNames"
-      (selected)="onNewSelected($event)"
-      [list]="monsterService.monsterNames"
-      [label]="'Search for a dnd monster!'"
-    >
-    </app-typeahead>
+    <div class="card">
+      <div class="card-body">
+        <app-typeahead
+          *ngIf="monsterService.monsterNames"
+          (selected)="onNewSelected($event)"
+          [list]="monsterService.monsterNames"
+          [label]="'Search for a dnd monster!'"
+        >
+        </app-typeahead>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
     <app-monster-card
       *ngIf="selectedMonster"
       [monster]="selectedMonster"
