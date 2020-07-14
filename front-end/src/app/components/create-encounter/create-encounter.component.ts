@@ -3,6 +3,7 @@ import { MonsterService } from "src/app/services/monster.service";
 import { PlayersService } from "src/app/services/players.service";
 import { ICheckboxChangeEvent } from "src/app/interfaces/checkbox-change";
 import { IRadioButtonChangeEvent } from "src/app/interfaces/radio-change";
+import { IMonsterIndex } from "src/app/interfaces/monster-index";
 
 @Component({
   selector: "app-create-encounter",
@@ -76,6 +77,14 @@ export class CreateEncounterComponent implements OnInit {
         difficulty: this.difficulty,
       })
     );
+  }
+
+  onMonsterDuplicate(monster: IMonsterIndex) {
+    this.monsterService.AddMonster(monster);
+  }
+
+  onMonsterRemove(monster: IMonsterIndex) {
+    this.monsterService.RemoveMonster(monster);
   }
 
   private ReadLocalStorage() {

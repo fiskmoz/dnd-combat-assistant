@@ -92,7 +92,7 @@ export class PlayersService {
     }
   }
 
-  private UpdateLocalStorage() {
+  public UpdateLocalStorage() {
     localStorage.setItem(
       "player_service_data",
       JSON.stringify({
@@ -103,7 +103,9 @@ export class PlayersService {
 
   private ReadLocalStorage() {
     let storageJson = localStorage.getItem("player_service_data");
-    if (!storageJson) return;
+    if (!storageJson) {
+      return;
+    }
     storageJson = JSON.parse(storageJson);
     if (!!storageJson.hasOwnProperty("playerList")) {
       this.playerList = storageJson["playerList"];

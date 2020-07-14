@@ -62,4 +62,11 @@ export class MonsterService {
       .get<IMonsterIndex>("/api/encounter/monster?name=" + monster)
       .toPromise();
   }
+
+  AddMonster(monster: IMonsterIndex) {
+    this.currentEncounter.push(monster);
+  }
+  RemoveMonster(monster: IMonsterIndex) {
+    this.currentEncounter.splice(this.currentEncounter.indexOf(monster), 1);
+  }
 }

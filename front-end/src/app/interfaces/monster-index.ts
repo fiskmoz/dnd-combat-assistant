@@ -28,6 +28,8 @@ export interface IMonsterIndex {
   legendary_actions?: IAbility[];
   spells?: string[];
 
+  initiative?: number;
+  img_url?: string;
   // EXTEND WITH LEGENDARY STUFF LATER
 }
 

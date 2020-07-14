@@ -14,15 +14,18 @@ import { TextboxComponent } from "./components/inputs/textbox/textbox.component"
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { PlayersService } from "./services/players.service";
 import { RouterModule } from "@angular/router";
-import { CreatePlayerWrapperComponent } from "./components/player-creation/create-player-wrapper/create-player-wrapper.component";
-import { CreatePlayerComponent } from "./components/player-creation/create-player/create-player.component";
+import { CreatePlayerWrapperComponent } from "./components/create-player-wrapper/create-player-wrapper.component";
+import { CreatePlayerComponent } from "./components/create-player/create-player.component";
 import { MonsterService } from "./services/monster.service";
-import { CreateEncounterComponent } from "./components/encounter-creation/create-encounter/create-encounter.component";
-import { MonsterCardComponent } from "./components/encounter-creation/monster-card/monster-card.component";
+import { CreateEncounterComponent } from "./components/create-encounter/create-encounter.component";
+import { MonsterCardComponent } from "./components/monster-card/monster-card.component";
 import { FloorPipe } from "./pipes/floor.pipe";
 import { MonsterSearchComponent } from "./components/monster-search/monster-search.component";
 import { TypeaheadComponent } from "./components/inputs/typeahead/typeahead.component";
 import { HeaderComponent } from "./components/layout/header/header.component";
+import { InitiativeComponent } from "./components/initiative/initiative.component";
+import { AdjustComponent } from "./components/inputs/adjust/adjust.component";
+import { InitiativeEntityComponent } from "./components/initiative-entity/initiative-entity.component";
 
 @NgModule({
   declarations: [
@@ -41,6 +44,9 @@ import { HeaderComponent } from "./components/layout/header/header.component";
     MonsterSearchComponent,
     TypeaheadComponent,
     HeaderComponent,
+    InitiativeComponent,
+    AdjustComponent,
+    InitiativeEntityComponent,
   ],
   imports: [
     BrowserModule,

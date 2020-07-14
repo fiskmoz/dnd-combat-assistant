@@ -4,10 +4,12 @@ Generate balanced encounters for your party given parameters for exmaple, number
 
 ### Backlog:
 
-Style app container.
+Fix high level encounter matching
+change colors of adjust component. Replace in create player component
 Favicons
 Initiative generator
-IUA => postgres?
+Sea only creatures still show up with land.
+More monsters, more images.
 
 ### The Stack:
 
@@ -22,5 +24,5 @@ Navigate to project root
 
 navigate to front-end map:  
 `npm start`
-or   
+or  
 `ng serve --proxy-config proxy.config.json`
