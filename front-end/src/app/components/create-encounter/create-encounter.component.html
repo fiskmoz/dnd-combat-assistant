@@ -177,5 +177,8 @@
   <app-monster-card
     [monster]="monster"
     [crToXPTable]="monsterService.crToXpTable"
+    [enableOptions]="true"
+    (duplicate$)="onMonsterDuplicate(monster)"
+    (remove$)="onMonsterRemove(monster)"
   ></app-monster-card>
 </div>

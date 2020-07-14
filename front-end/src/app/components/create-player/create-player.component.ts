@@ -8,6 +8,7 @@ import { Player } from "src/app/interfaces/player";
 })
 export class CreatePlayerComponent implements OnInit {
   @Input() player: Player;
+  @Input() initiative: boolean;
 
   @Output() playerChanged$ = new EventEmitter();
   constructor() {}
@@ -21,6 +22,11 @@ export class CreatePlayerComponent implements OnInit {
 
   nameChanged(name: string) {
     this.player.name = name;
+    this.playerChanged$.emit();
+  }
+
+  initiativeChanged(init: string) {
+    this.player.initiative = parseInt(init);
     this.playerChanged$.emit();
   }
 }

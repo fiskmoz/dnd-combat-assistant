@@ -1,21 +1,25 @@
 <div class="container-xl">
   <div class="row">
-    <app-header (pageChange)="onPageChange($event)"></app-header>
+    <div class="col-12 px-0">
+      <app-header (pageChange)="onPageChange($event)"></app-header>
+    </div>
   </div>
   <div *ngIf="navigation == 'generate'" class="row">
-    <div class="col-md-6 col-sm-12">
+    <div class="col-md-6 col-sm-12 col-lg-6">
       <app-create-player-wrapper></app-create-player-wrapper>
     </div>
-    <div class="col-md-6 col-sm-12">
+    <div class="col-md-6 col-sm-12 col-lg-6">
       <app-create-encounter></app-create-encounter>
     </div>
   </div>
   <div *ngIf="navigation == 'search'" class="row">
-    <div class="col-md-12">
+    <div class="col-12">
       <app-monster-search></app-monster-search>
     </div>
   </div>
   <div *ngIf="navigation == 'initiative'" class="row">
-    <p>TODO</p>
+    <div class="col-12">
+      <app-initiative></app-initiative>
+    </div>
   </div>
 </div>

@@ -4,6 +4,7 @@ export interface Player {
   level: number;
   xpthreshhold?: IPlayerXpRow;
   name: string;
+  initiative?: number;
   class?: string;
   race?: string;
   strength?: number;

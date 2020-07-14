@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <app-button
+        [text]="'Randomize Initiative'"
+        [large]="true"
+        [type]="'primary'"
+        (clicked$)="onInitiativeStart()"
+      >
+      </app-button>
+    </div>
+    <div class="col-md-4 col-sm-4">
+      <span *ngFor="let player of playerService.playerList">
+        <app-create-player
+          [player]="player"
+          [initiative]="true"
+          (playerChanged$)="playerService.UpdateLocalStorage()"
+        >
+        </app-create-player>
+      </span>
+    </div>
+    <div class="col-md-4 col-sm-4 p-1">
+      <span *ngFor="let monster of monsterService.currentEncounter">
+        <app-monster-card
+          [initiative]="true"
+          [monster]="monster"
+          [crToXPTable]="monsterService.crToXpTable"
+          [enableOptions]="true"
+        >
+        </app-monster-card>
+      </span>
+    </div>
+    <div class="col-md-4 col-sm-4 p-1">
+      <div class="col-12">
+        <div class="col-12" *ngFor="let entity of initiativeList">
+          <app-initiative-entity [entity]="entity"> </app-initiative-entity>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
