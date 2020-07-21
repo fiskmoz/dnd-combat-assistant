@@ -1,4 +1,24 @@
 <div class="card">
-  <p>{{ entity.name }}</p>
-  <p>{{ entity.initiative }}</p>
+  <div class="row">
+    <div class="col-8">
+      <p>{{ entity.name }}</p>
+      <div>
+        {{ "init: " + entity.initiative }}
+        {{ !!entity.hitpoints ? "hp: " + entity.hitpoints : "" }}
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="img-container">
+        <img
+          src="{{
+            entity.player
+              ? 'https://i.imgur.com/ZSH9ikY.jpg'
+              : 'https://i.imgur.com/OWTsHDl.jpeg'
+          }}"
+          alt=""
+          class="img-thumbnail img-fluid"
+        />
+      </div>
+    </div>
+  </div>
 </div>

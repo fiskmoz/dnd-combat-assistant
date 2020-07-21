@@ -90,10 +90,18 @@
       </div>
     </div>
     <div *ngIf="!!initiative" class="row">
-      <div class="col-12">
+      <div class="col-6">
         {{ monster.name }}
         <br />
         <i>Dex modifier: {{ (monster.dexterity - 10) / 2 | floor }}</i>
+      </div>
+      <div class="col-6 p-1" *ngIf="enableOptions">
+        <app-adjust
+          [decreaseButtonText]="'remove'"
+          [increaseButtonText]="'duplicate'"
+          (decreased$)="onRemoveMonster()"
+          (increased$)="onDuplicateMonster()"
+        ></app-adjust>
       </div>
       <div class="col-md-6 col-sm-12">
         initiative:
@@ -134,15 +142,6 @@
           [default]="monster.initiative ? monster.initiative : 0"
           (change$)="initiativeChanged($event)"
         ></app-dropdown>
-      </div>
-      <div class="col-12">
-        Hitpoints:
-        <app-textbox
-          [type]="'text'"
-          [placeholder]="monster.hit_points"
-          [id]="monster.name + '_hit_points'"
-        >
-        </app-textbox>
       </div>
     </div>
   </div>
