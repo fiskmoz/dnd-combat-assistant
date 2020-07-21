@@ -17,6 +17,7 @@ export class MonsterService {
     this.http.get("/api/encounter/names").subscribe((data: JSON) => {
       this.monsterNames = Object.values(data);
     });
+    this.currentEncounter = [];
   }
 
   GenerateRandomEncounter(

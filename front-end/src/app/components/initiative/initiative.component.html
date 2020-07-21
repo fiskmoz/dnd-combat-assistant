@@ -1,13 +1,26 @@
 <div class="container">
   <div class="row">
-    <div class="col-12">
-      <app-button
-        [text]="'Randomize Initiative'"
-        [large]="true"
-        [type]="'primary'"
-        (clicked$)="onInitiativeStart()"
-      >
-      </app-button>
+    <div class="col-12 p-2">
+      <div class="row">
+        <div class="col-4">
+          <app-typeahead
+            *ngIf="monsterService.monsterNames"
+            (selected)="onNewSelected($event)"
+            [list]="monsterService.monsterNames"
+            [label]="'Add a monster!'"
+          >
+          </app-typeahead>
+        </div>
+        <div class="col-4 text-center">
+          <app-button
+            [text]="'Calculate Initiative'"
+            [large]="true"
+            [type]="'primary'"
+            (clicked$)="onInitiativeStart()"
+          >
+          </app-button>
+        </div>
+      </div>
     </div>
     <div class="col-md-4 col-sm-4">
       <span *ngFor="let player of playerService.playerList">
@@ -26,6 +39,8 @@
           [monster]="monster"
           [crToXPTable]="monsterService.crToXpTable"
           [enableOptions]="true"
+          (duplicate$)="onDuplicateMonster(monster)"
+          (remove$)="onRemoveMonster(monster)"
         >
         </app-monster-card>
       </span>
