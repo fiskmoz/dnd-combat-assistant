@@ -36,6 +36,18 @@
           </p>
         </div>
         <div>
+          <p *ngIf="!!monster.damage_immunities">
+            <b>Damage Immunities:</b> {{ monster.damage_immunities }}
+          </p>
+          <p *ngIf="!!monster.damage_resistances">
+            <b>Resistance:</b> {{ monster.damage_resistances }}
+          </p>
+          <p *ngIf="!!monster.damage_vulnerabilities">
+            <b>Vulnerabilities:</b> {{ monster.damage_vulnerabilities }}
+          </p>
+          <p *ngIf="!!monster.condition_immunities">
+            <b>Condition Immunities:</b> {{ monster.condition_immunities }}
+          </p>
           <p><b>Senses: </b> {{ monster.senses }}</p>
           <p><b>Languages: </b> {{ monster.languages }}</p>
           <p>
