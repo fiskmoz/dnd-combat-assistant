@@ -19,52 +19,87 @@ export class InitiativeComponent implements OnInit {
 
   public initiativeList: IInitiativeEntity[];
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.initiativeList = [];
+    this.RefreshIniativeState();
+  }
 
   onInitiativeStart() {
     this.initiativeList = [];
     if (!this.monsterService.currentEncounter) {
       return;
     }
-    this.monsterService.currentEncounter.filter((m) => {
-      m.initiative =
+    this.monsterService.currentEncounter.forEach((m, index) => {
+      this.monsterService.currentEncounter[index].initiative =
         this.randomService.GetRandomNumber(1, 20) +
         Math.floor((m.dexterity - 10) / 2);
-      this.initiativeList.push({
-        name: m.name,
-        initiative: m.initiative,
-        hitpoints: m.hit_points,
-        mosnter: true,
-      } as IInitiativeEntity);
     });
+
     if (!this.playerService.playerList) {
       return;
     }
-    this.playerService.playerList.filter((p) => {
+
+    this.RefreshIniativeState();
+  }
+
+  onPlayerChanged() {
+    this.playerService.UpdateLocalStorage();
+    this.RefreshIniativeState();
+  }
+
+  onMonsterChanged(monster: IMonsterIndex, id: number) {
+    this.RefreshIniativeState();
+  }
+
+  onNewSelected(monster: string) {
+    this.monsterService.GetMonsterDataByName(monster).then((data) => {
+      // tslint:disable-next-line: no-string-literal
+      data[0]["initiative"] = 0;
+      this.monsterService.AddMonster(data[0]);
+      this.RefreshIniativeState();
+    });
+  }
+
+  onDuplicateMonster(monster: IMonsterIndex) {
+    this.monsterService.AddMonster(monster);
+    this.RefreshIniativeState();
+  }
+
+  onRemoveMonster(monster: IMonsterIndex) {
+    this.monsterService.RemoveMonster(monster);
+    this.initiativeList.splice(
+      this.initiativeList.findIndex((i) => {
+        return (
+          i.name === monster.name + " " + monster.initiative_suffix.toString()
+        );
+      }),
+      1
+    );
+  }
+
+  RefreshIniativeState() {
+    this.initiativeList = [];
+    this.monsterService.currentEncounter.forEach((m, index) => {
+      this.initiativeList.push({
+        name: m.name,
+        id: index + 1,
+        initiative: m.initiative,
+        hitpoints: m.hit_points,
+        monster: true,
+      } as IInitiativeEntity);
+    });
+    this.playerService.playerList.forEach((p) => {
       this.initiativeList.push({
         name: p.name,
         initiative: p.initiative,
         player: true,
       } as IInitiativeEntity);
     });
+    this.AddSuffixToDuplicates();
+    this.monsterService.AddSuffixToDuplicates();
     this.initiativeList.sort((a, b) => {
       return b.initiative - a.initiative;
     });
-    this.AddSuffixToDuplicates();
-  }
-
-  onNewSelected(monster: string) {
-    this.monsterService.GetMonsterDataByName(monster).then((data) => {
-      this.monsterService.AddMonster(data[0]);
-    });
-  }
-
-  onDuplicateMonster(monster: IMonsterIndex) {
-    this.monsterService.AddMonster(monster);
-  }
-
-  onRemoveMonster(monster: IMonsterIndex) {
-    this.monsterService.RemoveMonster(monster);
   }
 
   AddSuffixToDuplicates() {

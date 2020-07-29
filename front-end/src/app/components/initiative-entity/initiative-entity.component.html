@@ -1,7 +1,9 @@
 <div class="card">
   <div class="row">
     <div class="col-8">
-      <p>{{ entity.name }}</p>
+      <p>
+        <b>{{ entity.name }}</b>
+      </p>
       <div>
         {{ "init: " + entity.initiative }}
         {{ !!entity.hitpoints ? "hp: " + entity.hitpoints : "" }}

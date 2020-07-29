@@ -11,9 +11,11 @@ export class MonsterCardComponent implements OnInit {
   @Input() crToXPTable: JSON;
   @Input() initiative: boolean;
   @Input() enableOptions: boolean;
+  @Input() id: number;
 
   @Output() remove$ = new EventEmitter<IMonsterIndex>();
   @Output() duplicate$ = new EventEmitter<IMonsterIndex>();
+  @Output() changed$ = new EventEmitter<IMonsterIndex>();
 
   constructor() {}
 
@@ -21,6 +23,7 @@ export class MonsterCardComponent implements OnInit {
 
   initiativeChanged(init: string) {
     this.monster.initiative = parseInt(init);
+    this.changed$.emit(this.monster);
   }
 
   onRemoveMonster() {

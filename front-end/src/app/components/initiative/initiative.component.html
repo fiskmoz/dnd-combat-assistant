@@ -27,7 +27,7 @@
         <app-create-player
           [player]="player"
           [initiative]="true"
-          (playerChanged$)="playerService.UpdateLocalStorage()"
+          (playerChanged$)="onPlayerChanged()"
         >
         </app-create-player>
       </span>
@@ -37,10 +37,12 @@
         <app-monster-card
           [initiative]="true"
           [monster]="monster"
+          [id]="monster.initiative_suffix"
           [crToXPTable]="monsterService.crToXpTable"
           [enableOptions]="true"
           (duplicate$)="onDuplicateMonster(monster)"
           (remove$)="onRemoveMonster(monster)"
+          (changed$)="onMonsterChanged(monster)"
         >
         </app-monster-card>
       </span>
