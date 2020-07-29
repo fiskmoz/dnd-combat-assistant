@@ -47,7 +47,7 @@ export class InitiativeComponent implements OnInit {
     this.RefreshIniativeState();
   }
 
-  onMonsterChanged(monster: IMonsterIndex, id: number) {
+  onMonsterChanged(monster: IMonsterIndex) {
     this.RefreshIniativeState();
   }
 
