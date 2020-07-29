@@ -1,14 +1,14 @@
 # Dnd Combat Assistant
 
 Generate balanced encounters for your party given parameters for exmaple, number of players, location, encounter difficulty etc.
+Now also featuring a fully integrated initiative generator where you can dynamically remove monsters that die etc.
 
 ### Backlog:
 
 Fix high level encounter matching
-change colors of adjust component. Replace in create player component
 Favicons
-Initiative generator
-Sea only creatures still show up with land.
+Integrate damage calculations in initiative generator
+Sea only creatures still show up with land, sometimes?
 More monsters, more images.
 
 ### The Stack:
