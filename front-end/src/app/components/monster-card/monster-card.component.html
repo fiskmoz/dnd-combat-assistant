@@ -104,6 +104,7 @@
     <div *ngIf="!!initiative" class="row">
       <div class="col-6">
         {{ monster.name }}
+        {{ !!id ? id : "" }}
         <br />
         <i>Dex modifier: {{ (monster.dexterity - 10) / 2 | floor }}</i>
       </div>

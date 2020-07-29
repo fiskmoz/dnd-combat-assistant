@@ -30,6 +30,7 @@ export interface IMonsterIndex {
 
   initiative?: number;
   img_url?: string;
+  initiative_suffix?: number;
   // EXTEND WITH LEGENDARY STUFF LATER
 }
 

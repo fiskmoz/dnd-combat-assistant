@@ -64,10 +64,35 @@ export class MonsterService {
       .toPromise();
   }
 
-  AddMonster(monster: IMonsterIndex) {
-    this.currentEncounter.push(monster);
+  AddMonster(monster: IMonsterIndex): void {
+    this.currentEncounter.push(Object.assign({}, monster));
   }
-  RemoveMonster(monster: IMonsterIndex) {
+  RemoveMonster(monster: IMonsterIndex): void {
     this.currentEncounter.splice(this.currentEncounter.indexOf(monster), 1);
+  }
+
+  AddSuffixToDuplicates(): void {
+    let suffix = 2;
+    let hit = false;
+    for (let i = 0; i < this.currentEncounter.length; i++) {
+      for (let j = 0; j < this.currentEncounter.length; j++) {
+        if (i === j) {
+          continue;
+        }
+        if (this.currentEncounter[i].name === this.currentEncounter[j].name) {
+          this.currentEncounter[j].initiative_suffix = suffix;
+          suffix++;
+          hit = true;
+        }
+      }
+      if (!!hit) {
+        this.currentEncounter[i].initiative_suffix = 1;
+      }
+      suffix = 2;
+      hit = false;
+    }
+    this.currentEncounter.sort((a, b) => {
+      return a.initiative_suffix - b.initiative_suffix;
+    });
   }
 }
