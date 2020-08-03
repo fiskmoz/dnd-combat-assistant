@@ -1,15 +1,15 @@
 # Dnd Combat Assistant
 
-Generate balanced encounters for your party given parameters for exmaple, number of players, location, encounter difficulty etc.
-Now also featuring a fully integrated initiative generator where you can dynamically remove monsters that die etc.
+Generate balanced encounters for your party given parameters e.g, number of players or monsters, general location, encounter difficulty etc.      
+Now also featuring a fully integrated initiative generator where you can dynamically sort, add or remove monsters.
 
 ### Backlog:
 
-Fix high level encounter matching
-Favicons
-Integrate damage calculations in initiative generator
-Sea only creatures still show up with land, sometimes?
-More monsters, more images.
+Fix high level encounter matching     
+Favicons     
+Integrate damage calculations in initiative generator     
+Sea only creatures still show up with land, sometimes?     
+More monsters, more images.     
 
 ### The Stack:
 
@@ -23,6 +23,6 @@ Navigate to project root
 `python app.py`
 
 navigate to front-end map:  
-`npm start`
-or  
+`npm start`     
+or       
 `ng serve --proxy-config proxy.config.json`
