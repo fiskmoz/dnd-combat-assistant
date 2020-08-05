@@ -14,6 +14,7 @@ msgpack==1.0.0
 protobuf==3.11.3
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
+firebase-admin==4.3.0
 pycodestyle==2.5.0
 pyscbwrapper==0.1.1
 pytz==2018.7
