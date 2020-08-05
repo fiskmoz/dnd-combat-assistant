@@ -24,6 +24,8 @@ export class HomePageComponent implements OnInit {
       case "nav_initiative":
         this.navigation = "initiative";
         break;
+      case "nav_grid":
+        this.navigation = "grid";
     }
   }
 }

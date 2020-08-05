@@ -6,12 +6,40 @@ import uuid
 import sys
 import datetime
 import random
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
+
 
 app = Flask(__name__)
 mimetypes.init()
 mimetypes.add_type("application/javascript", ".js", True)
 mimetypes.add_type("image/vnd.microsoft.icon", ".ico", True)
 
+# LOAD FIREBASE ADMIN RIGHTS
+if os.path.isfile("./firebase_cred.json"):
+    with open("./firebase_cred.json") as file:
+        cred = credentials.Certificate(json.load(file))
+else:
+    cred = credentials.Certificate({
+        "type": os.environ.get('type').replace('\\n', '\n'),
+        "project_id": os.environ.get('project_id').replace('\\n', '\n'),
+        "private_key_id": os.environ.get('private_key_id').replace('\\n', '\n'),
+        "private_key": os.environ.get('private_key').replace('\\n', '\n'),
+        "client_email": os.environ.get('client_email').replace('\\n', '\n'),
+        "client_id": os.environ.get('client_id').replace('\\n', '\n'),
+        "auth_uri": os.environ.get('auth_uri').replace('\\n', '\n'),
+        "token_uri": os.environ.get('token_uri').replace('\\n', '\n'),
+        "auth_provider_x509_cert_url": os.environ.get('auth_provider_x509_cert_url').replace('\\n', '\n'),
+        "client_x509_cert_url": os.environ.get('client_x509_cert_url').replace('\\n', '\n'),
+    })
+if cred == None:
+    raise RuntimeError("Failed to fetch firebase credentials")
+
+firebase_admin.initialize_app(cred)
+db = firestore.client()
+grids_auth = {el.id: el.to_dict()
+              for el in db.collection(u'Campaigns').stream()}
 
 # LOAD MONSTER DATA
 with open('./data/monstersv2.json') as file:
@@ -167,6 +195,37 @@ def generate():
     return response
 
 
+@app.route('/api/grids/authenticate')
+def grid_auth():
+    gridid = request.args.get('gridid')
+    password = request.args.get('password')
+    if grids_auth.get(gridid) != None:
+        if grids_auth.get(gridid).get('password') == password:
+            return app.response_class(
+                response=json.dumps({'response': 'success'}),
+                status=200,
+                mimetype='application/json'
+            )
+        return SendBadRequest('Invalid credentials')
+    return SendBadRequest('No grid with that ID was found')
+
+
+@app.route('/api/grids/update', methods=['POST'])
+def grid_update():
+    gridid = request.args.get('gridid')
+    data = request.data.decode("utf-8")
+    print(data)
+    print(gridid)
+    if grids_auth.get(gridid) == None:
+        return SendBadRequest('No such room')
+    db.collection(u'Grids').document(gridid).update({"grid": data})
+    return app.response_class(
+        response=json.dumps({'response': 'success'}),
+        status=200,
+        mimetype='application/json'
+    )
+
+
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve_static(path):
@@ -237,12 +296,11 @@ def monsterFitsPreviousType(key, previous_type):
 
 
 def SendBadRequest(text):
-    response = app.response_class(
+    return app.response_class(
         response=text,
         status=400,
         mimetype='application/text'
     )
-    return response
 
 
 if __name__ == "__main__":
