@@ -1,0 +1,27 @@
+<div class="d-flex" cdkDropListGroup>
+  <div class="grid-container">
+    <ng-container *ngFor="let item of battlefieldIds; let j = index">
+      <div
+        cdkDropList
+        (cdkDropListDropped)="drop($event)"
+        [id]="j"
+        [cdkDropListDisabled]="true"
+        #battlefieldElem
+      >
+        <div cdkDrag class="grid-box">
+          {{ item != "0" ? item : null }}
+          <div *cdkDragPlaceholder></div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div>
+    <p>Select the boxes you want</p>
+    <div cdkDropList (cdkDropListDropped)="drop($event)" #toolboxElem>
+      <div cdkDrag class="grid-box" *ngFor="let item of toolboxIds">
+        {{ item }}
+        <div *cdkDragPlaceholder></div>
+      </div>
+    </div>
+  </div>
+</div>

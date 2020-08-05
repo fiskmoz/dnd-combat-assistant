@@ -1,7 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
-
+import { environment } from "src/environments/environment";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
@@ -26,6 +26,12 @@ import { HeaderComponent } from "./components/layout/header/header.component";
 import { InitiativeComponent } from "./components/initiative/initiative.component";
 import { AdjustComponent } from "./components/inputs/adjust/adjust.component";
 import { InitiativeEntityComponent } from "./components/initiative-entity/initiative-entity.component";
+import { AngularFireModule } from "@angular/fire";
+import { AngularFirestoreModule } from "@angular/fire/firestore";
+import { GridControllerComponent } from "./components/grid-controller/grid-controller.component";
+import { GridComponent } from "./components/grid/grid.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { DragDropModule } from "@angular/cdk/drag-drop";
 
 @NgModule({
   declarations: [
@@ -47,8 +53,13 @@ import { InitiativeEntityComponent } from "./components/initiative-entity/initia
     InitiativeComponent,
     AdjustComponent,
     InitiativeEntityComponent,
+    GridControllerComponent,
+    GridComponent,
   ],
   imports: [
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
+    DragDropModule,
     BrowserModule,
     HttpClientModule,
     NgbModule,
@@ -56,6 +67,7 @@ import { InitiativeEntityComponent } from "./components/initiative-entity/initia
     ReactiveFormsModule,
     AppRoutingModule,
     RouterModule,
+    BrowserAnimationsModule,
   ],
   providers: [PlayersService, MonsterService],
   bootstrap: [AppComponent],

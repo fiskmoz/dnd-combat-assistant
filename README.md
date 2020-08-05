@@ -10,6 +10,8 @@ Favicons
 Integrate damage calculations in initiative generator
 Sea only creatures still show up with land, sometimes?
 More monsters, more images.
+Consistent error responses with consistent entity
+Write better firestore rules
 
 ### The Stack:
 

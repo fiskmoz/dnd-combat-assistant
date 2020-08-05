@@ -1,0 +1,63 @@
+<div class="container">
+  <div *ngIf="!!gridService.isAuthenticated" class="">
+    <div class="row p-2">
+      <div class="col-10">
+        <h3>{{ "Connected to: " + gridService.gridid }}</h3>
+      </div>
+      <div class="col-2">
+        <app-button
+          [text]="'Leave'"
+          [type]="'secondary'"
+          (clicked$)="handleLeave()"
+        >
+        </app-button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <app-grid> </app-grid>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!gridService.isAuthenticated" class="col-4">
+    <div class="card">
+      <div class="card-header">
+        <p>Please enter your grid credentials:</p>
+        <div
+          *ngIf="!!gridService.status"
+          class="alert alert-danger"
+          role="alert"
+        >
+          {{ gridService.status }}
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="p-1">
+          <app-textbox
+            [text]="gridService.gridid"
+            [type]="'text'"
+            [placeholder]="'Grid ID'"
+            [id]="'grid_id'"
+            (textChanged$)="handleGridIdChange($event)"
+          ></app-textbox>
+        </div>
+        <div class="p-1">
+          <app-textbox
+            [type]="'password'"
+            [text]="gridService.password"
+            [placeholder]="'Password'"
+            [id]="'password'"
+            (textChanged$)="handlePasswordChange($event)"
+          ></app-textbox>
+        </div>
+        <div class="p-1">
+          <app-button
+            [text]="'Enter'"
+            [type]="'primary'"
+            (clicked$)="handleLogin()"
+          ></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
