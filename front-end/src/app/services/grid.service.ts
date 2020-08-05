@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { HttpClient } from "@angular/common/http";
-import { promise } from "protractor";
 
 @Injectable({
   providedIn: "root",
