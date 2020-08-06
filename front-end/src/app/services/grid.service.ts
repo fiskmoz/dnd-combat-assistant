@@ -17,6 +17,7 @@ export class GridService {
       localData = JSON.parse(localStorage.getItem("AuthenticatedGrid"));
     } catch (e) {
       this.isAuthenticated = false;
+      localStorage.removeItem("AuthenticatedGrid");
       return;
     }
     this.gridid = localData["gridid"];
