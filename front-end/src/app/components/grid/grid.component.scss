@@ -18,6 +18,30 @@
     0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 
+@media only screen and (max-width: 768px) {
+  .grid-box {
+    width: 50px;
+    height: 50px;
+    font-size: 23pt;
+  }
+  .grid-container {
+    width: 560px !important;
+    min-width: 560px !important;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .grid-box {
+    width: 35px;
+    height: 35px;
+    font-size: 16pt;
+  }
+  .grid-container {
+    width: 400px !important;
+    min-width: 400px !important;
+  }
+}
+
 .grid-box:active {
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
     0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);

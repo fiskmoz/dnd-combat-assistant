@@ -12,7 +12,14 @@ export class GridService {
   public status: string;
 
   constructor(private firestore: AngularFirestore, private http: HttpClient) {
-    this.gridid = localStorage.getItem("AuthenticatedGrid");
+    let localData;
+    try {
+      localData = JSON.parse(localStorage.getItem("AuthenticatedGrid"));
+    } catch (e) {
+      this.isAuthenticated = false;
+      return;
+    }
+    this.gridid = localData["gridid"];
     this.isAuthenticated = !!this.gridid;
   }
 
@@ -32,7 +39,10 @@ export class GridService {
     this.http.get(apiUrl).subscribe(
       (data: JSON) => {
         this.isAuthenticated = data["response"] === "success";
-        localStorage.setItem("AuthenticatedGrid", this.gridid);
+        localStorage.setItem(
+          "AuthenticatedGrid",
+          JSON.stringify({ gridid: this.gridid, password: this.password })
+        );
       },
       (err: Error) => {
         this.status = err["error"];

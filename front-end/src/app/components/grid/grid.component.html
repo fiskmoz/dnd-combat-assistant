@@ -1,4 +1,4 @@
-<div class="d-flex" cdkDropListGroup>
+<div cdkDropListGroup>
   <div class="grid-container">
     <ng-container *ngFor="let item of battlefieldIds; let j = index">
       <div
@@ -15,7 +15,7 @@
       </div>
     </ng-container>
   </div>
-  <div>
+  <div class="text-center">
     <p>Select the boxes you want</p>
     <div cdkDropList (cdkDropListDropped)="drop($event)" #toolboxElem>
       <div cdkDrag class="grid-box" *ngFor="let item of toolboxIds">
