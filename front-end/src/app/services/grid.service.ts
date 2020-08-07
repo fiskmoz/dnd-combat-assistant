@@ -12,10 +12,11 @@ export class GridService {
   public status: string;
 
   constructor(private firestore: AngularFirestore, private http: HttpClient) {
-    let localData;
+    let localData = null;
     try {
       localData = JSON.parse(localStorage.getItem("AuthenticatedGrid"));
-    } catch (e) {
+    } catch (e) {}
+    if (localData == null) {
       this.isAuthenticated = false;
       localStorage.removeItem("AuthenticatedGrid");
       return;
