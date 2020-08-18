@@ -34,6 +34,14 @@
         [default]="player.level"
         (change$)="levelChanged($event)"
       ></app-dropdown>
+      <div class="pt-2">
+        <app-adjust
+          [decreaseButtonText]="'remove'"
+          [increaseButtonText]="'duplicate'"
+          (decreased$)="onPlayerRemove()"
+          (increased$)="onDuplicatePlayer()"
+        ></app-adjust>
+      </div>
     </div>
     <div *ngIf="initiative">
       Character initiative:

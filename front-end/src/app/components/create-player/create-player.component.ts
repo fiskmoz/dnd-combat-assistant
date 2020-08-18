@@ -11,6 +11,8 @@ export class CreatePlayerComponent implements OnInit {
   @Input() initiative: boolean;
 
   @Output() playerChanged$ = new EventEmitter();
+  @Output() playerRemoved$ = new EventEmitter();
+  @Output() playerDuplicated$ = new EventEmitter();
   constructor() {}
 
   ngOnInit(): void {}
@@ -28,5 +30,12 @@ export class CreatePlayerComponent implements OnInit {
   initiativeChanged(init: string) {
     this.player.initiative = parseInt(init);
     this.playerChanged$.emit();
+  }
+
+  onDuplicatePlayer() {
+    this.playerDuplicated$.emit();
+  }
+  onPlayerRemove() {
+    this.playerRemoved$.emit();
   }
 }

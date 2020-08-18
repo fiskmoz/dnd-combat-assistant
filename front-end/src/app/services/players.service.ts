@@ -62,16 +62,28 @@ export class PlayersService {
     });
   }
 
-  AddNewPlayer() {
-    const mrDefault = {
-      level: 1,
-      name: "mrs default",
-    } as Player;
-    if (!this.playerList) {
-      this.playerList = [mrDefault];
+  AddNewPlayer(player?: Player) {
+    if (!!player) {
+      this.playerList.push(Object.assign({}, player));
     } else {
-      this.playerList.push(mrDefault);
+      const mrDefault = {
+        level: 1,
+        name: "mrs default",
+      } as Player;
+      if (!this.playerList) {
+        this.playerList = [mrDefault];
+      } else {
+        this.playerList.push(mrDefault);
+      }
     }
+
+    this.SetPlayerXPthreshhold();
+    this.CalculateEncounterDifficulty();
+    this.UpdateLocalStorage();
+  }
+
+  RemovePlayer(player: Player) {
+    this.playerList = this.playerList.filter((p) => p !== player);
     this.SetPlayerXPthreshhold();
     this.CalculateEncounterDifficulty();
     this.UpdateLocalStorage();

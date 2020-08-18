@@ -18,22 +18,6 @@
               (clicked$)="onPlayerAdd()"
             ></app-button>
           </div>
-          <div class="px-2">
-            <app-button
-              [text]="'Remove Player'"
-              [small]="true"
-              [type]="'secondary'"
-              (clicked$)="onPlayerRemove()"
-            ></app-button>
-          </div>
-          <div class="px-2">
-            <app-button
-              [text]="'Save'"
-              [small]="true"
-              [type]="'primary'"
-              (clicked$)="onSave()"
-            ></app-button>
-          </div>
         </div>
       </div>
     </div>
@@ -43,6 +27,8 @@
       <app-create-player
         [player]="player"
         (playerChanged$)="onPlayerChanged()"
+        (playerDuplicated$)="playerSerivce.AddNewPlayer(player)"
+        (playerRemoved$)="this.playerSerivce.RemovePlayer(player)"
       ></app-create-player>
     </div>
   </div>
