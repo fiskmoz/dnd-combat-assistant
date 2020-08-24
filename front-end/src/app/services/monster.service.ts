@@ -75,8 +75,12 @@ export class MonsterService {
   }
 
   AddMonster(monster: IMonsterIndex): void {
+    !!monster.initiative
+      ? (monster.initiative = monster.initiative)
+      : (monster.initiative = 0);
     this.currentEncounter.push(Object.assign({}, monster));
     this.monsterTotal = this.currentEncounter.length;
+    this.AddSuffixToDuplicates();
   }
   RemoveMonster(monster: IMonsterIndex): void {
     this.currentEncounter.splice(this.currentEncounter.indexOf(monster), 1);
@@ -104,6 +108,12 @@ export class MonsterService {
       hit = false;
     }
     this.currentEncounter.sort((a, b) => {
+      if (a.name < b.name) {
+        return -1;
+      }
+      if (a.name > b.name) {
+        return 1;
+      }
       return a.initiative_suffix - b.initiative_suffix;
     });
   }

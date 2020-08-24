@@ -70,7 +70,7 @@ export class InitiativeComponent implements OnInit {
     this.initiativeList.splice(
       this.initiativeList.findIndex((i) => {
         return (
-          i.name === monster.name + " " + monster.initiative_suffix.toString()
+          i.name === monster.name && i.suffix === monster.initiative_suffix
         );
       }),
       1
@@ -79,6 +79,7 @@ export class InitiativeComponent implements OnInit {
 
   RefreshIniativeState() {
     this.initiativeList = [];
+    this.monsterService.AddSuffixToDuplicates();
     this.monsterService.currentEncounter.forEach((m, index) => {
       this.initiativeList.push({
         name: m.name,
@@ -86,6 +87,7 @@ export class InitiativeComponent implements OnInit {
         initiative: m.initiative,
         hitpoints: m.hit_points,
         monster: true,
+        suffix: !!m.initiative_suffix ? m.initiative_suffix : null,
       } as IInitiativeEntity);
     });
     this.playerService.playerList.forEach((p) => {
@@ -95,33 +97,8 @@ export class InitiativeComponent implements OnInit {
         player: true,
       } as IInitiativeEntity);
     });
-    this.AddSuffixToDuplicates();
-    this.monsterService.AddSuffixToDuplicates();
     this.initiativeList.sort((a, b) => {
       return b.initiative - a.initiative;
     });
-  }
-
-  AddSuffixToDuplicates() {
-    let suffix = 2;
-    let hit = false;
-    for (let i = 0; i < this.initiativeList.length; i++) {
-      for (let j = 0; j < this.initiativeList.length; j++) {
-        if (i === j) {
-          continue;
-        }
-        if (this.initiativeList[i].name === this.initiativeList[j].name) {
-          this.initiativeList[j].name =
-            this.initiativeList[j].name + " " + suffix.toString();
-          suffix++;
-          hit = true;
-        }
-      }
-      if (!!hit) {
-        this.initiativeList[i].name = this.initiativeList[i].name + " 1";
-      }
-      suffix = 2;
-      hit = false;
-    }
   }
 }
