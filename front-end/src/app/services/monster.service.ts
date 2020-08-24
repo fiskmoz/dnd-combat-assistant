@@ -9,6 +9,8 @@ export class MonsterService {
   public currentEncounter: IMonsterIndex[];
   public monsterNames: string[];
   public crToXpTable: JSON;
+  public monstersMultiplier: JSON;
+  public monsterTotal = 1;
 
   constructor(private http: HttpClient) {
     this.http.get("/api/encounter/crtable").subscribe((data: JSON) => {
@@ -16,6 +18,9 @@ export class MonsterService {
     });
     this.http.get("/api/encounter/names").subscribe((data: JSON) => {
       this.monsterNames = Object.values(data);
+    });
+    this.http.get("api/encounter/multiplier").subscribe((data: JSON) => {
+      this.monstersMultiplier = data;
     });
     this.currentEncounter = [];
   }
@@ -27,7 +32,7 @@ export class MonsterService {
     alignment?: string,
     locations?: string[],
     geolocation?: string
-  ) {
+  ): Promise<unknown> {
     if (!monsters || !partyxp || !origins || origins.length === 0) {
       console.log("Missing parameters for request");
       return;
@@ -49,9 +54,14 @@ export class MonsterService {
     if (!!locations) {
       apiUrl = apiUrl + "&locations=" + locations.join("-");
     }
-    this.http.get<IMonsterIndex[]>(apiUrl).subscribe((r) => {
-      Object.assign(this.currentEncounter, r);
+    const promise = new Promise((resolve, reject) => {
+      this.http.get<IMonsterIndex[]>(apiUrl).subscribe((r) => {
+        Object.assign(this.currentEncounter, r);
+        this.monsterTotal = this.currentEncounter.length;
+        resolve();
+      });
     });
+    return promise;
   }
 
   GetMonsterDataByName(monster: string): Promise<IMonsterIndex> {
@@ -66,9 +76,11 @@ export class MonsterService {
 
   AddMonster(monster: IMonsterIndex): void {
     this.currentEncounter.push(Object.assign({}, monster));
+    this.monsterTotal = this.currentEncounter.length;
   }
   RemoveMonster(monster: IMonsterIndex): void {
     this.currentEncounter.splice(this.currentEncounter.indexOf(monster), 1);
+    this.monsterTotal = this.currentEncounter.length;
   }
 
   AddSuffixToDuplicates(): void {
@@ -94,5 +106,18 @@ export class MonsterService {
     this.currentEncounter.sort((a, b) => {
       return a.initiative_suffix - b.initiative_suffix;
     });
+  }
+
+  GetMonsterMultiplier(xp: number): number {
+    return Math.round(
+      xp /
+        this.monstersMultiplier[
+          this.monsterTotal > 0
+            ? this.monsterTotal > 15
+              ? 15
+              : this.monsterTotal
+            : 1
+        ]
+    );
   }
 }

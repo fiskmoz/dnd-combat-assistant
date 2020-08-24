@@ -1,3 +1,4 @@
+import { MonsterService } from "src/app/services/monster.service";
 import { Component, OnInit } from "@angular/core";
 import { PlayersService } from "src/app/services/players.service";
 
@@ -7,7 +8,10 @@ import { PlayersService } from "src/app/services/players.service";
   styleUrls: ["./create-player-wrapper.component.scss"],
 })
 export class CreatePlayerWrapperComponent implements OnInit {
-  constructor(public playerSerivce: PlayersService) {}
+  constructor(
+    public playerSerivce: PlayersService,
+    public MonsterService: MonsterService
+  ) {}
 
   ngOnInit(): void {}
 

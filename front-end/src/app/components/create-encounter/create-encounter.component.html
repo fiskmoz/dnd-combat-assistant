@@ -173,6 +173,10 @@
   </div>
 </div>
 
+<div>
+  {{ errorMSG  }}
+</div>
+
 <div *ngFor="let monster of monsterService.currentEncounter">
   <app-monster-card
     [monster]="monster"
