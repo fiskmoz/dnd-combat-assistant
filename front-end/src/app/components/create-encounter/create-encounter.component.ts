@@ -22,19 +22,30 @@ export class CreateEncounterComponent implements OnInit {
   locations = ["plain"];
   monsterTotal = "1";
   difficulty = "easy";
+  errorMSG = "";
 
   ngOnInit(): void {
     this.ReadLocalStorage();
   }
   onRandomEncounter() {
-    this.monsterService.GenerateRandomEncounter(
-      this.monsterTotal,
-      this.playerService.GetEncounterDifficulty(this.difficulty),
-      this.origins,
-      null,
-      this.locations,
-      this.geolocation
-    );
+    this.monsterService
+      .GenerateRandomEncounter(
+        this.monsterTotal,
+        this.playerService.GetEncounterDifficulty(this.difficulty),
+        this.origins,
+        null,
+        this.locations,
+        this.geolocation
+      )
+      .then(() => {
+        this.errorMSG = "";
+        if (parseInt(this.monsterTotal) != this.monsterService.monsterTotal) {
+          this.errorMSG =
+            "Sorry, we could not find exactly " +
+            this.monsterTotal +
+            " monsters fitting these criterias. Please enable more locations to have increased chances. ";
+        }
+      });
   }
 
   refChange(event: ICheckboxChangeEvent) {
@@ -57,6 +68,7 @@ export class CreateEncounterComponent implements OnInit {
   monsterTotalChange(event: string) {
     this.monsterTotal = event;
     this.UpdateLocalStorage();
+    this.monsterService.monsterTotal = parseInt(this.monsterTotal);
   }
   encounterDifficultyChange(event: string) {
     this.difficulty = event;
@@ -99,6 +111,7 @@ export class CreateEncounterComponent implements OnInit {
     }
     if (!!storageJson.hasOwnProperty("monsterTotal")) {
       this.monsterTotal = storageJson["monsterTotal"];
+      this.monsterService.monsterTotal = parseInt(this.monsterTotal);
     }
     if (!!storageJson.hasOwnProperty("difficulty")) {
       this.difficulty = storageJson["difficulty"];

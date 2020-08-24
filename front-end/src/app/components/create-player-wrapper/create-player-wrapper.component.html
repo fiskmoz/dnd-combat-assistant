@@ -3,14 +3,19 @@
     <div class="card">
       <div class="card-body">
         <h4>Encounter difficulty</h4>
-        <p>
-          Easy: {{ playerSerivce.easyEncounter }}xp Medium:
-          {{ playerSerivce.mediumEncounter }}xp Hard:
-          {{ playerSerivce.hardEncounter }}xp Deadly:
-          {{ playerSerivce.deadlyEncounter }}xp
-        </p>
+        Easy:
+        {{ MonsterService.GetMonsterMultiplier(playerSerivce.easyEncounter) }}xp
+        Medium:
+        {{
+          MonsterService.GetMonsterMultiplier(playerSerivce.mediumEncounter)
+        }}xp Hard:
+        {{ MonsterService.GetMonsterMultiplier(playerSerivce.hardEncounter) }}xp
+        Deadly:
+        {{
+          MonsterService.GetMonsterMultiplier(playerSerivce.deadlyEncounter)
+        }}xp
         <div class="d-flex">
-          <div class="pr-2">
+          <div class="pr-2 pt-2">
             <app-button
               [text]="'Add Player'"
               [small]="true"

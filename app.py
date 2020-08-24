@@ -79,6 +79,10 @@ possible_allignments = ["lawful good", "neutral good", "chaotic good", "lawful n
 possible_types_all = ['dragon', 'elemental', 'monstrosity', 'construct', 'beast', 'humanoid', 'plant',
                       'fiend', 'ooze', 'fey', 'giant', 'celestial', 'aberration', 'undead', 'swarm of Tiny beasts']
 
+# BLACKLISTED MONSTERS BY NAME
+blacklisted_monsters = ['Commoner']
+blacklisted_sea_creatures = ['Sahuagin']
+
 
 @app.route('/')
 def index():
@@ -87,34 +91,39 @@ def index():
 
 @app.route('/api/encounter/thresholds')
 def threshholds():
-    response = app.response_class(
+    return app.response_class(
         response=json.dumps(encounter_thresholds),
         status=200,
         mimetype='application/json'
     )
-    return response
 
 
 @app.route('/api/encounter/crtable')
 def crtable():
-    response = app.response_class(
+    return app.response_class(
         response=json.dumps(cr_to_xp_table),
         status=200,
         mimetype='application/json'
     )
-    return response
+
+
+@app.route('/api/encounter/multiplier')
+def multipliers():
+    return app.response_class(
+        response=json.dumps(monsters_multiplier),
+        status=200,
+        mimetype='application/json')
 
 
 @app.route('/api/encounter/names')
 def names():
-    response = app.response_class(
+    return app.response_class(
         response=json.dumps(
             sorted([value['name'] for value in monster_data])
         ),
         status=200,
         mimetype='application/json'
     )
-    return response
 
 
 @app.route('/api/encounter/monster')
@@ -172,6 +181,8 @@ def generate():
         if not monsterFitsPreviousType(key, previous_type):
             if monster_data[key]['type'] != 'humanoid':
                 continue
+        if monster_data[key]['name'] in blacklisted_monsters:
+            continue
         while True:
             response_json[response_index] = monster_data[key]
             challenge_ratings.remove(monster_data[key]['challenge_rating'])
@@ -244,7 +255,7 @@ def GetChallengeRatings(partyxp, members):
                 str(ChallengeRatingByExperience(remainingxp)))
             continue
         # Adjust these for more fair encounters.
-        random_percentage = (random.randint(20, 50) / 100) / (members / 2)
+        random_percentage = (random.randint(15, 35) / 100) / (members / 2)
         challenge_ratings.append(
             str(ChallengeRatingByExperience(remainingxp*random_percentage)))
         remainingxp = remainingxp * (1 - random_percentage)
@@ -275,7 +286,7 @@ def monsterFitsGeolocation(key, geolocation):
         return False
 
     # Remove sea creatures
-    if not 'walk' in monster_data[key]['speed_json'] or monster_data[key]['speed_json']['walk'] == 0 or monster_data[key]['subtype'] == 'merfolk':
+    if not 'walk' in monster_data[key]['speed_json'] or monster_data[key]['speed_json']['walk'] == 0 or monster_data[key]['subtype'] == 'merfolk' or monster_data[key]['name'] in blacklisted_sea_creatures:
         return False
 
     if geolocation == 'sky':
