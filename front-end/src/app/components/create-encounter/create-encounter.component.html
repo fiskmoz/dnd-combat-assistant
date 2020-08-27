@@ -129,14 +129,6 @@
         (changed$)="locationChange($event)"
       ></app-checkbox>
       <app-checkbox
-        [id]="'frostlandsref'"
-        [text]="'frostlands'"
-        [name]="'frostlands'"
-        [checked]="locations.includes('frostlands')"
-        [inline]="true"
-        (changed$)="locationChange($event)"
-      ></app-checkbox>
-      <app-checkbox
         [id]="'swampref'"
         [text]="'swamp'"
         [name]="'swamp'"
@@ -174,7 +166,7 @@
 </div>
 
 <div>
-  {{ errorMSG  }}
+  {{ errorMSG }}
 </div>
 
 <div *ngFor="let monster of monsterService.currentEncounter">

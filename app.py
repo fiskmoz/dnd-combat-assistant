@@ -59,15 +59,14 @@ with open('./data/monsters_multiplier.json') as file:
 
 # CONSTANTS
 possible_locations = ["city", "village", "mountain", "cave",
-                      "plain", "frostlands", "swamp", "forest", "underdark"]
+                      "plain", "swamp", "forest", "underdark"]
 # Extend possible types
 possible_types_dict = {
-    "city": ["construct", "elemental", "humanoid, undead", 'aberration'],
-    "village": ["humanoid", "dragon", 'monstrosity', 'giant', 'aberration'],
-    "mountain": ["giant", "dragon", 'monstrosity', 'humanoid'],
+    "city": ["construct", "elemental", "humanoid, undead", 'aberration', 'fiend'],
+    "village": ["construct", "elemental", "humanoid", "dragon", 'monstrosity', 'giant', 'aberration', 'fiend'],
+    "mountain": ["giant", "dragon", 'monstrosity', 'humanoid', 'celestial'],
     "cave": ["monstrosity", "dragon", 'elemental', 'plant', 'giant', 'aberration', 'swarm of Tiny beasts', "beasts", "humanoid"],
-    "plain": ["humanoid", "beast", "undead", "dragon", 'elemental', 'humanoid', 'plant', 'swarm of Tiny beasts'],
-    "frostlands": ["monstrosity", "beast", 'elemental', "humanoid"],
+    "plain": ["humanoid", "fiend", "beast", "undead", "ooze", "dragon", 'elemental', 'humanoid', 'plant', 'swarm of Tiny beasts'],
     "swamp": ["giant", "ooze", 'monstrosity', 'swarm of Tiny beasts', "humanoid"],
     "forest": ["beast", "ooze", "plant", "swarm of tiny beasts,'monstrosity", 'humanoid', 'fey'],
     "underdark": ["undead", "fiend", "humanoid", "dragon"],
