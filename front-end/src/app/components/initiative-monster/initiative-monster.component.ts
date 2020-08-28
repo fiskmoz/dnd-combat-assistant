@@ -1,6 +1,5 @@
 import { IMonsterIndex } from "./../../interfaces/monster-index";
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { typeWithParameters } from "@angular/compiler/src/render3/util";
 
 @Component({
   selector: "app-initiative-monster",
