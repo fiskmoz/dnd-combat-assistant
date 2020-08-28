@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-body">
-    <div *ngIf="!initiative" class="row">
+    <div class="row">
       <div class="col-md-6 col-sm-12">
         <div class="header">
           <h3>{{ monster.name }}</h3>
@@ -99,62 +99,6 @@
             </p>
           </div>
         </div>
-      </div>
-    </div>
-    <div *ngIf="!!initiative" class="row">
-      <div class="col-6">
-        {{ monster.name }}
-        {{ !!id ? id : "" }}
-        <br />
-        <i>Dex modifier: {{ (monster.dexterity - 10) / 2 | floor }}</i>
-      </div>
-      <div class="col-6 p-1" *ngIf="enableOptions">
-        <app-adjust
-          [decreaseButtonText]="'remove'"
-          [increaseButtonText]="'duplicate'"
-          (decreased$)="onRemoveMonster()"
-          (increased$)="onDuplicateMonster()"
-        ></app-adjust>
-      </div>
-      <div class="col-md-6 col-sm-12">
-        initiative:
-        <app-dropdown
-          [list]="[
-            '0',
-            '1',
-            '2',
-            '3',
-            '4',
-            '5',
-            '6',
-            '7',
-            '8',
-            '9',
-            '10',
-            '11',
-            '12',
-            '13',
-            '14',
-            '15',
-            '16',
-            '17',
-            '18',
-            '19',
-            '20',
-            '21',
-            '22',
-            '23',
-            '24',
-            '25',
-            '26',
-            '27',
-            '28',
-            '29',
-            '30'
-          ]"
-          [default]="monster.initiative ? monster.initiative : 0"
-          (change$)="initiativeChanged($event)"
-        ></app-dropdown>
       </div>
     </div>
   </div>

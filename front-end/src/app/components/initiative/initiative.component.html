@@ -34,17 +34,13 @@
     </div>
     <div class="col-md-4 col-sm-4 p-1">
       <span *ngFor="let monster of monsterService.currentEncounter">
-        <app-monster-card
-          [initiative]="true"
+        <app-initiative-monster
           [monster]="monster"
-          [id]="monster.initiative_suffix"
-          [crToXPTable]="monsterService.crToXpTable"
-          [enableOptions]="true"
           (duplicate$)="onDuplicateMonster(monster)"
           (remove$)="onRemoveMonster(monster)"
           (changed$)="onMonsterChanged(monster)"
         >
-        </app-monster-card>
+        </app-initiative-monster>
       </span>
     </div>
     <div class="col-md-4 col-sm-4 p-1">

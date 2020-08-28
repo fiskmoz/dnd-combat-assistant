@@ -9,22 +9,15 @@ import { IMonsterIndex } from "src/app/interfaces/monster-index";
 export class MonsterCardComponent implements OnInit {
   @Input() monster: IMonsterIndex;
   @Input() crToXPTable: JSON;
-  @Input() initiative: boolean;
   @Input() enableOptions: boolean;
   @Input() id: number;
 
   @Output() remove$ = new EventEmitter<IMonsterIndex>();
   @Output() duplicate$ = new EventEmitter<IMonsterIndex>();
-  @Output() changed$ = new EventEmitter<IMonsterIndex>();
 
   constructor() {}
 
   ngOnInit(): void {}
-
-  initiativeChanged(init: string) {
-    this.monster.initiative = parseInt(init);
-    this.changed$.emit(this.monster);
-  }
 
   onRemoveMonster() {
     this.remove$.emit(this.monster);

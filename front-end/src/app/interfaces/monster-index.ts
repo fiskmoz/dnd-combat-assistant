@@ -6,6 +6,7 @@ export interface IMonsterIndex {
   subtype?: string;
   alignment: string;
   armor_class: number;
+  max_hit_points: number;
   hit_points: number;
   hit_dice: string;
   speed: string;
