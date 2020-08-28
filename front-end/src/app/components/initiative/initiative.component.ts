@@ -70,6 +70,7 @@ export class InitiativeComponent implements OnInit {
 
   RefreshIniativeState() {
     this.initiativeList = [];
+    this.monsterService.AddSuffixToDuplicates();
     this.monsterService.currentEncounter.forEach((m, index) => {
       this.initiativeList.push({
         name: m.name,
@@ -78,6 +79,7 @@ export class InitiativeComponent implements OnInit {
         hitpoints: m.hit_points,
         suffix: m.initiative_suffix,
         monster: true,
+        suffix: !!m.initiative_suffix ? m.initiative_suffix : null,
       } as IInitiativeEntity);
     });
     this.playerService.playerList.forEach((p) => {
