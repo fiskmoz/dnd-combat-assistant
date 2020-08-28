@@ -32,6 +32,7 @@ import { GridControllerComponent } from "./components/grid-controller/grid-contr
 import { GridComponent } from "./components/grid/grid.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { DragDropModule } from "@angular/cdk/drag-drop";
+import { InitiativeMonsterComponent } from './components/initiative-monster/initiative-monster.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { DragDropModule } from "@angular/cdk/drag-drop";
     InitiativeEntityComponent,
     GridControllerComponent,
     GridComponent,
+    InitiativeMonsterComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),

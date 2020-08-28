@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { IMonsterIndex } from "../interfaces/monster-index";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
   providedIn: "root",
@@ -57,7 +57,7 @@ export class MonsterService {
     const promise = new Promise((resolve, reject) => {
       this.http.get<IMonsterIndex[]>(apiUrl).subscribe((r) => {
         Object.assign(this.currentEncounter, r);
-        this.monsterTotal = this.currentEncounter.length;
+        this.InitializeNewMonsters();
         resolve();
       });
     });
@@ -75,12 +75,25 @@ export class MonsterService {
   }
 
   AddMonster(monster: IMonsterIndex): void {
-    this.currentEncounter.push(Object.assign({}, monster));
+    let _monster = Object.assign({}, monster);
+    _monster.initiative = 0;
+    _monster.max_hit_points = _monster.hit_points;
+    this.currentEncounter.push(_monster);
     this.monsterTotal = this.currentEncounter.length;
+    this.AddSuffixToDuplicates();
   }
   RemoveMonster(monster: IMonsterIndex): void {
     this.currentEncounter.splice(this.currentEncounter.indexOf(monster), 1);
     this.monsterTotal = this.currentEncounter.length;
+  }
+
+  InitializeNewMonsters() {
+    this.currentEncounter.forEach((m) => {
+      m.initiative = 0;
+      m.max_hit_points = m.hit_points;
+    });
+    this.monsterTotal = this.currentEncounter.length;
+    this.AddSuffixToDuplicates();
   }
 
   AddSuffixToDuplicates(): void {

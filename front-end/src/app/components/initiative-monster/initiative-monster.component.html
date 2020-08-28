@@ -1,0 +1,95 @@
+<div class="card">
+  <div class="card-body row">
+    <div class="col-md-6 col-sm-12">
+      {{ monster.name }}
+      {{ !!monster.initiative_suffix ? monster.initiative_suffix : "" }}
+      <br />
+      <small
+        ><i>Dex modifier: {{ (monster.dexterity - 10) / 2 | floor }}</i></small
+      >
+      <br />
+      <small
+        ><i>Max HP: {{ monster.max_hit_points }}</i></small
+      >
+    </div>
+    <div class="col-md-6 p-1 col-sm-12">
+      <app-adjust
+        [decreaseButtonText]="'remove'"
+        [increaseButtonText]="'duplicate'"
+        (decreased$)="onRemoveMonster()"
+        (increased$)="onDuplicateMonster()"
+      ></app-adjust>
+    </div>
+    <div class="col-md-6 col-sm-12">
+      initiative:
+      <app-dropdown
+        [list]="[
+          '-3',
+          '-2',
+          '-1',
+          '0',
+          '1',
+          '2',
+          '3',
+          '4',
+          '5',
+          '6',
+          '7',
+          '8',
+          '9',
+          '10',
+          '11',
+          '12',
+          '13',
+          '14',
+          '15',
+          '16',
+          '17',
+          '18',
+          '19',
+          '20',
+          '21',
+          '22',
+          '23',
+          '24',
+          '25',
+          '26',
+          '27',
+          '28',
+          '29',
+          '30'
+        ]"
+        [default]="monster.initiative ? monster.initiative : 0"
+        (change$)="onInitiativeChanged($event)"
+      ></app-dropdown>
+    </div>
+    <div class="col-md-6 col-sm-12">
+      <small *ngIf="!!isTextValid"
+        ><i>Current HP: {{ monster.hit_points }}</i></small
+      >
+      <small class="text-danger" *ngIf="!isTextValid"
+        ><i>Invalid damage!</i></small
+      >
+      <div class="row">
+        <div class="col-md-9 col-sm-12">
+          <app-textbox
+            [type]="'text'"
+            [id]="monster.index"
+            [placeholder]="'Damage:'"
+            (textChanged$)="onInitiativeDamageTextChanged($event)"
+          >
+          </app-textbox>
+        </div>
+        <div class="col-md-3 col-sm-12 pl-0">
+          <app-button
+            [text]="'Go!'"
+            [large]="false"
+            [small]="true"
+            [type]="'danger'"
+            (clicked$)="onDamageDealt($event)"
+          ></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

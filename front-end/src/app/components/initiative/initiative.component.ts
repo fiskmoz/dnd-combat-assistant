@@ -53,8 +53,6 @@ export class InitiativeComponent implements OnInit {
 
   onNewSelected(monster: string) {
     this.monsterService.GetMonsterDataByName(monster).then((data) => {
-      // tslint:disable-next-line: no-string-literal
-      data[0]["initiative"] = 0;
       this.monsterService.AddMonster(data[0]);
       this.RefreshIniativeState();
     });
@@ -67,14 +65,7 @@ export class InitiativeComponent implements OnInit {
 
   onRemoveMonster(monster: IMonsterIndex) {
     this.monsterService.RemoveMonster(monster);
-    this.initiativeList.splice(
-      this.initiativeList.findIndex((i) => {
-        return (
-          i.name === monster.name + " " + monster.initiative_suffix.toString()
-        );
-      }),
-      1
-    );
+    this.RefreshIniativeState();
   }
 
   RefreshIniativeState() {
@@ -85,6 +76,7 @@ export class InitiativeComponent implements OnInit {
         id: index + 1,
         initiative: m.initiative,
         hitpoints: m.hit_points,
+        suffix: m.initiative_suffix,
         monster: true,
       } as IInitiativeEntity);
     });
@@ -95,33 +87,8 @@ export class InitiativeComponent implements OnInit {
         player: true,
       } as IInitiativeEntity);
     });
-    this.AddSuffixToDuplicates();
-    this.monsterService.AddSuffixToDuplicates();
     this.initiativeList.sort((a, b) => {
       return b.initiative - a.initiative;
     });
-  }
-
-  AddSuffixToDuplicates() {
-    let suffix = 2;
-    let hit = false;
-    for (let i = 0; i < this.initiativeList.length; i++) {
-      for (let j = 0; j < this.initiativeList.length; j++) {
-        if (i === j) {
-          continue;
-        }
-        if (this.initiativeList[i].name === this.initiativeList[j].name) {
-          this.initiativeList[j].name =
-            this.initiativeList[j].name + " " + suffix.toString();
-          suffix++;
-          hit = true;
-        }
-      }
-      if (!!hit) {
-        this.initiativeList[i].name = this.initiativeList[i].name + " 1";
-      }
-      suffix = 2;
-      hit = false;
-    }
   }
 }
