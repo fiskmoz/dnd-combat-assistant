@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-8">
       <p>
-        <b>{{ entity.name }} {{ entity.suffix }}</b>
+        <b>{{ entity.name + (!!entity.suffix ? " " + entity.suffix : "") }}</b>
       </p>
       <div>
         {{ "init: " + entity.initiative }}

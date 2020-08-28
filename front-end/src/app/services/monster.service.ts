@@ -117,6 +117,12 @@ export class MonsterService {
       hit = false;
     }
     this.currentEncounter.sort((a, b) => {
+      if (a.name < b.name) {
+        return -1;
+      }
+      if (a.name > b.name) {
+        return 1;
+      }
       return a.initiative_suffix - b.initiative_suffix;
     });
   }
