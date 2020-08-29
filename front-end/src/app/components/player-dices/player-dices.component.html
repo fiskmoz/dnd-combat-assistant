@@ -1,0 +1,52 @@
+<div class="container-xl">
+  <div class="row">
+    <div class="col-2 p-2">
+      <app-dice
+        [diceList]="d20list"
+        [dice]="'D20'"
+        (rolled$)="handleRoll($event)"
+        (cleared$)="handleCleard($event)"
+      ></app-dice>
+    </div>
+    <div class="col-2 p-2">
+      <app-dice
+        [diceList]="d12list"
+        [dice]="'D12'"
+        (rolled$)="handleRoll($event)"
+        (cleared$)="handleCleard($event)"
+      ></app-dice>
+    </div>
+    <div class="col-2 p-2">
+      <app-dice
+        [diceList]="d10list"
+        [dice]="'D10'"
+        (rolled$)="handleRoll($event)"
+        (cleared$)="handleCleard($event)"
+      ></app-dice>
+    </div>
+    <div class="col-2 p-2">
+      <app-dice
+        [diceList]="d8list"
+        [dice]="'D8'"
+        (rolled$)="handleRoll($event)"
+        (cleared$)="handleCleard($event)"
+      ></app-dice>
+    </div>
+    <div class="col-2 p-2">
+      <app-dice
+        [diceList]="d6list"
+        [dice]="'D6'"
+        (rolled$)="handleRoll($event)"
+        (cleared$)="handleCleard($event)"
+      ></app-dice>
+    </div>
+    <div class="col-2 p-2">
+      <app-dice
+        [diceList]="d4list"
+        [dice]="'D4'"
+        (rolled$)="handleRoll($event)"
+        (cleared$)="handleCleard($event)"
+      ></app-dice>
+    </div>
+  </div>
+</div>
