@@ -18,6 +18,9 @@ export class HomePageComponent implements OnInit {
       case "nav_search":
         this.navigation = "search";
         break;
+      case "nav_player-tools":
+        this.navigation = "player-tools";
+        break;
       case "nav_generate":
         this.navigation = "generate";
         break;

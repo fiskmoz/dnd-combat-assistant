@@ -1,0 +1,19 @@
+<app-button
+  [text]="this.dice"
+  [type]="'primary'"
+  [small]="true"
+  (clicked$)="onRolledClick()"
+></app-button>
+<div *ngFor="let dice of diceList; let i = index">
+  {{ i + 1 }} : <b>{{ dice }}</b>
+</div>
+<div class="mt-3">
+  total: <b>{{ getTotal() }}</b>
+</div>
+<app-button
+  [text]="'Clear'"
+  [type]="'primary'"
+  [small]="true"
+  (clicked$)="onClearedClick()"
+>
+</app-button>

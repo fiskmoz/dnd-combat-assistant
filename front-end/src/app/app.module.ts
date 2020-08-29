@@ -32,7 +32,10 @@ import { GridControllerComponent } from "./components/grid-controller/grid-contr
 import { GridComponent } from "./components/grid/grid.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { DragDropModule } from "@angular/cdk/drag-drop";
-import { InitiativeMonsterComponent } from './components/initiative-monster/initiative-monster.component';
+import { InitiativeMonsterComponent } from "./components/initiative-monster/initiative-monster.component";
+import { PlayerToolsControllerComponent } from "./components/player-tools-controller/player-tools-controller.component";
+import { PlayerDicesComponent } from "./components/player-dices/player-dices.component";
+import { DiceComponent } from './components/inputs/dice/dice.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +60,9 @@ import { InitiativeMonsterComponent } from './components/initiative-monster/init
     GridControllerComponent,
     GridComponent,
     InitiativeMonsterComponent,
+    PlayerToolsControllerComponent,
+    PlayerDicesComponent,
+    DiceComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
