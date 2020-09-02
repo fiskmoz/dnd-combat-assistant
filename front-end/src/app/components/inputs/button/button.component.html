@@ -1,6 +1,6 @@
 <button
   [disabled]="disabled"
-  class="{{ 'btn ' + !!type ? 'btn-' + type : '' }}"
+  class="{{ !!type ? 'btn btn-' + type : 'btn' }}"
   (click)="onClick()"
   [class.btn-sm]="small"
   [class.btn-lg]="large"

@@ -224,8 +224,6 @@ def grid_auth():
 def grid_update():
     gridid = request.args.get('gridid')
     data = request.data.decode("utf-8")
-    print(data)
-    print(gridid)
     if grids_auth.get(gridid) == None:
         return SendBadRequest('No such room')
     db.collection(u'Grids').document(gridid).update({"grid": data})
