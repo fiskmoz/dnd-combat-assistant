@@ -5,6 +5,7 @@ import {
   CdkDropListGroup,
   CdkDragDrop,
 } from "@angular/cdk/drag-drop";
+import { IGridEntity } from "src/app/interfaces/grid-entity";
 
 @Component({
   selector: "app-grid",
@@ -16,7 +17,11 @@ export class GridComponent implements OnInit, AfterViewInit {
   @ViewChild(CdkDropList) toolboxElem: CdkDropList;
   @ViewChild(CdkDropList) battlefieldElem: CdkDropList;
 
-  public battlefieldIds: Array<string> = [];
+  public battlefieldSquares: Array<IGridEntity> = [];
+
+  public selectedColor: string;
+  public previousText: string;
+  public previousColor: string;
 
   public toolboxIds: Array<string> = ["", "P", "M", "X"];
 
@@ -29,8 +34,12 @@ export class GridComponent implements OnInit, AfterViewInit {
     this.battlefield = null;
     this.toolbox = null;
     for (let i = 0; i < 90; i++) {
-      this.battlefieldIds.push("0");
+      this.battlefieldSquares.push({
+        text: "",
+        color: "bg-white",
+      } as IGridEntity);
     }
+    console.log(this.battlefieldSquares);
   }
 
   ngOnInit(): void {
@@ -38,7 +47,7 @@ export class GridComponent implements OnInit, AfterViewInit {
       (res) => {
         const data = JSON.parse(res.payload.data()["grid"]);
         for (let i = 0; i < 90; i++) {
-          this.battlefieldIds[i] = data[i];
+          this.battlefieldSquares[i] = data[i];
         }
       },
       (err) => {
@@ -51,32 +60,51 @@ export class GridComponent implements OnInit, AfterViewInit {
 
   drop(event: CdkDragDrop<string[]>) {
     const currentIndex = parseInt(event.container.id);
-    let match = false;
+    const previousIndex = event.previousIndex;
     if (event.previousContainer !== event.container) {
-      switch (event.previousIndex) {
-        case 0:
-          match =
-            this.battlefieldIds[currentIndex] === "" ||
-            this.battlefieldIds[currentIndex] === null;
-          this.battlefieldIds[currentIndex] = "";
-          break;
-        case 1:
-          match = this.battlefieldIds[currentIndex] === "P";
-          this.battlefieldIds[currentIndex] = "P";
-          break;
-        case 2:
-          match = this.battlefieldIds[currentIndex] === "M";
-          this.battlefieldIds[currentIndex] = "M";
-          break;
-        case 3:
-          match = this.battlefieldIds[currentIndex] === "X";
-          this.battlefieldIds[currentIndex] = "X";
-          break;
+      if (
+        this.battlefieldSquares[currentIndex].text ===
+          this.toolboxIds[previousIndex] &&
+        this.battlefieldSquares[currentIndex].color === this.selectedColor
+      ) {
+        return;
       }
-      if (match) return;
+      this.battlefieldSquares[currentIndex].text = this.toolboxIds[
+        previousIndex
+      ];
+      this.battlefieldSquares[currentIndex].color = this.selectedColor;
+      this.previousText = this.toolboxIds[previousIndex];
+      this.previousColor = this.selectedColor;
       this.gridService.UpdateGrid(
-        JSON.stringify(Object.assign({}, this.battlefieldIds))
+        JSON.stringify(Object.assign({}, this.battlefieldSquares))
       );
     }
+  }
+
+  onColorSwitch(
+    color: "bg-white" | "bg-success" | "bg-primary" | "bg-danger"
+  ): void {
+    this.selectedColor = color;
+  }
+
+  onReset(): void {
+    // MODAL HERE WOULD BE COOL.
+    for (let i = 0; i < 90; i++) {
+      this.battlefieldSquares[i] = {
+        text: "",
+        color: "bg-white",
+      } as IGridEntity;
+    }
+    this.gridService.UpdateGrid(
+      JSON.stringify(Object.assign({}, this.battlefieldSquares))
+    );
+  }
+
+  handleClick(id: number): void {
+    this.battlefieldSquares[id].text = this.previousText;
+    this.battlefieldSquares[id].color = this.previousColor;
+    this.gridService.UpdateGrid(
+      JSON.stringify(Object.assign({}, this.battlefieldSquares))
+    );
   }
 }
