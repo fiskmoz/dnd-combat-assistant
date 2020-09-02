@@ -1,6 +1,6 @@
 <div cdkDropListGroup>
   <div class="grid-container">
-    <ng-container *ngFor="let item of battlefieldIds; let j = index">
+    <ng-container *ngFor="let item of battlefieldSquares; let j = index">
       <div
         cdkDropList
         (cdkDropListDropped)="drop($event)"
@@ -8,19 +8,105 @@
         [cdkDropListDisabled]="true"
         #battlefieldElem
       >
-        <div cdkDrag class="grid-box">
-          {{ item != "0" ? item : null }}
+        <div
+          cdkDrag
+          (click)="handleClick(j)"
+          class="{{ 'grid-box ' + item.color }}"
+        >
+          {{ item.text != "0" ? item.text : null }}
           <div *cdkDragPlaceholder></div>
         </div>
       </div>
     </ng-container>
   </div>
-  <div class="text-center">
-    <p>Select the boxes you want</p>
-    <div cdkDropList (cdkDropListDropped)="drop($event)" #toolboxElem>
-      <div cdkDrag class="grid-box" *ngFor="let item of toolboxIds">
-        {{ item }}
-        <div *cdkDragPlaceholder></div>
+  <div class="row">
+    <div class="col-2">
+      <div>Previous box :</div>
+      <div class="{{ 'grid-box ' + previousColor }}">
+        {{ this.previousText }}
+      </div>
+    </div>
+    <div class="col-9">
+      <div class="text-center">
+        <p>Select the boxes you want</p>
+        <div cdkDropList (cdkDropListDropped)="drop($event)" #toolboxElem>
+          <div
+            cdkDrag
+            class="{{ 'grid-box ' + selectedColor }}"
+            *ngFor="let item of toolboxIds"
+          >
+            {{ item }}
+            <div *cdkDragPlaceholder></div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center pt-2">
+        <span class="p-1"
+          ><app-button
+            [text]="'black'"
+            [small]="true"
+            [type]="'dark'"
+            (clicked$)="onColorSwitch('bg-dark')"
+          ></app-button
+        ></span>
+        <span class="p-1"
+          ><app-button
+            [text]="'white'"
+            [small]="true"
+            [type]="'light'"
+            (clicked$)="onColorSwitch('bg-white')"
+          ></app-button
+        ></span>
+        <span class="p-1"
+          ><app-button
+            [text]="'green'"
+            [small]="true"
+            [type]="'success'"
+            (clicked$)="onColorSwitch('bg-success')"
+          ></app-button
+        ></span>
+        <span class="p-1"
+          ><app-button
+            [text]="'blue'"
+            [small]="true"
+            [type]="'primary'"
+            (clicked$)="onColorSwitch('bg-primary')"
+          ></app-button
+        ></span>
+        <span class="p-1"
+          ><app-button
+            [text]="'red'"
+            [small]="true"
+            [type]="'danger'"
+            (clicked$)="onColorSwitch('bg-danger')"
+          ></app-button
+        ></span>
+        <span class="p-1"
+          ><app-button
+            [text]="'yellow'"
+            [small]="true"
+            [type]="'warning'"
+            (clicked$)="onColorSwitch('bg-warning')"
+          ></app-button
+        ></span>
+        <span class="p-1"
+          ><app-button
+            [text]="'gray'"
+            [small]="true"
+            [type]="'secondary'"
+            (clicked$)="onColorSwitch('bg-secondary')"
+          ></app-button
+        ></span>
+      </div>
+      <div class="text-center pt-2">
+        <span class="p-1"
+          ><app-button
+            [text]="'Reset Board'"
+            [small]="true"
+            [type]="'info'"
+            (clicked$)="onReset()"
+          ></app-button
+        ></span>
       </div>
     </div>
   </div>

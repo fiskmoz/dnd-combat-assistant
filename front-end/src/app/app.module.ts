@@ -2,7 +2,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import { environment } from "src/environments/environment";
-import { AppRoutingModule } from "./app-routing.module";
+import { AppRoutingModule } from "../module-imports/app-routing.module";
 import { AppComponent } from "./app.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { HomePageComponent } from "./components/layout/home-page/home-page.component";
@@ -35,7 +35,7 @@ import { DragDropModule } from "@angular/cdk/drag-drop";
 import { InitiativeMonsterComponent } from "./components/initiative-monster/initiative-monster.component";
 import { PlayerToolsControllerComponent } from "./components/player-tools-controller/player-tools-controller.component";
 import { PlayerDicesComponent } from "./components/player-dices/player-dices.component";
-import { DiceComponent } from './components/inputs/dice/dice.component';
+import { DiceComponent } from "./components/inputs/dice/dice.component";
 
 @NgModule({
   declarations: [

@@ -1,3 +1,4 @@
 test.py
 static/
 firebase_cred.json
+./front-end/node_modules
