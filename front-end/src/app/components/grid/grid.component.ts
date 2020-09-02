@@ -81,9 +81,7 @@ export class GridComponent implements OnInit, AfterViewInit {
     }
   }
 
-  onColorSwitch(
-    color: "bg-white" | "bg-success" | "bg-primary" | "bg-danger"
-  ): void {
+  onColorSwitch(color: string): void {
     this.selectedColor = color;
   }
 
