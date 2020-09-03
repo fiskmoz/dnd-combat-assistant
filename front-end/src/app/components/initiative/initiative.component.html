@@ -13,8 +13,8 @@
         </div>
         <div class="col-4 text-center">
           <app-button
-            [text]="'Calculate Initiative'"
-            [large]="true"
+            [text]="'Randomize monster initiative'"
+            [small]="true"
             [type]="'primary'"
             (clicked$)="onInitiativeStart()"
           >
@@ -39,6 +39,7 @@
           (duplicate$)="onDuplicateMonster(monster)"
           (remove$)="onRemoveMonster(monster)"
           (changed$)="onMonsterChanged(monster)"
+          (nameClicked$)="openModal(content, monster.name)"
         >
         </app-initiative-monster>
       </span>
@@ -46,9 +47,37 @@
     <div class="col-md-4 col-sm-4 p-1">
       <div class="col-12">
         <div class="col-12" *ngFor="let entity of initiativeList">
-          <app-initiative-entity [entity]="entity"> </app-initiative-entity>
+          <app-initiative-entity
+            [entity]="entity"
+            (imageClicked$)="
+              !!entity.monster ? openModal(content, entity.name) : ''
+            "
+          >
+          </app-initiative-entity>
         </div>
       </div>
     </div>
   </div>
 </div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 id="modal-basic-title">Monster Stats</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <app-monster-card
+      [monster]="modalMonster"
+      [enableOptions]="false"
+      [crToXPTable]="monsterService.crToXpTable"
+    >
+    </app-monster-card>
+  </div>
+</ng-template>

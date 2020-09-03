@@ -4,6 +4,7 @@ import { PlayersService } from "src/app/services/players.service";
 import { RandomService } from "src/app/services/random.service";
 import { IInitiativeEntity } from "src/app/interfaces/initiative-entity";
 import { IMonsterIndex } from "src/app/interfaces/monster-index";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: "app-initiative",
@@ -14,14 +15,27 @@ export class InitiativeComponent implements OnInit {
   constructor(
     public monsterService: MonsterService,
     public playerService: PlayersService,
-    public randomService: RandomService
+    public randomService: RandomService,
+    private modalService: NgbModal
   ) {}
 
   public initiativeList: IInitiativeEntity[];
 
+  public modalMonster: IMonsterIndex;
+
   ngOnInit(): void {
     this.initiativeList = [];
     this.RefreshIniativeState();
+  }
+
+  openModal(content: any, name: string): void {
+    this.modalMonster = this.monsterService.currentEncounter.find(
+      (m) => m.name == name
+    );
+    this.modalService.open(content, { ariaLabelledBy: "modal" });
+  }
+  closeModal(): void {
+    this.modalService.dismissAll();
   }
 
   onInitiativeStart() {

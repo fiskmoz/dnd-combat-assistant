@@ -18,27 +18,50 @@
     0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 930px) {
   .grid-box {
     width: 50px;
     height: 50px;
     font-size: 23pt;
   }
   .grid-container {
-    width: 560px !important;
-    min-width: 560px !important;
+    width: 624px !important;
+    padding-left: 0px !important;
+  }
+  .modal-dialogue {
+    max-width: 82% !important;
   }
 }
-
-@media only screen and (max-width: 550px) {
+@media only screen and (max-width: 670px) {
   .grid-box {
     width: 35px;
     height: 35px;
     font-size: 16pt;
   }
   .grid-container {
-    width: 400px !important;
-    min-width: 400px !important;
+    width: 480px !important;
+    padding-left: 0px !important;
+  }
+  .modal-dialogue {
+    max-width: 82% !important;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .grid-box {
+    width: 25px;
+    height: 25px;
+    font-size: 12pt;
+  }
+  .grid-container {
+    width: 324px !important;
+  }
+
+  .modal-dialogue {
+    max-width: 82% !important;
+  }
+  div {
+    font-size: 12px;
   }
 }
 
@@ -58,7 +81,7 @@
   display: flex;
   flex-wrap: wrap;
   padding-left: 10px;
-  width: 800px;
+  width: 900px;
 }
 .cdk-drag-animating {
   transition: transform 150ms cubic-bezier(0, 0, 0.2, 1);

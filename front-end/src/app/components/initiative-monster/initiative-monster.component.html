@@ -1,8 +1,11 @@
 <div class="card">
   <div class="card-body row">
     <div class="col-md-6 col-sm-12">
-      {{ monster.name }}
-      {{ !!monster.initiative_suffix ? monster.initiative_suffix : "" }}
+      <a href="#" class="text-primary" (click)="onNameClicked()"
+        >{{ monster.name }}
+        {{ !!monster.initiative_suffix ? monster.initiative_suffix : "" }}</a
+      >
+
       <br />
       <small
         ><i>Dex modifier: {{ (monster.dexterity - 10) / 2 | floor }}</i></small
@@ -80,7 +83,7 @@
           >
           </app-textbox>
         </div>
-        <div class="col-md-3 col-sm-12 pl-0">
+        <div class="col-md-3 col-sm-12 pl-0 text-center">
           <app-button
             [text]="'Go!'"
             [large]="false"

@@ -9,7 +9,11 @@ import { IInitiativeEntity } from "src/app/interfaces/initiative-entity";
 export class InitiativeEntityComponent implements OnInit {
   @Input() entity: IInitiativeEntity;
 
+  @Output() imageClicked$ = new EventEmitter<void>();
   constructor() {}
 
   ngOnInit(): void {}
+  onImageClick(): void {
+    this.imageClicked$.emit();
+  }
 }
