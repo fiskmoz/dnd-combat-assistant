@@ -1,7 +1,7 @@
 <div class="container">
-  <div *ngIf="!!gridService.isAuthenticated" class="">
-    <div class="row p-2">
-      <div class="col-2">
+  <div *ngIf="!!gridService.isAuthenticated" class="col-12">
+    <div class="row pt-3 pb-3">
+      <div class="col-4">
         <app-button
           [text]="'Leave'"
           [type]="'secondary'"
@@ -9,8 +9,8 @@
         >
         </app-button>
       </div>
-      <div class="col-10">
-        <h3>{{ "Connected to: " + gridService.gridid }}</h3>
+      <div class="col-8">
+        <h3 class="d-inline h3">{{ "Connected to: " + gridService.gridid }}</h3>
       </div>
     </div>
     <div class="row">
@@ -19,7 +19,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="!gridService.isAuthenticated" class="col-12">
+  <div *ngIf="!gridService.isAuthenticated" class="col-12 pt-4">
     <div class="card">
       <div class="card-header">
         <p>Please enter your grid credentials:</p>

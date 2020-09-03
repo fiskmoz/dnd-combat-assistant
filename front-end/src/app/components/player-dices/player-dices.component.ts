@@ -43,22 +43,22 @@ export class PlayerDicesComponent implements OnInit {
   handleRoll(dice: string) {
     switch (dice) {
       case "D4":
-        this.d4list.push(this.randomService.GetRandomNumber(1, 5));
+        this.d4list.push(this.randomService.GetRandomNumber(1, 4));
         break;
       case "D6":
-        this.d6list.push(this.randomService.GetRandomNumber(1, 7));
+        this.d6list.push(this.randomService.GetRandomNumber(1, 6));
         break;
       case "D8":
-        this.d8list.push(this.randomService.GetRandomNumber(1, 9));
+        this.d8list.push(this.randomService.GetRandomNumber(1, 8));
         break;
       case "D10":
-        this.d10list.push(this.randomService.GetRandomNumber(1, 11));
+        this.d10list.push(this.randomService.GetRandomNumber(1, 10));
         break;
       case "D12":
-        this.d12list.push(this.randomService.GetRandomNumber(1, 13));
+        this.d12list.push(this.randomService.GetRandomNumber(1, 12));
         break;
       case "D20":
-        this.d20list.push(this.randomService.GetRandomNumber(1, 21));
+        this.d20list.push(this.randomService.GetRandomNumber(1, 20));
         break;
     }
   }

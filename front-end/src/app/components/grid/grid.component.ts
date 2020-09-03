@@ -6,6 +6,7 @@ import {
   CdkDragDrop,
 } from "@angular/cdk/drag-drop";
 import { IGridEntity } from "src/app/interfaces/grid-entity";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: "app-grid",
@@ -19,6 +20,7 @@ export class GridComponent implements OnInit, AfterViewInit {
 
   public battlefieldSquares: Array<IGridEntity> = [];
 
+  public closeResult: any;
   public selectedColor: string;
   public previousText: string;
   public previousColor: string;
@@ -29,24 +31,27 @@ export class GridComponent implements OnInit, AfterViewInit {
   public battlefieldIndex: number;
   public toolbox: CdkDropList;
   public toolboxIndex: number;
+  public boxes: number = 120;
 
-  constructor(private gridService: GridService) {
+  constructor(
+    private gridService: GridService,
+    private modalService: NgbModal
+  ) {
     this.battlefield = null;
     this.toolbox = null;
-    for (let i = 0; i < 90; i++) {
+    for (let i = 0; i < this.boxes; i++) {
       this.battlefieldSquares.push({
         text: "",
         color: "bg-white",
       } as IGridEntity);
     }
-    console.log(this.battlefieldSquares);
   }
 
   ngOnInit(): void {
     this.gridService.GetGridChanges().subscribe(
       (res) => {
         const data = JSON.parse(res.payload.data()["grid"]);
-        for (let i = 0; i < 90; i++) {
+        for (let i = 0; i < this.boxes; i++) {
           this.battlefieldSquares[i] = data[i];
         }
       },
@@ -54,6 +59,13 @@ export class GridComponent implements OnInit, AfterViewInit {
         console.log(err);
       }
     );
+  }
+
+  openModal(content: any): void {
+    this.modalService.open(content, { ariaLabelledBy: "modal" });
+  }
+  closeModal(): void {
+    this.modalService.dismissAll();
   }
 
   ngAfterViewInit() {}
@@ -86,7 +98,6 @@ export class GridComponent implements OnInit, AfterViewInit {
   }
 
   onReset(): void {
-    // MODAL HERE WOULD BE COOL.
     for (let i = 0; i < 90; i++) {
       this.battlefieldSquares[i] = {
         text: "",
@@ -96,6 +107,7 @@ export class GridComponent implements OnInit, AfterViewInit {
     this.gridService.UpdateGrid(
       JSON.stringify(Object.assign({}, this.battlefieldSquares))
     );
+    this.closeModal();
   }
 
   handleClick(id: number): void {
@@ -104,5 +116,10 @@ export class GridComponent implements OnInit, AfterViewInit {
     this.gridService.UpdateGrid(
       JSON.stringify(Object.assign({}, this.battlefieldSquares))
     );
+  }
+
+  resetPrevious(): void {
+    this.previousColor = "bg-white";
+    this.previousText = "";
   }
 }

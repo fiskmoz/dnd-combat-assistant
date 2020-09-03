@@ -14,6 +14,7 @@ export class InitiativeMonsterComponent implements OnInit {
   @Output() remove$ = new EventEmitter<IMonsterIndex>();
   @Output() duplicate$ = new EventEmitter<IMonsterIndex>();
   @Output() changed$ = new EventEmitter<IMonsterIndex>();
+  @Output() nameClicked$ = new EventEmitter<void>();
   constructor() {}
 
   ngOnInit(): void {}
@@ -47,5 +48,9 @@ export class InitiativeMonsterComponent implements OnInit {
   }
   onDuplicateMonster() {
     this.duplicate$.emit(this.monster);
+  }
+
+  onNameClicked(): void {
+    this.nameClicked$.emit();
   }
 }

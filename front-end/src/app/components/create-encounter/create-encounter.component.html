@@ -1,180 +1,182 @@
-<div class="card">
-  <div class="card-body">
-    <div>
-      <h5>Monster Referenses:</h5>
-      <app-checkbox
-        [id]="'SRDref'"
-        [text]="'Basic 5e'"
-        [name]="'SRD'"
-        [checked]="!!origins.includes('SRD')"
-        [inline]="true"
-        (changed$)="refChange($event)"
-      ></app-checkbox>
-      <app-checkbox
-        [id]="'CCref'"
-        [name]="'CC'"
-        [text]="'Creature Codex'"
-        [checked]="!!origins.includes('CC')"
-        [inline]="true"
-        (changed$)="refChange($event)"
-      ></app-checkbox>
-      <app-checkbox
-        [id]="'TOBref'"
-        [name]="'TOB'"
-        [text]="'Tome of beasts'"
-        [checked]="!!origins.includes('TOB')"
-        [inline]="true"
-        (changed$)="refChange($event)"
-      ></app-checkbox>
-    </div>
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <div>
+        <h5>Monster Referenses:</h5>
+        <app-checkbox
+          [id]="'SRDref'"
+          [text]="'Basic 5e'"
+          [name]="'SRD'"
+          [checked]="!!origins.includes('SRD')"
+          [inline]="true"
+          (changed$)="refChange($event)"
+        ></app-checkbox>
+        <app-checkbox
+          [id]="'CCref'"
+          [name]="'CC'"
+          [text]="'Creature Codex'"
+          [checked]="!!origins.includes('CC')"
+          [inline]="true"
+          (changed$)="refChange($event)"
+        ></app-checkbox>
+        <app-checkbox
+          [id]="'TOBref'"
+          [name]="'TOB'"
+          [text]="'Tome of beasts'"
+          [checked]="!!origins.includes('TOB')"
+          [inline]="true"
+          (changed$)="refChange($event)"
+        ></app-checkbox>
+      </div>
 
-    <div>
+      <div>
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+            <h5>Number of monsters:</h5>
+            <app-dropdown
+              [list]="[
+                '1',
+                '2',
+                '3',
+                '4',
+                '5',
+                '6',
+                '7',
+                '8',
+                '9',
+                '10',
+                '11',
+                '12'
+              ]"
+              [id]="'monstertotal'"
+              [default]="monsterTotal"
+              (change$)="monsterTotalChange($event)"
+            >
+            </app-dropdown>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <h5>Encounter Difficulty:</h5>
+            <app-dropdown
+              [list]="['easy', 'medium', 'hard', 'deadly']"
+              [id]="'encounterdiff'"
+              [default]="difficulty"
+              (change$)="encounterDifficultyChange($event)"
+            >
+            </app-dropdown>
+          </div>
+        </div>
+      </div>
       <div class="row">
         <div class="col-md-6 col-sm-12">
-          <h5>Number of monsters:</h5>
-          <app-dropdown
-            [list]="[
-              '1',
-              '2',
-              '3',
-              '4',
-              '5',
-              '6',
-              '7',
-              '8',
-              '9',
-              '10',
-              '11',
-              '12'
-            ]"
-            [id]="'monstertotal'"
-            [default]="monsterTotal"
-            (change$)="monsterTotalChange($event)"
-          >
-          </app-dropdown>
-        </div>
-        <div class="col-md-6 col-sm-12">
-          <h5>Encounter Difficulty:</h5>
-          <app-dropdown
-            [list]="['easy', 'medium', 'hard', 'deadly']"
-            [id]="'encounterdiff'"
-            [default]="difficulty"
-            (change$)="encounterDifficultyChange($event)"
-          >
-          </app-dropdown>
+          <h5>Geolocation:</h5>
+          <app-radio-buttons
+            [name]="'geolocations'"
+            [labels]="possibleGeoLocations"
+            [id]="'geolocations'"
+            [firstSelected]="true"
+            [horizontal]="true"
+            (radioChange$)="geoLocationChange($event)"
+          ></app-radio-buttons>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6 col-sm-12">
-        <h5>Geolocation:</h5>
-        <app-radio-buttons
-          [name]="'geolocations'"
-          [labels]="possibleGeoLocations"
-          [id]="'geolocations'"
-          [firstSelected]="true"
-          [horizontal]="true"
-          (radioChange$)="geoLocationChange($event)"
-        ></app-radio-buttons>
+      <div>
+        <h5>Locations:</h5>
+        <app-checkbox
+          [id]="'caveref'"
+          [text]="'cave'"
+          [name]="'cave'"
+          [checked]="locations.includes('cave')"
+          [inline]="true"
+          (changed$)="locationChange($event)"
+        ></app-checkbox>
+        <app-checkbox
+          [id]="'cityref'"
+          [text]="'city'"
+          [name]="'city'"
+          [checked]="locations.includes('city')"
+          [inline]="true"
+          (changed$)="locationChange($event)"
+        ></app-checkbox>
+        <app-checkbox
+          [id]="'villageref'"
+          [text]="'village'"
+          [name]="'village'"
+          [checked]="locations.includes('village')"
+          [inline]="true"
+          (changed$)="locationChange($event)"
+        ></app-checkbox>
+        <app-checkbox
+          [id]="'mountainref'"
+          [text]="'mountain'"
+          [name]="'mountain'"
+          [checked]="locations.includes('mountain')"
+          [inline]="true"
+          (changed$)="locationChange($event)"
+        ></app-checkbox>
+        <app-checkbox
+          [id]="'plainref'"
+          [text]="'plain'"
+          [name]="'plain'"
+          [checked]="locations.includes('plain')"
+          [inline]="true"
+          (changed$)="locationChange($event)"
+        ></app-checkbox>
+        <app-checkbox
+          [id]="'desertref'"
+          [text]="'desert'"
+          [name]="'desert'"
+          [checked]="locations.includes('desert')"
+          [inline]="true"
+          (changed$)="locationChange($event)"
+        ></app-checkbox>
+        <app-checkbox
+          [id]="'swampref'"
+          [text]="'swamp'"
+          [name]="'swamp'"
+          [checked]="locations.includes('swamp')"
+          [inline]="true"
+          (changed$)="locationChange($event)"
+        ></app-checkbox>
+        <app-checkbox
+          [id]="'forrestref'"
+          [text]="'forrest'"
+          [name]="'forrest'"
+          [checked]="locations.includes('forrest')"
+          [inline]="true"
+          (changed$)="locationChange($event)"
+        ></app-checkbox>
+        <app-checkbox
+          [id]="'underdarkref'"
+          [text]="'underdark'"
+          [name]="'underdark'"
+          [checked]="locations.includes('underdark')"
+          [inline]="true"
+          (changed$)="locationChange($event)"
+        ></app-checkbox>
       </div>
-    </div>
-    <div>
-      <h5>Locations:</h5>
-      <app-checkbox
-        [id]="'caveref'"
-        [text]="'cave'"
-        [name]="'cave'"
-        [checked]="locations.includes('cave')"
-        [inline]="true"
-        (changed$)="locationChange($event)"
-      ></app-checkbox>
-      <app-checkbox
-        [id]="'cityref'"
-        [text]="'city'"
-        [name]="'city'"
-        [checked]="locations.includes('city')"
-        [inline]="true"
-        (changed$)="locationChange($event)"
-      ></app-checkbox>
-      <app-checkbox
-        [id]="'villageref'"
-        [text]="'village'"
-        [name]="'village'"
-        [checked]="locations.includes('village')"
-        [inline]="true"
-        (changed$)="locationChange($event)"
-      ></app-checkbox>
-      <app-checkbox
-        [id]="'mountainref'"
-        [text]="'mountain'"
-        [name]="'mountain'"
-        [checked]="locations.includes('mountain')"
-        [inline]="true"
-        (changed$)="locationChange($event)"
-      ></app-checkbox>
-      <app-checkbox
-        [id]="'plainref'"
-        [text]="'plain'"
-        [name]="'plain'"
-        [checked]="locations.includes('plain')"
-        [inline]="true"
-        (changed$)="locationChange($event)"
-      ></app-checkbox>
-      <app-checkbox
-        [id]="'desertref'"
-        [text]="'desert'"
-        [name]="'desert'"
-        [checked]="locations.includes('desert')"
-        [inline]="true"
-        (changed$)="locationChange($event)"
-      ></app-checkbox>
-      <app-checkbox
-        [id]="'swampref'"
-        [text]="'swamp'"
-        [name]="'swamp'"
-        [checked]="locations.includes('swamp')"
-        [inline]="true"
-        (changed$)="locationChange($event)"
-      ></app-checkbox>
-      <app-checkbox
-        [id]="'forrestref'"
-        [text]="'forrest'"
-        [name]="'forrest'"
-        [checked]="locations.includes('forrest')"
-        [inline]="true"
-        (changed$)="locationChange($event)"
-      ></app-checkbox>
-      <app-checkbox
-        [id]="'underdarkref'"
-        [text]="'underdark'"
-        [name]="'underdark'"
-        [checked]="locations.includes('underdark')"
-        [inline]="true"
-        (changed$)="locationChange($event)"
-      ></app-checkbox>
-    </div>
-    <div class="col-12 text-center pt-2">
-      <app-button
-        [text]="'Create Random Encounter'"
-        [small]="true"
-        [type]="'primary'"
-        (clicked$)="onRandomEncounter()"
-      >
-      </app-button>
+      <div class="col-12 text-center pt-2">
+        <app-button
+          [text]="'Create Random Encounter'"
+          [small]="true"
+          [type]="'primary'"
+          (clicked$)="onRandomEncounter()"
+        >
+        </app-button>
+      </div>
     </div>
   </div>
-</div>
 
-<div>
-  {{ errorMSG }}
-</div>
+  <div>
+    {{ errorMSG }}
+  </div>
 
-<div *ngFor="let monster of monsterService.currentEncounter">
-  <app-monster-card
-    [monster]="monster"
-    [crToXPTable]="monsterService.crToXpTable"
-    [enableOptions]="true"
-    (duplicate$)="onMonsterDuplicate(monster)"
-    (remove$)="onMonsterRemove(monster)"
-  ></app-monster-card>
+  <div *ngFor="let monster of monsterService.currentEncounter">
+    <app-monster-card
+      [monster]="monster"
+      [crToXPTable]="monsterService.crToXpTable"
+      [enableOptions]="true"
+      (duplicate$)="onMonsterDuplicate(monster)"
+      (remove$)="onMonsterRemove(monster)"
+    ></app-monster-card>
+  </div>
 </div>

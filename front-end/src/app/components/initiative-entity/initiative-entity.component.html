@@ -11,14 +11,19 @@
     </div>
     <div class="col-4">
       <div class="img-container">
+        <summary *ngIf="entity.monster">
+          <img
+            src="https://i.imgur.com/OWTsHDl.jpeg"
+            alt=""
+            class="img-thumbnail img-fluid p-0"
+            (click)="onImageClick()"
+          />
+        </summary>
         <img
-          src="{{
-            entity.player
-              ? 'https://i.imgur.com/ZSH9ikY.jpg'
-              : 'https://i.imgur.com/OWTsHDl.jpeg'
-          }}"
+          *ngIf="entity.player"
+          src="https://i.imgur.com/ZSH9ikY.jpg"
           alt=""
-          class="img-thumbnail img-fluid"
+          class="img-thumbnail img-fluid p-0"
         />
       </div>
     </div>
