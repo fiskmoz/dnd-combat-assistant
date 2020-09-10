@@ -1,0 +1,44 @@
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <div class="header">
+          <h3>{{ spell.name }}</h3>
+          <p>
+            <i>
+              {{ spell.type }}, {{ !!spell.ritual ? "Ritual, " : "" }}
+              {{ spell.range }}</i
+            >
+          </p>
+        </div>
+        <div>
+          <p><b>Casting time:</b> {{ spell.casting_time }}</p>
+          <p><b>Duration:</b> {{ spell.duration }}</p>
+          <p>{{ spell.description }}</p>
+          <br />
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <img
+          src="https://i.pinimg.com/originals/91/82/74/9182740fb6ddc2f9847b668274392099.jpg"
+          class="img-fluid"
+        />
+        <div>
+          <p><b>Applicable classes:</b></p>
+          <p *ngFor="let class of spell.classes">
+            {{ class }}
+          </p>
+        </div>
+        <div *ngIf="!!spell.components">
+          <div *ngIf="!!spell.components.material">
+            <p><b>Materials:</b></p>
+            <div *ngFor="let material of spell.components.materials_needed">
+              <p>{{ material }}</p>
+            </div>
+          </div>
+          <p><b>Verbal:</b> {{ !!spell.components.verbal }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
