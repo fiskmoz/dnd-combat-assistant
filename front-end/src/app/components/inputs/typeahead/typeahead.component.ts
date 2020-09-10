@@ -49,7 +49,7 @@ export class TypeaheadComponent implements OnInit {
           : this.list.filter(
               (v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1
             )
-        ).slice(0, 10)
+        ).slice(0, 20)
       )
     );
   };

@@ -57,6 +57,10 @@ with open('./data/encounter_thresholds.json') as file:
 with open('./data/monsters_multiplier.json') as file:
     monsters_multiplier = json.load(file)
 
+# LOAD SPELLS
+with open('./data/spells.json') as file:
+    spells_book = json.load(file)
+
 # CONSTANTS
 possible_locations = ["city", "village", "mountain", "cave",
                       "plain", "swamp", "forest", "underdark"]
@@ -115,10 +119,21 @@ def multipliers():
 
 
 @app.route('/api/encounter/names')
-def names():
+def monster_names():
     return app.response_class(
         response=json.dumps(
             sorted([value['name'] for value in monster_data])
+        ),
+        status=200,
+        mimetype='application/json'
+    )
+
+
+@app.route('/api/spellbook/names')
+def spell_names():
+    return app.response_class(
+        response=json.dumps(
+            sorted([value['name'] for value in spells_book])
         ),
         status=200,
         mimetype='application/json'
@@ -137,6 +152,24 @@ def name():
         return SendBadRequest('could not find monster with that name')
     response = app.response_class(
         response=json.dumps(monster),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
+
+
+@app.route('/api/spellbook/spell')
+def get_spell():
+    name = request.args.get('name').lower()
+    if name is None:
+        return SendBadRequest('name is not set propperly')
+
+    spell = [value for value in spells_book if name ==
+             value['name'].lower()]
+    if spell is None:
+        return SendBadRequest('could not find monster with that name')
+    response = app.response_class(
+        response=json.dumps(spell),
         status=200,
         mimetype='application/json'
     )

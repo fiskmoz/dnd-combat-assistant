@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <app-typeahead
+          *ngIf="spellService.spellNames"
+          (selected)="onSpellSelect($event)"
+          [list]="spellService.spellNames"
+          [label]="'Search for a spell!'"
+        >
+        </app-typeahead>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <app-spell-card *ngIf="selectedSpell" [spell]="selectedSpell">
+    </app-spell-card>
+  </div>
+</div>

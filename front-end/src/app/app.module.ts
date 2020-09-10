@@ -18,9 +18,7 @@ import { CreatePlayerWrapperComponent } from "./components/create-player-wrapper
 import { CreatePlayerComponent } from "./components/create-player/create-player.component";
 import { MonsterService } from "./services/monster.service";
 import { CreateEncounterComponent } from "./components/create-encounter/create-encounter.component";
-import { MonsterCardComponent } from "./components/monster-card/monster-card.component";
 import { FloorPipe } from "./pipes/floor.pipe";
-import { MonsterSearchComponent } from "./components/monster-search/monster-search.component";
 import { TypeaheadComponent } from "./components/inputs/typeahead/typeahead.component";
 import { HeaderComponent } from "./components/layout/header/header.component";
 import { InitiativeComponent } from "./components/initiative/initiative.component";
@@ -36,6 +34,10 @@ import { InitiativeMonsterComponent } from "./components/initiative-monster/init
 import { PlayerToolsControllerComponent } from "./components/player-tools-controller/player-tools-controller.component";
 import { PlayerDicesComponent } from "./components/player-dices/player-dices.component";
 import { DiceComponent } from "./components/inputs/dice/dice.component";
+import { SpellSearchComponent } from "./components/search/spell-search/spell-search.component";
+import { SpellCardComponent } from "./components/cards/spell-card/spell-card.component";
+import { MonsterCardComponent } from "./components/cards/monster-card/monster-card.component";
+import { MonsterSearchComponent } from "./components/search/monster-search/monster-search.component";
 
 @NgModule({
   declarations: [
@@ -63,6 +65,8 @@ import { DiceComponent } from "./components/inputs/dice/dice.component";
     PlayerToolsControllerComponent,
     PlayerDicesComponent,
     DiceComponent,
+    SpellSearchComponent,
+    SpellCardComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
