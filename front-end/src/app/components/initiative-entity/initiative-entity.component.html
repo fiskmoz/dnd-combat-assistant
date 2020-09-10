@@ -1,13 +1,20 @@
 <div class="card">
   <div class="row">
     <div class="col-8">
-      <p>
-        <b>{{ entity.name + (!!entity.suffix ? " " + entity.suffix : "") }}</b>
-      </p>
+      <b>{{ entity.name + (!!entity.suffix ? " " + entity.suffix : "") }}</b>
       <div>
         {{ "init: " + entity.initiative }}
         {{ !!entity.hitpoints ? "hp: " + entity.hitpoints : "" }}
+        {{ !!entity.initiative_duplicate ? "prio: " + entity.priority : "" }}
       </div>
+      <app-button
+        *ngIf="!!entity.initiative_duplicate"
+        [text]="'+ prio'"
+        [small]="true"
+        [type]="'info'"
+        (clicked$)="onIncreasePrio(entity)"
+      >
+      </app-button>
     </div>
     <div class="col-4">
       <div class="img-container">

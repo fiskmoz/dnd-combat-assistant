@@ -89,20 +89,54 @@ export class InitiativeComponent implements OnInit {
         name: m.name,
         id: index + 1,
         initiative: m.initiative,
+        initiative_duplicate: false,
         hitpoints: m.hit_points,
+        priority: 0,
         monster: true,
         suffix: !!m.initiative_suffix ? m.initiative_suffix : null,
       } as IInitiativeEntity);
     });
-    this.playerService.playerList.forEach((p) => {
+    const prevLen = this.initiativeList.length;
+    this.playerService.playerList.forEach((p, index) => {
       this.initiativeList.push({
         name: p.name,
+        id: prevLen + index,
         initiative: p.initiative,
+        initiative_duplicate: false,
+        priority: 0,
         player: true,
       } as IInitiativeEntity);
     });
+    this.DetermineInitiativeDuplicates();
+    this.SortInitiative();
+  }
+
+  IncreasePrio(entity: IInitiativeEntity): void {
+    this.initiativeList.find((i) => i == entity).priority++;
+    this.SortPriority();
+  }
+
+  SortInitiative(): void {
     this.initiativeList.sort((a, b) => {
       return b.initiative - a.initiative;
+    });
+  }
+  DetermineInitiativeDuplicates(): void {
+    this.initiativeList.forEach((ii) => {
+      this.initiativeList.forEach((i) => {
+        if (i.id !== ii.id) {
+          if (ii.initiative == i.initiative) {
+            ii.initiative_duplicate = true;
+          }
+        }
+      });
+    });
+  }
+
+  SortPriority(): void {
+    this.initiativeList.sort((a, b) => {
+      if (b.priority == a.priority || b.initiative != a.initiative) return 0;
+      return b.priority - a.priority;
     });
   }
 }

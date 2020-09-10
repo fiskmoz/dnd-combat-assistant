@@ -52,6 +52,7 @@
             (imageClicked$)="
               !!entity.monster ? openModal(content, entity.name) : ''
             "
+            (increasePrio$)="IncreasePrio(entity)"
           >
           </app-initiative-entity>
         </div>
