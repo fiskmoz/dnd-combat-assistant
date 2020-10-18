@@ -2,13 +2,25 @@
   <div class="col-md-6">
     <div class="card">
       <div class="card-body">
-        <app-typeahead
-          *ngIf="monsterService.monsterNames"
-          (selected)="onNewSelected($event)"
-          [list]="monsterService.monsterNames"
-          [label]="'Search for a dnd monster!'"
-        >
-        </app-typeahead>
+        <div class="pb-3">
+          <p>Filter by monster challenge rating</p>
+          <app-dropdown
+            *ngIf="!!monsterService.monstersQuickSort"
+            [list]="monsterService.crList"
+            [default]="monsterService.crList[0]"
+            (change$)="onCrRequirementChange($event)"
+          ></app-dropdown>
+        </div>
+        <div>
+          <app-typeahead
+            *ngIf="IsInitialized()"
+            (selected)="onNewSelected($event)"
+            [list]="localMonsterList"
+            [label]="'Search for a dnd monster!'"
+            [id]="'monster-search-typeahead'"
+          >
+          </app-typeahead>
+        </div>
       </div>
     </div>
   </div>

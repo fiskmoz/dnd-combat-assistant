@@ -20,6 +20,8 @@ mimetypes.add_type("image/vnd.microsoft.icon", ".ico", True)
 if os.path.isfile("./firebase_cred.json"):
     with open("./firebase_cred.json") as file:
         cred = credentials.Certificate(json.load(file))
+        app.config['ENV'] = 'development'
+        app.config['DEBUG'] = True
 else:
     cred = credentials.Certificate({
         "type": os.environ.get('type').replace('\\n', '\n'),
@@ -118,23 +120,23 @@ def multipliers():
         mimetype='application/json')
 
 
-@app.route('/api/encounter/names')
-def monster_names():
+@app.route('/api/encounter/monster/quicksort')
+def monster_quicksort():
     return app.response_class(
         response=json.dumps(
-            sorted([value['name'] for value in monster_data])
-        ),
+            dict({i: dict({'name': x['name'], 'type': x['type'], 'challenge_rating': x['challenge_rating']})
+                  for i, x in enumerate(monster_data)})),
         status=200,
         mimetype='application/json'
     )
 
 
-@app.route('/api/spellbook/names')
-def spell_names():
+@app.route('/api/spellbook/quicksort')
+def spell_quicksort():
     return app.response_class(
         response=json.dumps(
-            sorted([value['name'] for value in spells_book])
-        ),
+            dict({i: dict({'name': x['name'], 'level': x['level'], 'classes': x['classes']})
+                  for i, x in enumerate(spells_book)})),
         status=200,
         mimetype='application/json'
     )

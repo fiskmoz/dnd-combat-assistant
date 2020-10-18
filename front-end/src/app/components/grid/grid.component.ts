@@ -5,7 +5,7 @@ import {
   CdkDropListGroup,
   CdkDragDrop,
 } from "@angular/cdk/drag-drop";
-import { IGridEntity } from "src/app/interfaces/grid-entity";
+import { GridEntity } from "src/app/interfaces/grid";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
@@ -18,7 +18,7 @@ export class GridComponent implements OnInit, AfterViewInit {
   @ViewChild(CdkDropList) toolboxElem: CdkDropList;
   @ViewChild(CdkDropList) battlefieldElem: CdkDropList;
 
-  public battlefieldSquares: Array<IGridEntity> = [];
+  public battlefieldSquares: Array<GridEntity> = [];
 
   public closeResult: any;
   public selectedColor: string;
@@ -31,7 +31,7 @@ export class GridComponent implements OnInit, AfterViewInit {
   public battlefieldIndex: number;
   public toolbox: CdkDropList;
   public toolboxIndex: number;
-  public boxes: number = 120;
+  public boxes = 120;
 
   constructor(
     private gridService: GridService,
@@ -43,13 +43,14 @@ export class GridComponent implements OnInit, AfterViewInit {
       this.battlefieldSquares.push({
         text: "",
         color: "bg-white",
-      } as IGridEntity);
+      } as GridEntity);
     }
   }
 
   ngOnInit(): void {
     this.gridService.GetGridChanges().subscribe(
       (res) => {
+        // tslint:disable-next-line: no-string-literal
         const data = JSON.parse(res.payload.data()["grid"]);
         for (let i = 0; i < this.boxes; i++) {
           this.battlefieldSquares[i] = data[i];
@@ -71,7 +72,7 @@ export class GridComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {}
 
   drop(event: CdkDragDrop<string[]>) {
-    const currentIndex = parseInt(event.container.id);
+    const currentIndex = parseInt(event.container.id, 10);
     const previousIndex = event.previousIndex;
     if (event.previousContainer !== event.container) {
       if (
@@ -102,7 +103,7 @@ export class GridComponent implements OnInit, AfterViewInit {
       this.battlefieldSquares[i] = {
         text: "",
         color: "bg-white",
-      } as IGridEntity;
+      } as GridEntity;
     }
     this.gridService.UpdateGrid(
       JSON.stringify(Object.assign({}, this.battlefieldSquares))

@@ -1,0 +1,28 @@
+<div class="text-center py-3">
+  <p>Search for resources:</p>
+</div>
+
+<div class="d-flex">
+  <ul
+    ngbNav
+    #nav="ngbNav"
+    [(activeId)]="active"
+    class="nav-pills"
+    orientation="vertical"
+  >
+    <li ngbNavItem="monster">
+      <a ngbNavLink>Monster</a>
+      <ng-template ngbNavContent>
+        <app-monster-search></app-monster-search>
+      </ng-template>
+    </li>
+    <li ngbNavItem="spell">
+      <a ngbNavLink>Spells</a>
+      <ng-template ngbNavContent>
+        <app-spell-search></app-spell-search>
+      </ng-template>
+    </li>
+  </ul>
+
+  <div [ngbNavOutlet]="nav" class="ml-4 w-100"></div>
+</div>

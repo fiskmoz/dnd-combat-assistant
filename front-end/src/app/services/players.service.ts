@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Player } from "../interfaces/player";
-import { IPlayerXpTable, IPlayerXpRow } from "../interfaces/player-xp-table";
+import { Player, PlayerXpRow, PlayerXpTable } from "../interfaces/player";
+
 import { HttpClient } from "@angular/common/http";
 
 @Injectable({
@@ -8,7 +8,7 @@ import { HttpClient } from "@angular/common/http";
 })
 export class PlayersService {
   public playerList: Player[];
-  public playerXpTable: IPlayerXpTable = {
+  public playerXpTable: PlayerXpTable = {
     levels: [],
   };
   public easyEncounter = 0;
@@ -25,7 +25,7 @@ export class PlayersService {
             medium: data[key].medium,
             hard: data[key].hard,
             deadly: data[key].deadly,
-          } as IPlayerXpRow;
+          } as PlayerXpRow;
         }
       }
       this.ReadLocalStorage();

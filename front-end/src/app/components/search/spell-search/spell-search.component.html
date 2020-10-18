@@ -2,11 +2,22 @@
   <div class="col-md-6">
     <div class="card">
       <div class="card-body">
+        <div class="pb-3">
+          <p>Filter by spell level</p>
+          <app-dropdown
+            *ngIf="!!spellService.levels"
+            [list]="spellService.levels"
+            [default]="spellService.levels[0]"
+            (change$)="onLevelRequirementChange($event)"
+          ></app-dropdown>
+        </div>
         <app-typeahead
-          *ngIf="spellService.spellNames"
+          *ngIf="IsInitialized()"
           (selected)="onSpellSelect($event)"
-          [list]="spellService.spellNames"
+          [list]="localSpellList"
           [label]="'Search for a spell!'"
+          (click)="setAvalibleSpells()"
+          [id]="'spell-search-typeahead'"
         >
         </app-typeahead>
       </div>

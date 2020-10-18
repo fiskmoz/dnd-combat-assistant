@@ -1,8 +1,6 @@
-import { IPlayerXpRow } from "./player-xp-table";
-
 export interface Player {
   level: number;
-  xpthreshhold?: IPlayerXpRow;
+  xpthreshhold?: PlayerXpRow;
   name: string;
   initiative?: number;
   class?: string;
@@ -13,4 +11,15 @@ export interface Player {
   dexterity?: number;
   constitution?: number;
   charisma?: number;
+}
+
+export interface PlayerXpTable {
+  levels: PlayerXpRow[];
+}
+
+export interface PlayerXpRow {
+  easy: number;
+  medium: number;
+  hard: number;
+  deadly: number;
 }

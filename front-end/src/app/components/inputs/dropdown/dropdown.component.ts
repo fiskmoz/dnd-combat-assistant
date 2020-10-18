@@ -17,7 +17,7 @@ export class DropdownComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.defaultSelection = this.list[parseInt(this.default)];
+    this.defaultSelection = this.list[parseInt(this.default, 10)];
   }
 
   onChange(target: string) {

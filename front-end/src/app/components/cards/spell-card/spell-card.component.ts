@@ -1,4 +1,4 @@
-import { ISpell } from "./../../../interfaces/spell";
+import { Spell } from "./../../../interfaces/spell";
 import { Component, OnInit, Input } from "@angular/core";
 
 @Component({
@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from "@angular/core";
   styleUrls: ["./spell-card.component.scss"],
 })
 export class SpellCardComponent implements OnInit {
-  @Input() spell: ISpell;
+  @Input() spell: Spell;
   constructor() {}
 
   ngOnInit(): void {}

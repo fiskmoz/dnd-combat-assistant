@@ -25,6 +25,7 @@ export class TypeaheadComponent implements OnInit {
 
   public model: any[];
 
+  @Input() id: string;
   @Input() list: string[];
   @Input() label: string;
   @Output() selected = new EventEmitter<string>();
@@ -44,12 +45,11 @@ export class TypeaheadComponent implements OnInit {
     const inputFocus$ = this.focus$;
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
       map((term: string) =>
-        (term === ""
+        term === ""
           ? this.list
           : this.list.filter(
               (v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1
             )
-        ).slice(0, 20)
       )
     );
   };

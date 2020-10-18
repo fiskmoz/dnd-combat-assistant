@@ -1,24 +1,45 @@
 import { Injectable } from "@angular/core";
-import { IMonsterIndex } from "../interfaces/monster-index";
+import { CrToTable, Monster, MonsterQuickSearch } from "../interfaces/monster";
 import { HttpClient } from "@angular/common/http";
+import { ValueConverter } from "@angular/compiler/src/render3/view/template";
 
 @Injectable({
   providedIn: "root",
 })
 export class MonsterService {
-  public currentEncounter: IMonsterIndex[];
-  public monsterNames: string[];
-  public crToXpTable: JSON;
+  public currentEncounter: Monster[];
+  public monstersQuickSort: MonsterQuickSearch[];
+  public crToXpTable: CrToTable[];
   public monstersMultiplier: JSON;
   public monsterTotal = 1;
+  public crList: string[] = [];
 
   constructor(private http: HttpClient) {
-    this.http.get("/api/encounter/crtable").subscribe((data: JSON) => {
+    this.http.get("/api/encounter/crtable").subscribe((data: CrToTable[]) => {
       this.crToXpTable = data;
+      for (const prop in this.crToXpTable) {
+        if (!!prop) {
+          this.crList.push(prop);
+        }
+      }
+      this.crList.shift();
+      this.crList.unshift(this.crList[this.crList.length - 1]);
+      this.crList.unshift(this.crList[this.crList.length - 2]);
+      this.crList.unshift(this.crList[this.crList.length - 3]);
+      this.crList.pop();
+      this.crList.pop();
+      this.crList.pop();
+      this.crList.unshift("0");
+      this.crList.unshift("any");
     });
-    this.http.get("/api/encounter/names").subscribe((data: JSON) => {
-      this.monsterNames = Object.values(data);
-    });
+    this.http
+      .get("/api/encounter/monster/quicksort")
+      .subscribe((data: MonsterQuickSearch[]) => {
+        this.monstersQuickSort = Object.values(data);
+        this.monstersQuickSort.sort((a, b) =>
+          ("" + a.name).localeCompare(b.name)
+        );
+      });
     this.http.get("api/encounter/multiplier").subscribe((data: JSON) => {
       this.monstersMultiplier = data;
     });
@@ -55,7 +76,7 @@ export class MonsterService {
       apiUrl = apiUrl + "&locations=" + locations.join("-");
     }
     const promise = new Promise((resolve, reject) => {
-      this.http.get<IMonsterIndex[]>(apiUrl).subscribe((r) => {
+      this.http.get<Monster[]>(apiUrl).subscribe((r) => {
         Object.assign(this.currentEncounter, r);
         this.InitializeNewMonsters();
         resolve();
@@ -64,25 +85,27 @@ export class MonsterService {
     return promise;
   }
 
-  GetMonsterDataByName(monster: string): Promise<IMonsterIndex> {
+  GetMonsterDataByName(monster: string): Promise<Monster> {
     if (!monster) {
       console.log("Missing parameters for request");
       return;
     }
     return this.http
-      .get<IMonsterIndex>("/api/encounter/monster?name=" + monster)
+      .get<Monster>("/api/encounter/monster?name=" + monster)
       .toPromise();
   }
 
-  AddMonster(monster: IMonsterIndex): void {
-    let _monster = Object.assign({}, monster);
-    _monster.initiative = 0;
-    _monster.max_hit_points = _monster.hit_points;
-    this.currentEncounter.push(_monster);
+  AddMonster(newMonster: Monster): void {
+    const monster = Object.assign({}, newMonster);
+    monster.initiative = 0;
+    monster.max_hit_points = !!newMonster.max_hit_points
+      ? newMonster.max_hit_points
+      : monster.hit_points;
+    this.currentEncounter.push(monster);
     this.monsterTotal = this.currentEncounter.length;
     this.AddSuffixToDuplicates();
   }
-  RemoveMonster(monster: IMonsterIndex): void {
+  RemoveMonster(monster: Monster): void {
     this.currentEncounter.splice(this.currentEncounter.indexOf(monster), 1);
     this.monsterTotal = this.currentEncounter.length;
   }
@@ -138,5 +161,9 @@ export class MonsterService {
             : 1
         ]
     );
+  }
+
+  GetMonsterNames(): string[] {
+    return this.monstersQuickSort.map((m) => m.name);
   }
 }

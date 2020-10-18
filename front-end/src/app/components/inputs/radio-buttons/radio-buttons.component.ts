@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { IRadioButtonChangeEvent } from "src/app/interfaces/radio-change";
+import { RadioButtonChangeEvent } from "src/app/interfaces/inputs";
 
 @Component({
   selector: "app-radio-buttons",
@@ -13,7 +13,7 @@ export class RadioButtonsComponent implements OnInit {
   @Input() firstSelected: boolean;
   @Input() horizontal: boolean;
 
-  @Output() radioChange$ = new EventEmitter<IRadioButtonChangeEvent>();
+  @Output() radioChange$ = new EventEmitter<RadioButtonChangeEvent>();
 
   constructor() {}
 
@@ -27,6 +27,6 @@ export class RadioButtonsComponent implements OnInit {
     this.radioChange$.emit({
       id: target.value,
       checked: target.checked,
-    } as IRadioButtonChangeEvent);
+    } as RadioButtonChangeEvent);
   }
 }

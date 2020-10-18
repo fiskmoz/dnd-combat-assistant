@@ -1,4 +1,4 @@
-export interface ISpell {
+export interface Spell {
   casting_time: string;
   classes: string[];
   components: {
@@ -17,4 +17,10 @@ export interface ISpell {
   tags: string[];
   type: string;
   school: string;
+}
+
+export interface SpellQuickSearch {
+  name: string;
+  level: string;
+  classes: string[];
 }
