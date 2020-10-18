@@ -2,8 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { MonsterService } from "src/app/services/monster.service";
 import { PlayersService } from "src/app/services/players.service";
 import { RandomService } from "src/app/services/random.service";
-import { IInitiativeEntity } from "src/app/interfaces/initiative-entity";
-import { IMonsterIndex } from "src/app/interfaces/monster-index";
+import { InitiativeEntity } from "src/app/interfaces/initiative";
+import { Monster } from "src/app/interfaces/monster";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
@@ -19,9 +19,9 @@ export class InitiativeComponent implements OnInit {
     private modalService: NgbModal
   ) {}
 
-  public initiativeList: IInitiativeEntity[];
+  public initiativeList: InitiativeEntity[];
 
-  public modalMonster: IMonsterIndex;
+  public modalMonster: Monster;
 
   ngOnInit(): void {
     this.initiativeList = [];
@@ -30,7 +30,7 @@ export class InitiativeComponent implements OnInit {
 
   openModal(content: any, name: string): void {
     this.modalMonster = this.monsterService.currentEncounter.find(
-      (m) => m.name == name
+      (m) => m.name === name
     );
     this.modalService.open(content, { ariaLabelledBy: "modal" });
   }
@@ -61,7 +61,7 @@ export class InitiativeComponent implements OnInit {
     this.RefreshIniativeState();
   }
 
-  onMonsterChanged(monster: IMonsterIndex) {
+  onMonsterChanged(monster: Monster) {
     this.RefreshIniativeState();
   }
 
@@ -72,12 +72,12 @@ export class InitiativeComponent implements OnInit {
     });
   }
 
-  onDuplicateMonster(monster: IMonsterIndex) {
+  onDuplicateMonster(monster: Monster) {
     this.monsterService.AddMonster(monster);
     this.RefreshIniativeState();
   }
 
-  onRemoveMonster(monster: IMonsterIndex) {
+  onRemoveMonster(monster: Monster) {
     this.monsterService.RemoveMonster(monster);
     this.RefreshIniativeState();
   }
@@ -94,7 +94,7 @@ export class InitiativeComponent implements OnInit {
         priority: 0,
         monster: true,
         suffix: !!m.initiative_suffix ? m.initiative_suffix : null,
-      } as IInitiativeEntity);
+      } as InitiativeEntity);
     });
     const prevLen = this.initiativeList.length;
     this.playerService.playerList.forEach((p, index) => {
@@ -105,14 +105,14 @@ export class InitiativeComponent implements OnInit {
         initiative_duplicate: false,
         priority: 0,
         player: true,
-      } as IInitiativeEntity);
+      } as InitiativeEntity);
     });
     this.DetermineInitiativeDuplicates();
     this.SortInitiative();
   }
 
-  IncreasePrio(entity: IInitiativeEntity): void {
-    this.initiativeList.find((i) => i == entity).priority++;
+  IncreasePrio(entity: InitiativeEntity): void {
+    this.initiativeList.find((i) => i === entity).priority++;
     this.SortPriority();
   }
 
@@ -135,7 +135,9 @@ export class InitiativeComponent implements OnInit {
 
   SortPriority(): void {
     this.initiativeList.sort((a, b) => {
-      if (b.priority == a.priority || b.initiative != a.initiative) return 0;
+      if (b.priority === a.priority || b.initiative !== a.initiative) {
+        return 0;
+      }
       return b.priority - a.priority;
     });
   }

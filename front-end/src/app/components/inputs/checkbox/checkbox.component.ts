@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { ICheckboxChangeEvent } from "src/app/interfaces/checkbox-change";
+import { CheckboxChangeEvent } from "src/app/interfaces/inputs";
 
 @Component({
   selector: "app-checkbox",
@@ -14,7 +14,7 @@ export class CheckboxComponent implements OnInit {
   @Input() inline: boolean;
   @Input() disabled: boolean;
 
-  @Output() changed$ = new EventEmitter<ICheckboxChangeEvent>();
+  @Output() changed$ = new EventEmitter<CheckboxChangeEvent>();
 
   constructor() {}
 
@@ -28,7 +28,7 @@ export class CheckboxComponent implements OnInit {
     this.changed$.emit({
       name: target.name,
       checked: target.checked,
-    } as ICheckboxChangeEvent);
+    } as CheckboxChangeEvent);
   }
 
   ngOnInit(): void {}

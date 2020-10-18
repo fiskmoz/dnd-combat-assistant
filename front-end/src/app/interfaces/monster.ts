@@ -1,4 +1,4 @@
-export interface IMonsterIndex {
+export interface Monster {
   index: string;
   name: string;
   size: string;
@@ -23,10 +23,10 @@ export interface IMonsterIndex {
   senses?: string;
   languages?: string;
   challenge_rating: string;
-  special_abilities?: IAbility[];
-  actions?: IAbility[];
+  special_abilities?: Ability[];
+  actions?: Ability[];
   legendary_desc?: string;
-  legendary_actions?: IAbility[];
+  legendary_actions?: Ability[];
   spells?: string[];
 
   initiative?: number;
@@ -35,9 +35,19 @@ export interface IMonsterIndex {
   // EXTEND WITH LEGENDARY STUFF LATER
 }
 
-export interface IAbility {
+export interface Ability {
   name: string;
   desc: string;
   attack_bonus: string;
   damage_dice?: string;
+}
+
+export interface MonsterQuickSearch {
+  name: string;
+  type: string;
+  challenge_rating: string;
+}
+
+export interface CrToTable {
+  cr: string;
 }

@@ -1,4 +1,4 @@
-import { IMonsterIndex } from "./../../interfaces/monster-index";
+import { Monster } from "../../interfaces/monster";
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 
 @Component({
@@ -7,13 +7,13 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
   styleUrls: ["./initiative-monster.component.scss"],
 })
 export class InitiativeMonsterComponent implements OnInit {
-  private damageText: string = "";
-  public isTextValid: boolean = true;
-  @Input() monster: IMonsterIndex;
+  private damageText = "";
+  public isTextValid = true;
+  @Input() monster: Monster;
 
-  @Output() remove$ = new EventEmitter<IMonsterIndex>();
-  @Output() duplicate$ = new EventEmitter<IMonsterIndex>();
-  @Output() changed$ = new EventEmitter<IMonsterIndex>();
+  @Output() remove$ = new EventEmitter<Monster>();
+  @Output() duplicate$ = new EventEmitter<Monster>();
+  @Output() changed$ = new EventEmitter<Monster>();
   @Output() nameClicked$ = new EventEmitter<void>();
   constructor() {}
 
@@ -24,7 +24,7 @@ export class InitiativeMonsterComponent implements OnInit {
   }
 
   onDamageDealt() {
-    let damage: number = parseInt(this.damageText);
+    const damage: number = parseInt(this.damageText, 10);
     if (isNaN(damage)) {
       this.isTextValid = false;
       return;
@@ -39,7 +39,7 @@ export class InitiativeMonsterComponent implements OnInit {
   }
 
   onInitiativeChanged(initiative: string) {
-    this.monster.initiative = parseInt(initiative);
+    this.monster.initiative = parseInt(initiative, 10);
     this.changed$.emit(this.monster);
   }
 

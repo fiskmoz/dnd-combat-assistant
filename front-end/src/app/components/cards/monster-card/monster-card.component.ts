@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { IMonsterIndex } from "src/app/interfaces/monster-index";
+import { Monster } from "src/app/interfaces/monster";
 
 @Component({
   selector: "app-monster-card",
@@ -7,13 +7,13 @@ import { IMonsterIndex } from "src/app/interfaces/monster-index";
   styleUrls: ["./monster-card.component.scss"],
 })
 export class MonsterCardComponent implements OnInit {
-  @Input() monster: IMonsterIndex;
+  @Input() monster: Monster;
   @Input() crToXPTable: JSON;
   @Input() enableOptions: boolean;
   @Input() id: number;
 
-  @Output() remove$ = new EventEmitter<IMonsterIndex>();
-  @Output() duplicate$ = new EventEmitter<IMonsterIndex>();
+  @Output() remove$ = new EventEmitter<Monster>();
+  @Output() duplicate$ = new EventEmitter<Monster>();
 
   constructor() {}
 

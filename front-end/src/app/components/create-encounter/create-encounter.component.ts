@@ -1,9 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { MonsterService } from "src/app/services/monster.service";
 import { PlayersService } from "src/app/services/players.service";
-import { ICheckboxChangeEvent } from "src/app/interfaces/checkbox-change";
-import { IRadioButtonChangeEvent } from "src/app/interfaces/radio-change";
-import { IMonsterIndex } from "src/app/interfaces/monster-index";
+import { Monster } from "src/app/interfaces/monster";
+import { CheckboxChangeEvent, RadioButtonChangeEvent } from 'src/app/interfaces/inputs';
 
 @Component({
   selector: "app-create-encounter",
@@ -39,7 +38,7 @@ export class CreateEncounterComponent implements OnInit {
       )
       .then(() => {
         this.errorMSG = "";
-        if (parseInt(this.monsterTotal) != this.monsterService.monsterTotal) {
+        if (parseInt(this.monsterTotal, 10) !== this.monsterService.monsterTotal) {
           this.errorMSG =
             "Sorry, we could not find exactly " +
             this.monsterTotal +
@@ -48,7 +47,7 @@ export class CreateEncounterComponent implements OnInit {
       });
   }
 
-  refChange(event: ICheckboxChangeEvent) {
+  refChange(event: CheckboxChangeEvent) {
     if (event.checked && this.origins.indexOf(event.name) === -1) {
       this.origins.push(event.name);
     } else {
@@ -57,7 +56,7 @@ export class CreateEncounterComponent implements OnInit {
     this.UpdateLocalStorage();
   }
 
-  locationChange(event: ICheckboxChangeEvent) {
+  locationChange(event: CheckboxChangeEvent) {
     if (event.checked && this.locations.indexOf(event.name) === -1) {
       this.locations.push(event.name);
     } else {
@@ -68,15 +67,15 @@ export class CreateEncounterComponent implements OnInit {
   monsterTotalChange(event: string) {
     this.monsterTotal = event;
     this.UpdateLocalStorage();
-    this.monsterService.monsterTotal = parseInt(this.monsterTotal);
+    this.monsterService.monsterTotal = parseInt(this.monsterTotal, 10);
   }
   encounterDifficultyChange(event: string) {
     this.difficulty = event;
     this.UpdateLocalStorage();
   }
 
-  geoLocationChange(event: IRadioButtonChangeEvent) {
-    this.geolocation = this.possibleGeoLocations[parseInt(event.id)];
+  geoLocationChange(event: RadioButtonChangeEvent) {
+    this.geolocation = this.possibleGeoLocations[parseInt(event.id, 10)];
   }
 
   private UpdateLocalStorage() {
@@ -91,17 +90,19 @@ export class CreateEncounterComponent implements OnInit {
     );
   }
 
-  onMonsterDuplicate(monster: IMonsterIndex) {
+  onMonsterDuplicate(monster: Monster) {
     this.monsterService.AddMonster(monster);
   }
 
-  onMonsterRemove(monster: IMonsterIndex) {
+  onMonsterRemove(monster: Monster) {
     this.monsterService.RemoveMonster(monster);
   }
 
   private ReadLocalStorage() {
     let storageJson = localStorage.getItem("encounter_data");
-    if (!storageJson) return;
+    if (!storageJson) {
+      return;
+    }
     storageJson = JSON.parse(storageJson);
     if (!!storageJson.hasOwnProperty("origins")) {
       this.origins = storageJson["origins"];
@@ -111,7 +112,7 @@ export class CreateEncounterComponent implements OnInit {
     }
     if (!!storageJson.hasOwnProperty("monsterTotal")) {
       this.monsterTotal = storageJson["monsterTotal"];
-      this.monsterService.monsterTotal = parseInt(this.monsterTotal);
+      this.monsterService.monsterTotal = parseInt(this.monsterTotal, 10);
     }
     if (!!storageJson.hasOwnProperty("difficulty")) {
       this.difficulty = storageJson["difficulty"];

@@ -4,9 +4,9 @@
       <div class="row">
         <div class="col-4">
           <app-typeahead
-            *ngIf="monsterService.monsterNames"
+            *ngIf="!!monsterService.monstersQuickSort"
             (selected)="onNewSelected($event)"
-            [list]="monsterService.monsterNames"
+            [list]="monsterService.GetMonsterNames()"
             [label]="'Add a monster!'"
           >
           </app-typeahead>

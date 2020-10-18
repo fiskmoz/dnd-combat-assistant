@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, Input, EventEmitter } from "@angular/core";
-import { IInitiativeEntity } from "src/app/interfaces/initiative-entity";
+import { InitiativeEntity } from "src/app/interfaces/initiative";
 
 @Component({
   selector: "app-initiative-entity",
@@ -7,7 +7,7 @@ import { IInitiativeEntity } from "src/app/interfaces/initiative-entity";
   styleUrls: ["./initiative-entity.component.scss"],
 })
 export class InitiativeEntityComponent implements OnInit {
-  @Input() entity: IInitiativeEntity;
+  @Input() entity: InitiativeEntity;
 
   @Output() imageClicked$ = new EventEmitter<void>();
   @Output() increasePrio$ = new EventEmitter<void>();

@@ -1,4 +1,4 @@
-export interface IInitiativeEntity {
+export interface InitiativeEntity {
   name: string;
   id: number;
   initiative: number;
