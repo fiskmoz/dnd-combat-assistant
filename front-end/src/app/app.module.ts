@@ -2,7 +2,6 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import { environment } from "src/environments/environment";
-import { AppRoutingModule } from "../module-imports/app-routing.module";
 import { AppComponent } from "./app.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { ButtonComponent } from "./components/inputs/button/button.component";
@@ -39,6 +38,7 @@ import { SpellCardComponent } from "./components/layout/spell-card/spell-card.co
 import { SearchViewComponent } from "./components/views/search-view/search-view.component";
 import { GenerateEncounterViewComponent } from "./components/views/generate-encounter-view/generate-encounter-view.component";
 import { SpellSearchComponent } from "./components/layout/spell-search/spell-search.component";
+import { AppRoutingModule } from "./module-imports/app-routing.module";
 
 @NgModule({
   declarations: [

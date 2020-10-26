@@ -89,6 +89,11 @@ blacklisted_monsters = ['Commoner']
 blacklisted_sea_creatures = ['Sahuagin']
 
 
+@app.route('/search')
+@app.route('/player-tools')
+@app.route('/generate')
+@app.route('/initiative')
+@app.route('/grid')
 @app.route('/')
 def index():
     return send_from_directory("static/", "index.html")
@@ -97,9 +102,9 @@ def index():
 @app.route('/api/encounter/thresholds')
 def threshholds():
     return app.response_class(
-        response=json.dumps(encounter_thresholds),
-        status=200,
-        mimetype='application/json'
+        response = json.dumps(encounter_thresholds),
+        status = 200,
+        mimetype = 'application/json'
     )
 
 

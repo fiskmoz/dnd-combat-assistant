@@ -5,7 +5,6 @@ import { GridViewComponent } from "src/app/components/views/grid-view/grid-view.
 import { InitiativeViewComponent } from "src/app/components/views/initiative-view/initiative-view.component";
 import { PlayerToolsViewComponent } from "src/app/components/views/player-tools-view/player-tools-view.component";
 import { SearchViewComponent } from "src/app/components/views/search-view/search-view.component";
-import { environment } from "src/environments/environment";
 
 const routes: Routes = [
   {
@@ -31,11 +30,12 @@ const routes: Routes = [
   {
     path: "**",
     component: SearchViewComponent,
+    pathMatch: "full",
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: !environment.production })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
