@@ -1,5 +1,5 @@
-import { Monster } from "../../interfaces/monster";
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { Monster } from "src/app/interfaces/monster";
 
 @Component({
   selector: "app-initiative-monster",

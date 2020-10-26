@@ -8,10 +8,10 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: "app-initiative",
-  templateUrl: "./initiative.component.html",
-  styleUrls: ["./initiative.component.scss"],
+  templateUrl: "./initiative-view.component.html",
+  styleUrls: ["./initiative-view.component.scss"],
 })
-export class InitiativeComponent implements OnInit {
+export class InitiativeViewComponent implements OnInit {
   constructor(
     public monsterService: MonsterService,
     public playerService: PlayersService,
