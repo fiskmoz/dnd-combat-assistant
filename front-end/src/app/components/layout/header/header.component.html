@@ -19,29 +19,26 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" id="nav_search" (click)="onLinkClick($event)"
-          >Search</a
-        >
+        <link />
+        <a class="nav-link" id="nav_search" [routerLink]="'search'">Search</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="nav_player-tools" (click)="onLinkClick($event)"
+        <a class="nav-link" id="nav_player-tools" [routerLink]="'player-tools'"
           >Player-tools</a
         >
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="nav_generate" (click)="onLinkClick($event)"
+        <a class="nav-link" id="nav_generate" [routerLink]="'generate'"
           >Generate</a
         >
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="nav_initiative" (click)="onLinkClick($event)"
+        <a class="nav-link" id="nav_initiative" [routerLink]="'initiative'"
           >Initiative</a
         >
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="nav_grid" (click)="onLinkClick($event)"
-          >Grids</a
-        >
+        <a class="nav-link" id="nav_grid" [routerLink]="'grid'">Grids</a>
       </li>
     </ul>
   </div>

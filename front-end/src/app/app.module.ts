@@ -5,7 +5,6 @@ import { environment } from "src/environments/environment";
 import { AppRoutingModule } from "../module-imports/app-routing.module";
 import { AppComponent } from "./app.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { HomePageComponent } from "./components/layout/home-page/home-page.component";
 import { ButtonComponent } from "./components/inputs/button/button.component";
 import { RadioButtonsComponent } from "./components/inputs/radio-buttons/radio-buttons.component";
 import { CheckboxComponent } from "./components/inputs/checkbox/checkbox.component";
@@ -14,36 +13,36 @@ import { TextboxComponent } from "./components/inputs/textbox/textbox.component"
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { PlayersService } from "./services/players.service";
 import { RouterModule } from "@angular/router";
-import { CreatePlayerWrapperComponent } from "./components/create-player-wrapper/create-player-wrapper.component";
-import { CreatePlayerComponent } from "./components/create-player/create-player.component";
 import { MonsterService } from "./services/monster.service";
-import { CreateEncounterComponent } from "./components/create-encounter/create-encounter.component";
 import { FloorPipe } from "./pipes/floor.pipe";
 import { TypeaheadComponent } from "./components/inputs/typeahead/typeahead.component";
 import { HeaderComponent } from "./components/layout/header/header.component";
-import { InitiativeComponent } from "./components/initiative/initiative.component";
 import { AdjustComponent } from "./components/inputs/adjust/adjust.component";
-import { InitiativeEntityComponent } from "./components/initiative-entity/initiative-entity.component";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
-import { GridControllerComponent } from "./components/grid-controller/grid-controller.component";
-import { GridComponent } from "./components/grid/grid.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { DragDropModule } from "@angular/cdk/drag-drop";
-import { InitiativeMonsterComponent } from "./components/initiative-monster/initiative-monster.component";
-import { PlayerToolsControllerComponent } from "./components/player-tools-controller/player-tools-controller.component";
-import { PlayerDicesComponent } from "./components/player-dices/player-dices.component";
 import { DiceComponent } from "./components/inputs/dice/dice.component";
-import { SpellSearchComponent } from "./components/search/spell-search/spell-search.component";
-import { SpellCardComponent } from "./components/cards/spell-card/spell-card.component";
-import { MonsterCardComponent } from "./components/cards/monster-card/monster-card.component";
-import { MonsterSearchComponent } from "./components/search/monster-search/monster-search.component";
-import { SearchViewComponent } from './components/search/search-view/search-view.component';
+import { CreatePlayerWrapperComponent } from "./components/layout/create-player-wrapper/create-player-wrapper.component";
+import { CreatePlayerComponent } from "./components/layout/create-player/create-player.component";
+import { CreateEncounterComponent } from "./components/layout/create-encounter/create-encounter.component";
+import { MonsterCardComponent } from "./components/layout/monster-card/monster-card.component";
+import { MonsterSearchComponent } from "./components/layout/monster-search/monster-search.component";
+import { InitiativeViewComponent } from "./components/views/initiative-view/initiative-view.component";
+import { InitiativeEntityComponent } from "./components/layout/initiative-entity/initiative-entity.component";
+import { GridViewComponent } from "./components/views/grid-view/grid-view.component";
+import { GridComponent } from "./components/layout/grid/grid.component";
+import { InitiativeMonsterComponent } from "./components/layout/initiative-monster/initiative-monster.component";
+import { PlayerToolsViewComponent } from "./components/views/player-tools-view/player-tools-view.component";
+import { PlayerDicesComponent } from "./components/layout/player-dices/player-dices.component";
+import { SpellCardComponent } from "./components/layout/spell-card/spell-card.component";
+import { SearchViewComponent } from "./components/views/search-view/search-view.component";
+import { GenerateEncounterViewComponent } from "./components/views/generate-encounter-view/generate-encounter-view.component";
+import { SpellSearchComponent } from "./components/layout/spell-search/spell-search.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomePageComponent,
     ButtonComponent,
     RadioButtonsComponent,
     CheckboxComponent,
@@ -57,18 +56,20 @@ import { SearchViewComponent } from './components/search/search-view/search-view
     MonsterSearchComponent,
     TypeaheadComponent,
     HeaderComponent,
-    InitiativeComponent,
+    InitiativeViewComponent,
     AdjustComponent,
     InitiativeEntityComponent,
-    GridControllerComponent,
+    GridViewComponent,
     GridComponent,
     InitiativeMonsterComponent,
-    PlayerToolsControllerComponent,
+    PlayerToolsViewComponent,
     PlayerDicesComponent,
     DiceComponent,
-    SpellSearchComponent,
+    MonsterSearchComponent,
     SpellCardComponent,
     SearchViewComponent,
+    GenerateEncounterViewComponent,
+    SpellSearchComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),

@@ -3,10 +3,10 @@ import { GridService } from "src/app/services/grid.service";
 
 @Component({
   selector: "app-grid-controller",
-  templateUrl: "./grid-controller.component.html",
-  styleUrls: ["./grid-controller.component.scss"],
+  templateUrl: "./grid-view.component.html",
+  styleUrls: ["./grid-view.component.scss"],
 })
-export class GridControllerComponent implements OnInit {
+export class GridViewComponent implements OnInit {
   constructor(public gridService: GridService) {
     gridService.status = "";
   }
