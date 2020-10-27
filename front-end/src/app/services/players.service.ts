@@ -17,6 +17,7 @@ export class PlayersService {
   public deadlyEncounter = 0;
 
   constructor(private http: HttpClient) {
+    this.ReadLocalStorage();
     this.http.get("/api/encounter/thresholds").subscribe((data: JSON) => {
       for (const key in data) {
         if (data.hasOwnProperty(key)) {
@@ -28,7 +29,6 @@ export class PlayersService {
           } as PlayerXpRow;
         }
       }
-      this.ReadLocalStorage();
       this.CalculateEncounterDifficulty();
     });
   }

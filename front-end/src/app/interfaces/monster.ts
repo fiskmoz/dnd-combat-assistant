@@ -1,5 +1,4 @@
 export interface Monster {
-  index: string;
   name: string;
   size: string;
   type: string;
@@ -28,6 +27,8 @@ export interface Monster {
   legendary_desc?: string;
   legendary_actions?: Ability[];
   spells?: string[];
+  index?: number;
+  prio?: number;
 
   initiative?: number;
   img_url?: string;

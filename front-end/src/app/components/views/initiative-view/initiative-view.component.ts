@@ -85,13 +85,14 @@ export class InitiativeViewComponent implements OnInit {
   RefreshIniativeState() {
     this.initiativeList = [];
     this.monsterService.currentEncounter.forEach((m, index) => {
+      m.index = index + 1;
       this.initiativeList.push({
         name: m.name,
         id: index + 1,
-        initiative: m.initiative,
+        initiative: !!m.initiative ? m.initiative : 0,
         initiative_duplicate: false,
         hitpoints: m.hit_points,
-        priority: 0,
+        priority: !!m.prio ? m.prio : 0,
         monster: true,
         suffix: !!m.initiative_suffix ? m.initiative_suffix : null,
       } as InitiativeEntity);
@@ -101,9 +102,9 @@ export class InitiativeViewComponent implements OnInit {
       this.initiativeList.push({
         name: p.name,
         id: prevLen + index,
-        initiative: p.initiative,
+        initiative: !!p.initiative ? p.initiative : 0,
         initiative_duplicate: false,
-        priority: 0,
+        priority: !!p.prio ? p.prio : 0,
         player: true,
       } as InitiativeEntity);
     });
@@ -112,6 +113,10 @@ export class InitiativeViewComponent implements OnInit {
   }
 
   IncreasePrio(entity: InitiativeEntity): void {
+    const enty = !!entity.monster
+      ? this.monsterService.currentEncounter.find((m) => m.index == entity.id)
+      : this.playerService.playerList.find((p) => p.name === entity.name);
+    !!enty.prio ? enty.prio++ : (enty.prio = 1);
     this.initiativeList.find((i) => i === entity).priority++;
     this.SortPriority();
   }
