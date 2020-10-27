@@ -11,6 +11,7 @@ export interface Player {
   dexterity?: number;
   constitution?: number;
   charisma?: number;
+  prio?: number;
 }
 
 export interface PlayerXpTable {
