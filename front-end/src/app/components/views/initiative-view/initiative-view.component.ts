@@ -110,6 +110,7 @@ export class InitiativeViewComponent implements OnInit {
     });
     this.DetermineInitiativeDuplicates();
     this.SortInitiative();
+    this.SortPriority();
   }
 
   IncreasePrio(entity: InitiativeEntity): void {

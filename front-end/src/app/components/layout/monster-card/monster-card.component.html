@@ -13,9 +13,13 @@
         <div>
           <p><b>Armor class: </b>{{ monster.armor_class }}</p>
           <p>
-            <b>Hit Points: </b>{{ monster.max_hit_points }} ({{
-              monster.hit_dice
-            }})
+            <b>Hit Points: </b
+            >{{
+              !!monster.max_hit_points
+                ? monster.max_hit_points
+                : monster.hit_points
+            }}
+            ({{ monster.hit_dice }})
           </p>
           <p><b>Speed: </b>{{ monster.speed }}</p>
         </div>
