@@ -10,27 +10,31 @@ const routes: Routes = [
   {
     path: "generate",
     component: GenerateEncounterViewComponent,
+    data: { animationState: "generate" },
   },
   {
     path: "search",
     component: SearchViewComponent,
+    data: { animationState: "search" },
   },
   {
     path: "initiative",
     component: InitiativeViewComponent,
+    data: { animationState: "initiative" },
   },
   {
     path: "grid",
     component: GridViewComponent,
+    data: { animationState: "grid" },
   },
   {
     path: "player-tools",
     component: PlayerToolsViewComponent,
+    data: { animationState: "player-tools" },
   },
   {
     path: "**",
-    component: SearchViewComponent,
-    pathMatch: "full",
+    redirectTo: "search",
   },
 ];
 
