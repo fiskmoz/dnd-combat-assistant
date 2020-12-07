@@ -7,7 +7,7 @@ import { Monster } from "src/app/interfaces/monster";
   styleUrls: ["./initiative-monster.component.scss"],
 })
 export class InitiativeMonsterComponent implements OnInit {
-  private damageText = "";
+  public damageText = "";
   public isTextValid = true;
   @Input() monster: Monster;
 
@@ -34,6 +34,7 @@ export class InitiativeMonsterComponent implements OnInit {
     if (this.monster.hit_points < 1) {
       this.onRemoveMonster();
     } else {
+      this.damageText = "";
       this.changed$.emit(this.monster);
     }
   }

@@ -22,8 +22,7 @@ export class GridComponent implements OnInit, AfterViewInit {
 
   public closeResult: any;
   public selectedColor: string;
-  public previousText: string;
-  public previousColor: string;
+  public selectedText: string;
 
   public toolboxIds: Array<string> = ["", "P", "M", "X"];
 
@@ -86,8 +85,7 @@ export class GridComponent implements OnInit, AfterViewInit {
         previousIndex
       ];
       this.battlefieldSquares[currentIndex].color = this.selectedColor;
-      this.previousText = this.toolboxIds[previousIndex];
-      this.previousColor = this.selectedColor;
+      this.selectedText = this.toolboxIds[previousIndex];
       this.gridService.UpdateGrid(
         JSON.stringify(Object.assign({}, this.battlefieldSquares))
       );
@@ -112,15 +110,19 @@ export class GridComponent implements OnInit, AfterViewInit {
   }
 
   handleClick(id: number): void {
-    this.battlefieldSquares[id].text = this.previousText;
-    this.battlefieldSquares[id].color = this.previousColor;
+    this.battlefieldSquares[id].text = this.selectedText;
+    this.battlefieldSquares[id].color = this.selectedColor;
     this.gridService.UpdateGrid(
       JSON.stringify(Object.assign({}, this.battlefieldSquares))
     );
   }
 
+  handleToolbarClick(id: string): void {
+    this.selectedText = id;
+  }
+
   resetPrevious(): void {
-    this.previousColor = "bg-white";
-    this.previousText = "";
+    this.selectedColor = "bg-white";
+    this.selectedText = "";
   }
 }

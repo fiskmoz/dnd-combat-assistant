@@ -2,7 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { MonsterService } from "src/app/services/monster.service";
 import { PlayersService } from "src/app/services/players.service";
 import { Monster } from "src/app/interfaces/monster";
-import { CheckboxChangeEvent, RadioButtonChangeEvent } from 'src/app/interfaces/inputs';
+import {
+  CheckboxChangeEvent,
+  RadioButtonChangeEvent,
+} from "src/app/interfaces/inputs";
 
 @Component({
   selector: "app-create-encounter",
@@ -38,7 +41,9 @@ export class CreateEncounterComponent implements OnInit {
       )
       .then(() => {
         this.errorMSG = "";
-        if (parseInt(this.monsterTotal, 10) !== this.monsterService.monsterTotal) {
+        if (
+          parseInt(this.monsterTotal, 10) !== this.monsterService.monsterTotal
+        ) {
           this.errorMSG =
             "Sorry, we could not find exactly " +
             this.monsterTotal +

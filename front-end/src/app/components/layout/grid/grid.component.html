@@ -1,4 +1,4 @@
-<div cdkDropListGroup>
+<div class="bg-brown text-dark py-3" cdkDropListGroup>
   <div class="grid-container mx-auto">
     <ng-container *ngFor="let item of battlefieldSquares; let j = index">
       <div
@@ -19,88 +19,97 @@
       </div>
     </ng-container>
   </div>
-  <div class="row">
-    <div class="mx-auto">
+  <div class="grid-container mx-auto">
+    <div class="d-flex justify-content-between w-100 px-2">
       <div class="d-flex">
-        <div class="d-flex flex-column">
-          <div class="text-center">
-            <p>Select the boxes you want</p>
-            <div cdkDropList (cdkDropListDropped)="drop($event)" #toolboxElem>
-              <div
-                cdkDrag
-                class="{{ 'grid-box ' + selectedColor }}"
-                *ngFor="let item of toolboxIds"
-              >
-                {{ item }}
-                <div *cdkDragPlaceholder></div>
-              </div>
-            </div>
-          </div>
-          <div class="text-center card-body pt-2">
-            <span class="p-1"
-              ><app-button
-                [text]="'black'"
-                [small]="true"
-                [type]="'dark'"
-                (clicked$)="onColorSwitch('bg-dark')"
-              ></app-button
-            ></span>
-            <span class="p-1"
-              ><app-button
-                [text]="'white'"
-                [small]="true"
-                [type]="'light'"
-                (clicked$)="onColorSwitch('bg-white')"
-              ></app-button
-            ></span>
-            <span class="p-1"
-              ><app-button
-                [text]="'green'"
-                [small]="true"
-                [type]="'success'"
-                (clicked$)="onColorSwitch('bg-success')"
-              ></app-button
-            ></span>
-            <span class="p-1"
-              ><app-button
-                [text]="'blue'"
-                [small]="true"
-                [type]="'primary'"
-                (clicked$)="onColorSwitch('bg-primary')"
-              ></app-button
-            ></span>
-            <span class="p-1"
-              ><app-button
-                [text]="'red'"
-                [small]="true"
-                [type]="'danger'"
-                (clicked$)="onColorSwitch('bg-danger')"
-              ></app-button
-            ></span>
-            <span class="p-1"
-              ><app-button
-                [text]="'yellow'"
-                [small]="true"
-                [type]="'warning'"
-                (clicked$)="onColorSwitch('bg-warning')"
-              ></app-button
-            ></span>
-            <span class="p-1"
-              ><app-button
-                [text]="'gray'"
-                [small]="true"
-                [type]="'secondary'"
-                (clicked$)="onColorSwitch('bg-secondary')"
-              ></app-button
-            ></span>
+        <span class="my-auto"
+          ><app-button
+            [text]="'Reset Board'"
+            [small]="true"
+            [type]="'info'"
+            (clicked$)="openModal(content)"
+          ></app-button
+        ></span>
+      </div>
+      <div class="text-center">
+        <p>Select the boxes you want</p>
+        <div cdkDropList (cdkDropListDropped)="drop($event)" #toolboxElem>
+          <div
+            cdkDrag
+            class="{{ 'grid-box ' + selectedColor }}"
+            *ngFor="let item of toolboxIds"
+            (click)="handleToolbarClick(item)"
+          >
+            {{ item }}
+            <div *cdkDragPlaceholder></div>
           </div>
         </div>
-        <div>
-          <div>Previous box :</div>
-          <div class="{{ 'grid-box mt-3 ' + previousColor }}">
-            {{ this.previousText }}
-          </div>
-          <div class="mt-2">
+        <div class="card-body pt-2">
+          <span class="p-1"
+            ><app-button
+              [text]="'black'"
+              [small]="true"
+              [type]="'dark'"
+              (clicked$)="onColorSwitch('bg-dark')"
+            ></app-button
+          ></span>
+          <span class="p-1"
+            ><app-button
+              [text]="'white'"
+              [small]="true"
+              [type]="'light'"
+              (clicked$)="onColorSwitch('bg-white')"
+            ></app-button
+          ></span>
+          <span class="p-1"
+            ><app-button
+              [text]="'green'"
+              [small]="true"
+              [type]="'success'"
+              (clicked$)="onColorSwitch('bg-success')"
+            ></app-button
+          ></span>
+          <span class="p-1"
+            ><app-button
+              [text]="'blue'"
+              [small]="true"
+              [type]="'primary'"
+              (clicked$)="onColorSwitch('bg-primary')"
+            ></app-button
+          ></span>
+          <span class="p-1"
+            ><app-button
+              [text]="'red'"
+              [small]="true"
+              [type]="'danger'"
+              (clicked$)="onColorSwitch('bg-danger')"
+            ></app-button
+          ></span>
+          <span class="p-1"
+            ><app-button
+              [text]="'yellow'"
+              [small]="true"
+              [type]="'warning'"
+              (clicked$)="onColorSwitch('bg-warning')"
+            ></app-button
+          ></span>
+          <span class="p-1"
+            ><app-button
+              [text]="'gray'"
+              [small]="true"
+              [type]="'secondary'"
+              (clicked$)="onColorSwitch('bg-secondary')"
+            ></app-button
+          ></span>
+        </div>
+      </div>
+      <div class="">
+        <div>Selected:</div>
+        <div class="{{ 'grid-box mt-3 ' + selectedColor }}">
+          {{ this.selectedText }}
+        </div>
+        <div class="mt-2 d-flex">
+          <div class="mx-auto">
             <app-button
               [text]="'Clear'"
               [small]="true"
@@ -110,20 +119,10 @@
           </div>
         </div>
       </div>
-
-      <div class="text-center pt-2">
-        <span class="p-1"
-          ><app-button
-            [text]="'Reset Board'"
-            [small]="true"
-            [type]="'info'"
-            (clicked$)="openModal(content)"
-          ></app-button
-        ></span>
-      </div>
     </div>
   </div>
 </div>
+
 <ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Are you sure?</h4>

@@ -9,6 +9,17 @@ import { routeChangeAnimation } from "./animations/slide";
   animations: [routeChangeAnimation],
 })
 export class AppComponent {
+  public mode = "";
+  constructor() {
+    try {
+      this.mode = localStorage.getItem("mode");
+    } catch (e) {
+      console.log(e);
+    }
+    if (!this.mode) {
+      this.mode = "light";
+    }
+  }
   title = "dnd-assistant";
 
   prepareRoute(outlet: RouterOutlet) {
@@ -17,5 +28,17 @@ export class AppComponent {
       outlet.activatedRouteData &&
       outlet.activatedRouteData.animationState
     );
+  }
+
+  handleModeToggle(): void {
+    switch (this.mode) {
+      case "light":
+        this.mode = "dark";
+        break;
+      case "dark":
+        this.mode = "light";
+        break;
+    }
+    localStorage.setItem("mode", this.mode);
   }
 }

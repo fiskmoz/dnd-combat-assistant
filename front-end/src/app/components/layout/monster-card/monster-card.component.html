@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card bg-dynamic" *ngIf="!!crToXPTable">
   <div class="card-body">
     <div class="row">
       <div class="col-md-6 col-sm-12">
@@ -86,8 +86,8 @@
           </div>
         </div>
       </div>
-      <div class="col-md-6 col-sm-12">
-        <div class="p-2" *ngIf="enableOptions">
+      <div class="col-lg-6 col-8">
+        <div class="mb-1" *ngIf="enableOptions">
           <app-adjust
             [decreaseButtonText]="'remove'"
             [increaseButtonText]="'duplicate'"
@@ -98,7 +98,7 @@
         <img
           *ngIf="!!monster.img_url"
           src="{{ monster.img_url }}"
-          class="img-fluid"
+          class="img-fluid rounded"
         />
         <div *ngIf="!!monster.actions">
           <div *ngFor="let ability of monster.actions">

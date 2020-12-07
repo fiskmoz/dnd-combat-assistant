@@ -6,13 +6,23 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
   styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent implements OnInit {
-  @Output() pageChange = new EventEmitter<MouseEvent>();
+  @Input() mode: string;
+  @Output() lightdark$ = new EventEmitter<void>();
 
   constructor() {}
 
   ngOnInit(): void {}
 
-  onLinkClick($event: MouseEvent) {
-    this.pageChange.emit($event);
+  onModeToggle() {
+    this.lightdark$.emit();
+  }
+
+  get invertTheme(): string {
+    switch (this.mode) {
+      case "light":
+        return "dark";
+      case "dark":
+        return "light";
+    }
   }
 }

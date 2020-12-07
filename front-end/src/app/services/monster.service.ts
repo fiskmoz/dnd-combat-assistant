@@ -43,7 +43,12 @@ export class MonsterService {
     this.http.get("api/encounter/multiplier").subscribe((data: JSON) => {
       this.monstersMultiplier = data;
     });
-    this.currentEncounter = [];
+    try {
+      this.currentEncounter = JSON.parse(localStorage.getItem("monsters"));
+    } catch (e) {
+      console.log(e);
+      this.currentEncounter = [];
+    }
   }
 
   GenerateRandomEncounter(
@@ -79,6 +84,7 @@ export class MonsterService {
       this.http.get<Monster[]>(apiUrl).subscribe((r) => {
         Object.assign(this.currentEncounter, r);
         this.InitializeNewMonsters();
+        localStorage.setItem("monsters", JSON.stringify(this.currentEncounter));
         resolve();
       });
     });

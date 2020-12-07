@@ -1,8 +1,8 @@
-<div class="container">
+<div class="container px-lg-3 px-0">
   <div class="row">
-    <div class="col-12 p-2">
+    <div class="col-12">
       <div class="row">
-        <div class="col-4">
+        <div class="col-lg-4 col-12">
           <app-typeahead
             *ngIf="!!monsterService.monstersQuickSort"
             (selected)="onNewSelected($event)"
@@ -11,18 +11,20 @@
           >
           </app-typeahead>
         </div>
-        <div class="col-4 text-center">
-          <app-button
-            [text]="'Randomize monster initiative'"
-            [small]="true"
-            [type]="'primary'"
-            (clicked$)="onInitiativeStart()"
-          >
-          </app-button>
+        <div class="col-lg-4 mt-3 mt-lg-0 col-12 d-flex">
+          <div class="my-auto mx-auto">
+            <app-button
+              [text]="'Randomize monster initiative'"
+              [small]="true"
+              [type]="'primary'"
+              (clicked$)="onInitiativeStart()"
+            >
+            </app-button>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-md-4 col-sm-4">
+    <div class="col-lg-4 mt-3 col-12">
       <span *ngFor="let player of playerService.playerList">
         <app-create-player
           [player]="player"
@@ -32,7 +34,7 @@
         </app-create-player>
       </span>
     </div>
-    <div class="col-md-4 col-sm-4 p-1">
+    <div class="col-lg-4 mt-3 col-12">
       <span *ngFor="let monster of monsterService.currentEncounter">
         <app-initiative-monster
           [monster]="monster"
@@ -44,18 +46,16 @@
         </app-initiative-monster>
       </span>
     </div>
-    <div class="col-md-4 col-sm-4 p-1">
-      <div class="col-12">
-        <div class="col-12" *ngFor="let entity of initiativeList">
-          <app-initiative-entity
-            [entity]="entity"
-            (imageClicked$)="
-              !!entity.monster ? openModal(content, entity.name) : ''
-            "
-            (increasePrio$)="IncreasePrio(entity)"
-          >
-          </app-initiative-entity>
-        </div>
+    <div class="col-lg-4 mt-3 col-12">
+      <div *ngFor="let entity of initiativeList">
+        <app-initiative-entity
+          [entity]="entity"
+          (imageClicked$)="
+            !!entity.monster ? openModal(content, entity.name) : ''
+          "
+          (increasePrio$)="IncreasePrio(entity)"
+        >
+        </app-initiative-entity>
       </div>
     </div>
   </div>

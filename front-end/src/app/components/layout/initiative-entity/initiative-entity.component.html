@@ -1,23 +1,25 @@
-<div class="card">
-  <div class="row">
-    <div class="col-8">
-      <b>{{ entity.name + (!!entity.suffix ? " " + entity.suffix : "") }}</b>
-      <div>
-        {{ "init: " + entity.initiative }}
-        {{ !!entity.hitpoints ? "hp: " + entity.hitpoints : "" }}
-        {{ !!entity.initiative_duplicate ? "prio: " + entity.priority : "" }}
+<div class="card bg-dynamic">
+  <div class="d-flex">
+    <div class="">
+      <div class="p-2">
+        <b>{{ entity.name + (!!entity.suffix ? " " + entity.suffix : "") }}</b>
+        <div>
+          {{ "init: " + entity.initiative }}
+          {{ !!entity.hitpoints ? "hp: " + entity.hitpoints : "" }}
+          {{ !!entity.initiative_duplicate ? "prio: " + entity.priority : "" }}
+        </div>
+        <app-button
+          *ngIf="!!entity.initiative_duplicate"
+          [text]="'+ prio'"
+          [small]="true"
+          [type]="'primary'"
+          (clicked$)="onIncreasePrio()"
+        >
+        </app-button>
       </div>
-      <app-button
-        *ngIf="!!entity.initiative_duplicate"
-        [text]="'+ prio'"
-        [small]="true"
-        [type]="'info'"
-        (clicked$)="onIncreasePrio()"
-      >
-      </app-button>
     </div>
-    <div class="col-4">
-      <div class="img-container">
+    <div class="ml-auto d-flex">
+      <div class="img-container my-auto">
         <summary *ngIf="entity.monster">
           <img
             src="https://i.imgur.com/OWTsHDl.jpeg"
