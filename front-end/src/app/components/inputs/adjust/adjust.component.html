@@ -1,22 +1,25 @@
-<div class="container">
-  <div class="row border rounded">
-    <div class="col-md-6 col-sm-12 py-2">
-      <app-button
-        [text]="increaseButtonText"
-        [large]="false"
-        [small]="true"
-        [type]="'success'"
-        (clicked$)="onIncrease($event)"
-      ></app-button>
-    </div>
-    <div class="col-md-6 col-sm-12 py-2">
-      <app-button
-        [text]="decreaseButtonText"
-        [large]="false"
-        [small]="true"
-        [type]="'danger'"
-        (clicked$)="onDecrease($event)"
-      ></app-button>
+<div class="card bg-dynamic">
+  <div class="card-body p-1">
+    <div class="d-flex">
+      <div>
+        <app-button
+          [text]="increaseButtonText"
+          [large]="false"
+          [small]="true"
+          [type]="'primary'"
+          (clicked$)="onIncrease($event)"
+        ></app-button>
+      </div>
+
+      <div class="ml-auto">
+        <app-button
+          [text]="decreaseButtonText"
+          [large]="false"
+          [small]="true"
+          [type]="'danger'"
+          (clicked$)="onDecrease($event)"
+        ></app-button>
+      </div>
     </div>
   </div>
 </div>

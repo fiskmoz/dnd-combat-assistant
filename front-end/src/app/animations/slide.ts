@@ -10,7 +10,10 @@ import {
 
 export const routeChangeAnimation = trigger("routeTransitionAnimations", [
   transition(
-    "search => player-tools, search => generate, search => initiative, search => grid, player-tools => generate, player-tools => initiative, player-tools => grid, generate => initiative, generate => grid, initiative => grid",
+    "search => player-tools, search => manage, search => generate, search => initiative, search => grid, \
+    player-tools => manage, player-tools => generate, player-tools => initiative, player-tools => grid, \
+    manage => generate, manage => initiative, manage => grid, \
+    generate => initiative, generate => grid, initiative => grid",
     [
       style({ position: "relative" }),
       query(":enter, :leave", [
@@ -31,7 +34,10 @@ export const routeChangeAnimation = trigger("routeTransitionAnimations", [
     ]
   ),
   transition(
-    "player-tools => search, generate => search, initiative => search, grid => search, generate => player-tools, initiative => player-tools, player-tools => grid, initiative => generate, grid => generate, grid => initiative",
+    "player-tools => search, manage => search, generate => search, initiative => search, grid => search, \
+    manage => player-tools, generate => player-tools, initiative => player-tools, grid => player-tools, \
+    generate => manage, initiative => manage, grid => manage, \
+    initiative => generate, grid => generate, grid => initiative",
     [
       style({ position: "relative" }),
       query(":enter, :leave", [

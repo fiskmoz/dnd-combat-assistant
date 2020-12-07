@@ -24,7 +24,6 @@ import { DragDropModule } from "@angular/cdk/drag-drop";
 import { DiceComponent } from "./components/inputs/dice/dice.component";
 import { CreatePlayerWrapperComponent } from "./components/layout/create-player-wrapper/create-player-wrapper.component";
 import { CreatePlayerComponent } from "./components/layout/create-player/create-player.component";
-import { CreateEncounterComponent } from "./components/layout/create-encounter/create-encounter.component";
 import { MonsterCardComponent } from "./components/layout/monster-card/monster-card.component";
 import { MonsterSearchComponent } from "./components/layout/monster-search/monster-search.component";
 import { InitiativeViewComponent } from "./components/views/initiative-view/initiative-view.component";
@@ -36,9 +35,10 @@ import { PlayerToolsViewComponent } from "./components/views/player-tools-view/p
 import { PlayerDicesComponent } from "./components/layout/player-dices/player-dices.component";
 import { SpellCardComponent } from "./components/layout/spell-card/spell-card.component";
 import { SearchViewComponent } from "./components/views/search-view/search-view.component";
-import { GenerateEncounterViewComponent } from "./components/views/generate-encounter-view/generate-encounter-view.component";
 import { SpellSearchComponent } from "./components/layout/spell-search/spell-search.component";
 import { AppRoutingModule } from "./module-imports/app-routing.module";
+import { ManageComponent } from "./components/views/manage/manage.component";
+import { CreateEncounterComponent } from "./components/views/create-encounter/create-encounter.component";
 
 @NgModule({
   declarations: [
@@ -68,8 +68,8 @@ import { AppRoutingModule } from "./module-imports/app-routing.module";
     MonsterSearchComponent,
     SpellCardComponent,
     SearchViewComponent,
-    GenerateEncounterViewComponent,
     SpellSearchComponent,
+    ManageComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),

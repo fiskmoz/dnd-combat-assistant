@@ -16,7 +16,8 @@ export class ButtonComponent implements OnInit {
     | "danger"
     | "warning"
     | "info"
-    | "light";
+    | "light"
+    | "dark";
   @Input() disabled: boolean;
   @Input() loading: boolean;
 

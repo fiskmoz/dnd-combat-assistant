@@ -1,7 +1,7 @@
-<div class="card">
+<div class="card bg-dynamic">
   <div class="card-body row">
     <div class="col-md-6 col-sm-12">
-      <a class="btn text-primary p-0" (click)="onNameClicked()"
+      <a class="btn text-primary d-inline p-0" (click)="onNameClicked()"
         >{{ monster.name }}
         {{ !!monster.initiative_suffix ? monster.initiative_suffix : "" }}</a
       >
@@ -15,7 +15,7 @@
         ><i>Max HP: {{ monster.max_hit_points }}</i></small
       >
     </div>
-    <div class="col-md-6 p-1 col-sm-12">
+    <div class="col-lg-6 px-lg-0 py-1 col-8">
       <app-adjust
         [decreaseButtonText]="'remove'"
         [increaseButtonText]="'duplicate'"
@@ -76,6 +76,7 @@
       <div class="row">
         <div class="col-md-9 col-sm-12">
           <app-textbox
+            [text]="damageText"
             [type]="'text'"
             [id]="monster.index"
             [placeholder]="'Damage:'"

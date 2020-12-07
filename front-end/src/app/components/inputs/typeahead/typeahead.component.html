@@ -2,7 +2,7 @@
 <input
   [id]="id"
   type="text"
-  class="form-control"
+  class="form-control bg-dynamic"
   [(ngModel)]="model"
   [ngbTypeahead]="search"
   (focus)="focus$.next($any($event).target.value)"

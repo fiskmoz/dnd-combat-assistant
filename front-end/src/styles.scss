@@ -4,3 +4,22 @@
 
 /* Importing Bootstrap SCSS file. */
 @import "~bootstrap/scss/bootstrap";
+
+.bg-brown {
+  background-color: #d9d1ba !important;
+}
+
+.bg-durian {
+  background-color: #e6d0ab !important;
+}
+
+.dark .bg-dynamic {
+  background-color: #343a40 !important;
+  color: #fff !important;
+  border-color: #fff !important;
+}
+
+.light .bg-dynamic {
+  background-color: #f8f9fa !important;
+  color: #343a40 !important;
+}

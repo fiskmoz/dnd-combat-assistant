@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light">
   <div class="">
     <a class="navbar-brand">
       <img class="img-fluid rounded" src="/assets/images/dnd-logo.png" alt="" />
@@ -28,6 +28,9 @@
         >
       </li>
       <li class="nav-item">
+        <a class="nav-link" id="nav_manage" [routerLink]="'manage'">Manage</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" id="nav_generate" [routerLink]="'generate'"
           >Generate</a
         >
@@ -41,5 +44,8 @@
         <a class="nav-link" id="nav_grid" [routerLink]="'grid'">Grids</a>
       </li>
     </ul>
+    <a class="nav-link pl-0" (click)="onModeToggle()">{{
+      invertTheme + " theme"
+    }}</a>
   </div>
 </nav>

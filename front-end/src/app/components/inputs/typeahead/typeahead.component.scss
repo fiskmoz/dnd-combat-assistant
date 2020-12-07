@@ -4,3 +4,19 @@
   overflow-y: auto !important;
   overflow-x: hidden !important;
 }
+
+::ng-deep .dark ngb-typeahead-window.dropdown-menu {
+  background-color: #343a40 !important;
+  color: #fff !important;
+  .dropdown-item {
+    color: #fff !important;
+  }
+}
+
+::ng-deep .light ngb-typeahead-window.dropdown-menu {
+  background-color: #f8f9fa !important;
+  color: #343a40 !important;
+  .dropdown-item {
+    color: #343a40 !important;
+  }
+}
