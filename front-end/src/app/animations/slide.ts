@@ -10,8 +10,8 @@ import {
 
 export const routeChangeAnimation = trigger("routeTransitionAnimations", [
   transition(
-    "search => player-tools, search => manage, search => generate, search => initiative, search => grid, \
-    player-tools => manage, player-tools => generate, player-tools => initiative, player-tools => grid, \
+    "search => dice, search => manage, search => generate, search => initiative, search => grid, \
+    dice => manage, dice => generate, dice => initiative, dice => grid, \
     manage => generate, manage => initiative, manage => grid, \
     generate => initiative, generate => grid, initiative => grid",
     [
@@ -34,8 +34,8 @@ export const routeChangeAnimation = trigger("routeTransitionAnimations", [
     ]
   ),
   transition(
-    "player-tools => search, manage => search, generate => search, initiative => search, grid => search, \
-    manage => player-tools, generate => player-tools, initiative => player-tools, grid => player-tools, \
+    "dice => search, manage => search, generate => search, initiative => search, grid => search, \
+    manage => dice, generate => dice, initiative => dice, grid => dice, \
     generate => manage, initiative => manage, grid => manage, \
     initiative => generate, grid => generate, grid => initiative",
     [

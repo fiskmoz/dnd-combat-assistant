@@ -1,5 +1,5 @@
-import { Spell } from "./../../../interfaces/spell";
 import { Component, OnInit, Input } from "@angular/core";
+import { Spell } from "src/app/interfaces/spell";
 
 @Component({
   selector: "app-spell-card",

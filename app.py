@@ -63,6 +63,14 @@ with open('./data/monsters_multiplier.json') as file:
 with open('./data/spells.json') as file:
     spells_book = json.load(file)
 
+# LOAD WEAPONS
+with open('./data/5e_weapons.json') as file:
+    weapons_data = json.load(file)
+
+# LOAD CONDITIONS
+with open('./data/5e_conditions.json') as file:
+    conditions_data = json.load(file)
+
 # CONSTANTS
 possible_locations = ["city", "village", "mountain", "cave",
                       "plain", "swamp", "forest", "underdark"]
@@ -90,7 +98,7 @@ blacklisted_sea_creatures = ['Sahuagin']
 
 
 @app.route('/search')
-@app.route('/player-tools')
+@app.route('/dice')
 @app.route('/generate')
 @app.route('/initiative')
 @app.route('/grid')
@@ -102,9 +110,9 @@ def index():
 @app.route('/api/encounter/thresholds')
 def threshholds():
     return app.response_class(
-        response = json.dumps(encounter_thresholds),
-        status = 200,
-        mimetype = 'application/json'
+        response=json.dumps(encounter_thresholds),
+        status=200,
+        mimetype='application/json'
     )
 
 
@@ -123,6 +131,24 @@ def multipliers():
         response=json.dumps(monsters_multiplier),
         status=200,
         mimetype='application/json')
+
+
+@app.route('/api/data/weapons')
+def get_weapons():
+    return app.response_class(
+        response=json.dumps(weapons_data),
+        status=200,
+        mimetype='application/json'
+    )
+
+
+@app.route('/api/data/conditions')
+def get_conditions():
+    return app.response_class(
+        response=json.dumps(conditions_data),
+        status=200,
+        mimetype='application/json'
+    )
 
 
 @app.route('/api/encounter/monster/quicksort')

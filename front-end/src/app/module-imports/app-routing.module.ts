@@ -2,9 +2,9 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { GridViewComponent } from "src/app/components/views/grid-view/grid-view.component";
 import { InitiativeViewComponent } from "src/app/components/views/initiative-view/initiative-view.component";
-import { PlayerToolsViewComponent } from "src/app/components/views/player-tools-view/player-tools-view.component";
 import { SearchViewComponent } from "src/app/components/views/search-view/search-view.component";
 import { CreateEncounterComponent } from "../components/views/create-encounter/create-encounter.component";
+import { DiceViewComponent } from "../components/views/dice-view/dice-view.component";
 import { ManageComponent } from "../components/views/manage/manage.component";
 
 const routes: Routes = [
@@ -34,9 +34,9 @@ const routes: Routes = [
     data: { animationState: "grid" },
   },
   {
-    path: "player-tools",
-    component: PlayerToolsViewComponent,
-    data: { animationState: "player-tools" },
+    path: "dice",
+    component: DiceViewComponent,
+    data: { animationState: "dice" },
   },
   {
     path: "**",
