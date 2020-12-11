@@ -1,6 +1,6 @@
-import { Spell } from "./../../../interfaces/spell";
-import { SpellService } from "./../../../services/spell.service";
 import { AfterViewInit, Component, OnInit } from "@angular/core";
+import { Spell } from "src/app/interfaces/spell";
+import { SpellService } from "src/app/services/spell.service";
 
 @Component({
   selector: "app-spell-search",

@@ -22,6 +22,66 @@
         <app-spell-search></app-spell-search>
       </ng-template>
     </li>
+    <li ngbNavItem="weapons">
+      <a ngbNavLink>Weapons</a>
+      <ng-template ngbNavContent>
+        <div class="row bg-dynamic">
+          <div class="col-lg-6 col-12">
+            <div class="card bg-dynamic">
+              <div class="card-body">
+                <div *ngIf="!!staticDataService.weapons">
+                  <app-typeahead
+                    [list]="weaponNames"
+                    [label]="'Search for a weapon!'"
+                    (selected)="selectedWeapon = $event"
+                    [id]="'weapons-search-typeahead'"
+                  >
+                  </app-typeahead>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="!!selectedWeapon" class="col-lg-6 col-12">
+            <app-weapon-card
+              [weapon]="specificSelectedWeapon"
+            ></app-weapon-card>
+          </div>
+        </div>
+      </ng-template>
+    </li>
+    <li ngbNavItem="conditions">
+      <a ngbNavLink>Conditions</a>
+      <ng-template ngbNavContent>
+        <div class="row bg-dynamic">
+          <div class="col-lg-6 col-12">
+            <div class="card bg-dynamic">
+              <div class="card-body">
+                <div *ngIf="!!staticDataService.conditions">
+                  <app-typeahead
+                    [list]="conditionNames"
+                    [label]="'Search for a condition!'"
+                    (selected)="selectedCondition = $event"
+                    [id]="'condition-search-typeahead'"
+                  >
+                  </app-typeahead>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="!!selectedCondition" class="col-lg-6 col-12">
+            <div class="card bg-dynamic">
+              <div class="card-body">
+                <h3>{{ specificSelectedCondition.name }}</h3>
+                <div><b>Description:</b></div>
+                <div style="white-space: pre-line">
+                  {{ specificSelectedCondition.desc }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </li>
   </ul>
 
   <div [ngbNavOutlet]="nav" class="ml-lg-4 ml-0 w-100"></div>

@@ -1,0 +1,33 @@
+<div class="card bg-dynamic">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <div class="header">
+          <h3>{{ weapon.name }}</h3>
+          <p>
+            <i>
+              {{ weapon.category }}
+            </i>
+          </p>
+        </div>
+        <div>
+          <p><b>Weight:</b> {{ weapon.weight }}</p>
+          <p><b>Cost:</b> {{ weapon.cost }}</p>
+          <p>
+            <b>Properties:</b>
+            <span *ngFor="let prop of weapon.properties"> {{ prop }},</span>
+          </p>
+          <br />
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <img src="{{ weapon.img_url }}" class="img-fluid rounded bg-dynamic" />
+        <div>
+          <p>
+            <b>Damage:</b> {{ weapon.damage_dice }} {{ weapon.damage_type }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
