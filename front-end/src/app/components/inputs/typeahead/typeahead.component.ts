@@ -54,7 +54,7 @@ export class TypeaheadComponent implements OnInit {
     );
   };
 
-  selectedItem($event: any, input: any) {
+  selectedItem($event: any) {
     this.selected.emit($event["item"]);
   }
 
