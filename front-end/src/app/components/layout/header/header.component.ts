@@ -20,9 +20,9 @@ export class HeaderComponent implements OnInit {
   get invertTheme(): string {
     switch (this.mode) {
       case "light":
-        return "dark";
+        return "Dark";
       case "dark":
-        return "light";
+        return "Light";
     }
   }
 }
