@@ -1,16 +1,16 @@
 <div
   class="site"
-  [class.dark]="mode === 'dark'"
-  [class.light]="mode === 'light'"
-  [class.bg-dark]="mode === 'dark'"
-  [class.bg-light]="mode === 'light'"
+  [class.dark]="themeService.mode === 'dark'"
+  [class.light]="themeService.mode === 'light'"
+  [class.bg-dark]="themeService.mode === 'dark'"
+  [class.bg-light]="themeService.mode === 'light'"
 >
   <div class="container">
     <div class="row">
       <div class="col-12 px-0">
         <app-header
           (lightdark$)="handleModeToggle()"
-          [mode]="this.mode"
+          [mode]="themeService.mode"
         ></app-header>
       </div>
     </div>

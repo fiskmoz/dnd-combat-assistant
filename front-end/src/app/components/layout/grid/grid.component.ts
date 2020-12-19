@@ -7,6 +7,7 @@ import {
 } from "@angular/cdk/drag-drop";
 import { GridEntity } from "src/app/interfaces/grid";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { ThemeService } from "src/app/services/theme.service";
 
 @Component({
   selector: "app-grid",
@@ -34,7 +35,8 @@ export class GridComponent implements OnInit, AfterViewInit {
 
   constructor(
     private gridService: GridService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private themeService: ThemeService
   ) {
     this.battlefield = null;
     this.toolbox = null;
@@ -62,7 +64,10 @@ export class GridComponent implements OnInit, AfterViewInit {
   }
 
   openModal(content: any): void {
-    this.modalService.open(content, { ariaLabelledBy: "modal" });
+    this.modalService.open(content, {
+      ariaLabelledBy: "modal",
+      windowClass: this.themeService.mode,
+    });
   }
   closeModal(): void {
     this.modalService.dismissAll();

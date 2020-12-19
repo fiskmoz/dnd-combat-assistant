@@ -4,15 +4,15 @@
       <div class="card-body">
         <h4>Encounter difficulty</h4>
         Easy:
-        {{ MonsterService.GetMonsterMultiplier(playerSerivce.easyEncounter) }}xp
+        {{ monsterService.GetMonsterMultiplier(playerService.easyEncounter) }}xp
         Medium:
         {{
-          MonsterService.GetMonsterMultiplier(playerSerivce.mediumEncounter)
+          monsterService.GetMonsterMultiplier(playerService.mediumEncounter)
         }}xp Hard:
-        {{ MonsterService.GetMonsterMultiplier(playerSerivce.hardEncounter) }}xp
+        {{ monsterService.GetMonsterMultiplier(playerService.hardEncounter) }}xp
         Deadly:
         {{
-          MonsterService.GetMonsterMultiplier(playerSerivce.deadlyEncounter)
+          monsterService.GetMonsterMultiplier(playerService.deadlyEncounter)
         }}xp
         <div class="d-flex">
           <div class="pr-2 pt-2">
@@ -28,12 +28,12 @@
     </div>
   </div>
   <div class="row">
-    <div *ngFor="let player of playerSerivce.playerList">
+    <div *ngFor="let player of playerService.playerList">
       <app-create-player
         [player]="player"
         (playerChanged$)="onPlayerChanged()"
-        (playerDuplicated$)="playerSerivce.AddNewPlayer(player)"
-        (playerRemoved$)="this.playerSerivce.RemovePlayer(player)"
+        (playerDuplicated$)="playerService.AddNewPlayer(player)"
+        (playerRemoved$)="this.playerService.RemovePlayer(player)"
       ></app-create-player>
     </div>
   </div>

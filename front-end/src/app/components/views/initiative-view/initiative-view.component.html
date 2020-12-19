@@ -61,7 +61,7 @@
   </div>
 </div>
 <ng-template #content let-modal>
-  <div class="modal-header">
+  <div class="modal-header bg-dynamic">
     <h4 id="modal-basic-title">Monster Stats</h4>
     <button
       type="button"
@@ -73,7 +73,7 @@
     </button>
   </div>
 
-  <div class="modal-body">
+  <div class="modal-body p-0 bg-dynamic">
     <app-monster-card
       [monster]="modalMonster"
       [enableOptions]="false"

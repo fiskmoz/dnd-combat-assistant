@@ -216,12 +216,14 @@ def generate():
     locations = request.args.get('locations')
     origins = request.args.get('origins')
     geolocation = request.args.get('geolocation')
+    spread = request.args.get('spread')
 
-    if partyxp == None or monsters == None or locations == None or origins == None or geolocation == None:
+    if partyxp == None or monsters == None or locations == None or origins == None or geolocation == None or spread == None:
         return SendBadRequest('Invalid request parameters')
 
     # should validate partyxp and monsters, non ints will not cause crash here.
-    challenge_ratings = GetChallengeRatings(int(partyxp), int(monsters))
+    challenge_ratings = GetChallengeRatings(
+        int(partyxp), int(monsters), int(spread))
     response_json = {}
     response_index = 0
     possible_types = []
@@ -306,7 +308,7 @@ def serve_static(path):
     return send_from_directory("static/", path, mimetype=mimetypes.guess_type(path)[0])
 
 
-def GetChallengeRatings(partyxp, members):
+def GetChallengeRatings(partyxp, members, spread):
     partyxp = partyxp / monsters_multiplier[str(members)]
     if members == 1:
         return [ChallengeRatingByExperience(partyxp)]
@@ -318,7 +320,8 @@ def GetChallengeRatings(partyxp, members):
                 str(ChallengeRatingByExperience(remainingxp)))
             continue
         # Adjust these for more fair encounters.
-        random_percentage = (random.randint(15, 35) / 100) / (members / 2)
+        random_percentage = (random.randint(
+            round(spread/2), spread) / 100) / (members / 2)
         challenge_ratings.append(
             str(ChallengeRatingByExperience(remainingxp*random_percentage)))
         remainingxp = remainingxp * (1 - random_percentage)

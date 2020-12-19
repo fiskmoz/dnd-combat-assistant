@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
 import { routeChangeAnimation } from "./animations/slide";
+import { ThemeService } from "./services/theme.service";
 
 @Component({
   selector: "app-root",
@@ -9,17 +10,7 @@ import { routeChangeAnimation } from "./animations/slide";
   animations: [routeChangeAnimation],
 })
 export class AppComponent {
-  public mode = "";
-  constructor() {
-    try {
-      this.mode = localStorage.getItem("mode");
-    } catch (e) {
-      console.log(e);
-    }
-    if (!this.mode) {
-      this.mode = "light";
-    }
-  }
+  constructor(public themeService: ThemeService) {}
   title = "dnd-assistant";
 
   prepareRoute(outlet: RouterOutlet) {
@@ -31,14 +22,6 @@ export class AppComponent {
   }
 
   handleModeToggle(): void {
-    switch (this.mode) {
-      case "light":
-        this.mode = "dark";
-        break;
-      case "dark":
-        this.mode = "light";
-        break;
-    }
-    localStorage.setItem("mode", this.mode);
+    this.themeService.toggleMode();
   }
 }
