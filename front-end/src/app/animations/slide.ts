@@ -27,8 +27,8 @@ export const routeChangeAnimation = trigger("routeTransitionAnimations", [
       query(":enter", [style({ left: "100%" })]),
       query(":leave", animateChild()),
       group([
-        query(":leave", [animate("200ms ease-out", style({ left: "-150%" }))]),
-        query(":enter", [animate("300ms ease-out", style({ left: "0%" }))]),
+        query(":leave", [animate("250ms ease-out", style({ left: "-150%" }))]),
+        query(":enter", [animate("250ms ease-out", style({ left: "0%" }))]),
       ]),
       query(":enter", animateChild()),
     ]
@@ -51,8 +51,8 @@ export const routeChangeAnimation = trigger("routeTransitionAnimations", [
       query(":enter", [style({ left: "-100%" })]),
       query(":leave", animateChild()),
       group([
-        query(":leave", [animate("300ms ease-out", style({ left: "150%" }))]),
-        query(":enter", [animate("300ms ease-out", style({ left: "0%" }))]),
+        query(":leave", [animate("250ms ease-out", style({ left: "150%" }))]),
+        query(":enter", [animate("250ms ease-out", style({ left: "0%" }))]),
       ]),
       query(":enter", animateChild()),
     ]

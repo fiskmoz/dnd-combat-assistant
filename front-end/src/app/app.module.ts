@@ -29,7 +29,6 @@ import { InitiativeEntityComponent } from "./components/layout/initiative-entity
 import { GridViewComponent } from "./components/views/grid-view/grid-view.component";
 import { GridComponent } from "./components/layout/grid/grid.component";
 import { InitiativeMonsterComponent } from "./components/layout/initiative-monster/initiative-monster.component";
-import { PlayerDicesComponent } from "./components/layout/player-dices/player-dices.component";
 import { SearchViewComponent } from "./components/views/search-view/search-view.component";
 import { AppRoutingModule } from "./module-imports/app-routing.module";
 import { ManageComponent } from "./components/views/manage/manage.component";
@@ -64,7 +63,6 @@ import { SliderComponent } from "./components/inputs/slider/slider.component";
     GridViewComponent,
     GridComponent,
     InitiativeMonsterComponent,
-    PlayerDicesComponent,
     DiceComponent,
     MonsterSearchComponent,
     SpellCardComponent,
