@@ -40,6 +40,7 @@ import { MonsterSearchComponent } from "./components/layout/search/monster-searc
 import { SpellCardComponent } from "./components/layout/cards/spell-card/spell-card.component";
 import { SpellSearchComponent } from "./components/layout/search/spell-search/spell-search.component";
 import { WeaponCardComponent } from "./components/layout/cards/weapon-card/weapon-card.component";
+import { SliderComponent } from "./components/inputs/slider/slider.component";
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { WeaponCardComponent } from "./components/layout/cards/weapon-card/weapo
     ManageComponent,
     DiceViewComponent,
     WeaponCardComponent,
+    SliderComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),

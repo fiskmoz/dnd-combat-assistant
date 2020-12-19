@@ -1,6 +1,22 @@
 <div class="row">
   <div class="col-md-6 col-sm-12">
-    <div class="card bg-dynamic">
+    <div *ngIf="!!monsterService.monstersMultiplier" class="card bg-dynamic">
+      <div class="card-body">
+        <h4>Encounter difficulty</h4>
+        Easy:
+        {{ monsterService.GetMonsterMultiplier(playerService.easyEncounter) }}xp
+        Medium:
+        {{
+          monsterService.GetMonsterMultiplier(playerService.mediumEncounter)
+        }}xp Hard:
+        {{ monsterService.GetMonsterMultiplier(playerService.hardEncounter) }}xp
+        Deadly:
+        {{
+          monsterService.GetMonsterMultiplier(playerService.deadlyEncounter)
+        }}xp
+      </div>
+    </div>
+    <div class="card bg-dynamic mt-3">
       <div class="card-body">
         <div>
           <h5>Monster Referenses:</h5>
@@ -154,6 +170,24 @@
             [inline]="true"
             (changed$)="locationChange($event)"
           ></app-checkbox>
+        </div>
+        <div class="col-12 text-center pt-2">
+          <div class="d-flex"></div>
+          <h5>Experience difference spread:</h5>
+          <div class="d-flex justify-content-center">
+            <div class="my-auto mr-4 font-weight-light">Different</div>
+            <div>
+              <app-slider
+                [value]="spread"
+                [min]="2"
+                [max]="100"
+                (changed$)="spread = $event"
+              ></app-slider>
+            </div>
+            <div class="my-auto ml-5 font-weight-light">Similar</div>
+          </div>
+
+          <div>{{ spread }}</div>
         </div>
         <div class="col-12 text-center pt-2">
           <app-button

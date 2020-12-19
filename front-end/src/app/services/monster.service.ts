@@ -54,6 +54,7 @@ export class MonsterService {
   GenerateRandomEncounter(
     monsters: string,
     partyxp: string,
+    spread: number,
     origins: string[],
     alignment?: string,
     locations?: string[],
@@ -72,6 +73,8 @@ export class MonsterService {
       partyxp +
       "&geolocation=" +
       geolocation +
+      "&spread=" +
+      spread +
       "&origins=" +
       origins.join("-");
     if (!!alignment) {
@@ -85,7 +88,7 @@ export class MonsterService {
         Object.assign(this.currentEncounter, r);
         this.InitializeNewMonsters();
         localStorage.setItem("monsters", JSON.stringify(this.currentEncounter));
-        resolve();
+        resolve("");
       });
     });
     return promise;

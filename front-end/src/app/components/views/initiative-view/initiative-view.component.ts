@@ -5,6 +5,7 @@ import { RandomService } from "src/app/services/random.service";
 import { InitiativeEntity } from "src/app/interfaces/initiative";
 import { Monster } from "src/app/interfaces/monster";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { ThemeService } from "src/app/services/theme.service";
 
 @Component({
   selector: "app-initiative",
@@ -16,7 +17,8 @@ export class InitiativeViewComponent implements OnInit {
     public monsterService: MonsterService,
     public playerService: PlayersService,
     public randomService: RandomService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private themeService: ThemeService
   ) {}
 
   public initiativeList: InitiativeEntity[];
@@ -32,7 +34,10 @@ export class InitiativeViewComponent implements OnInit {
     this.modalMonster = this.monsterService.currentEncounter.find(
       (m) => m.name === name
     );
-    this.modalService.open(content, { ariaLabelledBy: "modal" });
+    this.modalService.open(content, {
+      ariaLabelledBy: "modal",
+      windowClass: this.themeService.mode,
+    });
   }
   closeModal(): void {
     this.modalService.dismissAll();

@@ -15,7 +15,7 @@ import {
 export class CreateEncounterComponent implements OnInit {
   constructor(
     public monsterService: MonsterService,
-    private playerService: PlayersService
+    public playerService: PlayersService
   ) {}
 
   possibleGeoLocations = ["land", "sea", "sky"];
@@ -24,6 +24,7 @@ export class CreateEncounterComponent implements OnInit {
   locations = ["plain"];
   monsterTotal = "1";
   difficulty = "easy";
+  spread = 35;
   errorMSG = "";
 
   ngOnInit(): void {
@@ -34,6 +35,7 @@ export class CreateEncounterComponent implements OnInit {
       .GenerateRandomEncounter(
         this.monsterTotal,
         this.playerService.GetEncounterDifficulty(this.difficulty),
+        this.spread,
         this.origins,
         null,
         this.locations,

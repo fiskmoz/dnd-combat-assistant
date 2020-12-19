@@ -9,25 +9,25 @@ import { PlayersService } from "src/app/services/players.service";
 })
 export class CreatePlayerWrapperComponent implements OnInit {
   constructor(
-    public playerSerivce: PlayersService,
-    public MonsterService: MonsterService
+    public playerService: PlayersService,
+    public monsterService: MonsterService
   ) {}
 
   ngOnInit(): void {}
 
   onPlayerAdd() {
-    this.playerSerivce.AddNewPlayer();
+    this.playerService.AddNewPlayer();
   }
 
   onPlayerRemove() {
-    if (!!this.playerSerivce.playerList) {
-      this.playerSerivce.playerList.pop();
+    if (!!this.playerService.playerList) {
+      this.playerService.playerList.pop();
     }
-    this.playerSerivce.CalculateEncounterDifficulty();
+    this.playerService.CalculateEncounterDifficulty();
   }
 
   onPlayerChanged() {
-    this.playerSerivce.CalculateEncounterDifficulty();
+    this.playerService.CalculateEncounterDifficulty();
   }
 
   onSave() {
