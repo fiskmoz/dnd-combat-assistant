@@ -22,8 +22,8 @@ export class GridComponent implements OnInit, AfterViewInit {
   public battlefieldSquares: Array<GridEntity> = [];
 
   public closeResult: any;
-  public selectedColor: string;
-  public selectedText: string;
+  public selectedColor = "bg-white";
+  public selectedText = "";
 
   public toolboxIds: Array<string> = ["", "P", "M", "X"];
 
@@ -31,7 +31,7 @@ export class GridComponent implements OnInit, AfterViewInit {
   public battlefieldIndex: number;
   public toolbox: CdkDropList;
   public toolboxIndex: number;
-  public boxes = 120;
+  public boxes = 144;
 
   constructor(
     private gridService: GridService,
@@ -54,7 +54,7 @@ export class GridComponent implements OnInit, AfterViewInit {
         // tslint:disable-next-line: no-string-literal
         const data = JSON.parse(res.payload.data()["grid"]);
         for (let i = 0; i < this.boxes; i++) {
-          this.battlefieldSquares[i] = data[i];
+          if (!!data[i]) this.battlefieldSquares[i] = data[i];
         }
       },
       (err) => {
@@ -77,20 +77,33 @@ export class GridComponent implements OnInit, AfterViewInit {
 
   drop(event: CdkDragDrop<string[]>) {
     const currentIndex = parseInt(event.container.id, 10);
-    const previousIndex = event.previousIndex;
+    const previousIndex = parseInt(event.previousContainer.id, 10);
+    const toolboxIndex = event.previousIndex;
     if (event.previousContainer !== event.container) {
-      if (
-        this.battlefieldSquares[currentIndex].text ===
-          this.toolboxIds[previousIndex] &&
-        this.battlefieldSquares[currentIndex].color === this.selectedColor
-      ) {
-        return;
+      // HANDLE GRID TO GRID
+      if (!isNaN(previousIndex)) {
+        const tmp = this.battlefieldSquares[currentIndex];
+        this.battlefieldSquares[currentIndex] = this.battlefieldSquares[
+          previousIndex
+        ];
+        this.battlefieldSquares[previousIndex] = tmp;
       }
-      this.battlefieldSquares[currentIndex].text = this.toolboxIds[
-        previousIndex
-      ];
-      this.battlefieldSquares[currentIndex].color = this.selectedColor;
-      this.selectedText = this.toolboxIds[previousIndex];
+      // HANDLE TOOLBOX TO GRID
+      if (!!isNaN(previousIndex)) {
+        if (
+          this.battlefieldSquares[currentIndex].text !==
+            this.toolboxIds[toolboxIndex] ||
+          this.battlefieldSquares[currentIndex].color !== this.selectedColor
+        ) {
+          this.battlefieldSquares[currentIndex].text = this.toolboxIds[
+            toolboxIndex
+          ];
+          this.battlefieldSquares[currentIndex].color = this.selectedColor;
+          this.selectedText = this.toolboxIds[toolboxIndex];
+        }
+      }
+
+      // ALWAYS UPDATE
       this.gridService.UpdateGrid(
         JSON.stringify(Object.assign({}, this.battlefieldSquares))
       );
@@ -102,7 +115,7 @@ export class GridComponent implements OnInit, AfterViewInit {
   }
 
   onReset(): void {
-    for (let i = 0; i < 90; i++) {
+    for (let i = 0; i < this.boxes; i++) {
       this.battlefieldSquares[i] = {
         text: "",
         color: "bg-white",
