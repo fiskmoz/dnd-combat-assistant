@@ -1,35 +1,21 @@
 <div class="text-dark" cdkDropListGroup>
-  <div class="grid-container mx-auto bg-brown py-3">
-    <ng-container *ngFor="let item of battlefieldSquares; let j = index">
-      <div
-        cdkDropList
-        (cdkDropListDropped)="drop($event)"
-        [id]="j"
-        [cdkDropListDisabled]="true"
-        #battlefieldElem
-      >
-        <div
-          cdkDrag
-          (click)="handleClick(j)"
-          class="{{ 'grid-box ' + item.color }}"
-        >
-          {{ item.text != "0" ? item.text : null }}
-          <div *cdkDragPlaceholder></div>
-        </div>
-      </div>
-    </ng-container>
-  </div>
-  <div class="grid-container mx-auto mt-3 bg-brown">
+  <div class="grid-container mx-auto mb-3 bg-brown">
     <div class="d-flex justify-content-between w-100 px-2">
-      <div class="d-flex">
-        <span class="my-auto"
-          ><app-button
-            [text]="'Reset Board'"
-            [small]="true"
-            [type]="'info'"
-            (clicked$)="openModal(content)"
-          ></app-button
-        ></span>
+      <div class="my-auto px-4">
+        <div>Selected:</div>
+        <div class="{{ 'grid-box mt-3 ' + selectedColor }}">
+          {{ this.selectedText }}
+        </div>
+        <div class="mt-2 d-flex">
+          <div class="mx-auto">
+            <app-button
+              [text]="'Clear'"
+              [small]="true"
+              [type]="'info'"
+              (clicked$)="resetPrevious()"
+            ></app-button>
+          </div>
+        </div>
       </div>
       <div class="text-center">
         <p>Select the boxes you want</p>
@@ -103,23 +89,40 @@
           ></span>
         </div>
       </div>
-      <div class="">
-        <div>Selected:</div>
-        <div class="{{ 'grid-box mt-3 ' + selectedColor }}">
-          {{ this.selectedText }}
-        </div>
-        <div class="mt-2 d-flex">
-          <div class="mx-auto">
-            <app-button
-              [text]="'Clear'"
-              [small]="true"
-              [type]="'info'"
-              (clicked$)="resetPrevious()"
-            ></app-button>
-          </div>
-        </div>
+      <div class="d-flex">
+        <span class="my-auto px-4"
+          ><app-button
+            [text]="'Reset Board'"
+            [small]="true"
+            [type]="'info'"
+            (clicked$)="openModal(content)"
+          ></app-button
+        ></span>
       </div>
     </div>
+  </div>
+  <div class="grid-container mx-auto bg-brown py-3">
+    <ng-container *ngFor="let item of battlefieldSquares; let j = index">
+      <div
+        cdkDropList
+        class="mw"
+        (cdkDropListDropped)="drop($event)"
+        [id]="j"
+        #battlefieldElem
+      >
+        <div
+          cdkDrag
+          (click)="handleClick(j)"
+          class="{{ 'grid-box grid-box-main ' + item.color }}"
+        >
+          {{ item.text != "0" ? item.text : null }}
+          <div *cdkDragPlaceholder></div>
+        </div>
+        <div class="{{ 'grid-box  box-ground-layer ' + item.color }}">
+          {{ item.text != "0" ? item.text : null }}
+        </div>
+      </div>
+    </ng-container>
   </div>
 </div>
 

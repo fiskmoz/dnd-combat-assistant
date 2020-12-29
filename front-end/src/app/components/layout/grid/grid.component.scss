@@ -31,6 +31,13 @@
   .modal-dialogue {
     max-width: 82% !important;
   }
+  .box-ground-layer {
+    margin-left: -50px !important;
+    z-index: 0;
+  }
+  .mw {
+    max-width: 50px !important;
+  }
 }
 @media only screen and (max-width: 670px) {
   .grid-box {
@@ -44,6 +51,13 @@
   }
   .modal-dialogue {
     max-width: 82% !important;
+  }
+  .box-ground-layer {
+    margin-left: -35px !important;
+    z-index: 0;
+  }
+  .mw {
+    max-width: 35px !important;
   }
 }
 
@@ -63,6 +77,13 @@
   div {
     font-size: 12px;
   }
+  .box-ground-layer {
+    margin-left: -25px !important;
+    z-index: 0;
+  }
+  .mw {
+    max-width: 25px !important;
+  }
 }
 
 .grid-box:active {
@@ -75,6 +96,14 @@
   display: inline-flex;
   padding-right: 2px;
   padding-bottom: 2px;
+}
+.box-ground-layer {
+  margin-left: -70px;
+  z-index: 0;
+}
+
+.mw {
+  max-width: 70px;
 }
 
 .grid-container {
@@ -91,4 +120,21 @@
 .cdk-drag-placeholder {
   opacity: 1;
   background: red;
+}
+
+.cdk-drop-list-dragging {
+  .grid-box-main {
+    display: none;
+  }
+  .box-ground-layer {
+    margin-left: 0px !important;
+  }
+}
+.cdk-drop-list-receiving {
+  .grid-box-main {
+    display: none;
+  }
+  .box-ground-layer {
+    margin-left: 0px !important;
+  }
 }
