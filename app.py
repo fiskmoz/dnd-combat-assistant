@@ -31,7 +31,7 @@ else:
             "auth_uri": os.environ.get("auth_uri").replace("\\n", "\n"),
             "token_uri": os.environ.get("token_uri").replace("\\n", "\n"),
             "auth_provider_x509_cert_url": os.environ.get(
-                "auth_provider_x509_dcert_url"
+                "auth_provider_x509_cert_url"
             ).replace("\\n", "\n"),
             "client_x509_cert_url": os.environ.get("client_x509_cert_url").replace(
                 "\\n", "\n"
@@ -171,6 +171,7 @@ blacklisted_monsters = ["Commoner"]
 blacklisted_sea_creatures = ["Sahuagin"]
 
 print("initialize static data..")
+
 
 @app.route("/search")
 @app.route("/dice")
