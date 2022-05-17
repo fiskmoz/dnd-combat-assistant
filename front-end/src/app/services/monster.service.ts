@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { CrToTable, Monster, MonsterQuickSearch } from "../interfaces/monster";
 import { HttpClient } from "@angular/common/http";
-import { ValueConverter } from "@angular/compiler/src/render3/view/template";
 
 @Injectable({
   providedIn: "root",
@@ -113,10 +112,12 @@ export class MonsterService {
     this.currentEncounter.push(monster);
     this.monsterTotal = this.currentEncounter.length;
     this.AddSuffixToDuplicates();
+    localStorage.setItem("monsters", JSON.stringify(this.currentEncounter));
   }
   RemoveMonster(monster: Monster): void {
     this.currentEncounter.splice(this.currentEncounter.indexOf(monster), 1);
     this.monsterTotal = this.currentEncounter.length;
+    localStorage.setItem("monsters", JSON.stringify(this.currentEncounter));
   }
 
   InitializeNewMonsters() {

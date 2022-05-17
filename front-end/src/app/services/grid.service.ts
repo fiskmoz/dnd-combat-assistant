@@ -21,7 +21,7 @@ export class GridService {
       localStorage.removeItem("AuthenticatedGrid");
       return;
     }
-    this.gridid = localData["gridid"];
+    this.gridid = localData.gridid;
     this.isAuthenticated = !!this.gridid;
   }
 
@@ -29,7 +29,7 @@ export class GridService {
     const apiUrl =
       "/api/grids/update?password=" + this.password + "&gridid=" + this.gridid;
     this.http.post(apiUrl, data).subscribe((data: JSON) => {
-      this.isAuthenticated = data["response"] === "success";
+      this.isAuthenticated = (data as any).response === "success";
     });
   }
   Authentivate() {
@@ -40,14 +40,14 @@ export class GridService {
       this.gridid;
     this.http.get(apiUrl).subscribe(
       (data: JSON) => {
-        this.isAuthenticated = data["response"] === "success";
+        this.isAuthenticated = (data as any).response === "success";
         localStorage.setItem(
           "AuthenticatedGrid",
           JSON.stringify({ gridid: this.gridid, password: this.password })
         );
       },
       (err: Error) => {
-        this.status = err["error"];
+        this.status = (err as any).error;
         localStorage.removeItem("AuthenticatedGrid");
       }
     );
@@ -59,7 +59,9 @@ export class GridService {
   }
 
   GetGridChanges() {
-    if (!this.isAuthenticated) return;
+    if (!this.isAuthenticated) {
+      return;
+    }
     return this.firestore
       .collection("Grids")
       .doc(this.gridid)

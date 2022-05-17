@@ -19,7 +19,7 @@ export class RadioButtonsComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onRadioChange(event: Event) {
+  onRadioChange(event: Event): void {
     const target = event.target as HTMLInputElement;
     if (!target) {
       return;

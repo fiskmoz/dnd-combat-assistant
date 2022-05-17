@@ -1,11 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 
 @Component({
   selector: "app-textbox",
   templateUrl: "./textbox.component.html",
   styleUrls: ["./textbox.component.scss"],
 })
-export class TextboxComponent implements OnInit {
+export class TextboxComponent {
   @Input() type: "text" | "email" | "password";
   @Input() placeholder: string;
   @Input() invalid: boolean;
@@ -13,16 +13,15 @@ export class TextboxComponent implements OnInit {
   @Input() text: string;
 
   @Output() textChanged$ = new EventEmitter<string>();
+  @Output() inputSubmitted$ = new EventEmitter<void>();
 
-  constructor() {}
-
-  ngOnInit(): void {}
-
-  onTextChange(name: string) {
+  onTextChange(name: string): void {
     if (!name) {
       return;
     }
-
     this.textChanged$.emit(name);
+  }
+  submit(): void {
+    this.inputSubmitted$.emit();
   }
 }

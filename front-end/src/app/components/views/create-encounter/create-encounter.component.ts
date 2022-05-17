@@ -30,7 +30,7 @@ export class CreateEncounterComponent implements OnInit {
   ngOnInit(): void {
     this.ReadLocalStorage();
   }
-  onRandomEncounter() {
+  onRandomEncounter(): void {
     this.monsterService
       .GenerateRandomEncounter(
         this.monsterTotal,
@@ -54,7 +54,7 @@ export class CreateEncounterComponent implements OnInit {
       });
   }
 
-  refChange(event: CheckboxChangeEvent) {
+  refChange(event: CheckboxChangeEvent): void {
     if (event.checked && this.origins.indexOf(event.name) === -1) {
       this.origins.push(event.name);
     } else {
@@ -63,7 +63,7 @@ export class CreateEncounterComponent implements OnInit {
     this.UpdateLocalStorage();
   }
 
-  locationChange(event: CheckboxChangeEvent) {
+  locationChange(event: CheckboxChangeEvent): void {
     if (event.checked && this.locations.indexOf(event.name) === -1) {
       this.locations.push(event.name);
     } else {
@@ -71,21 +71,21 @@ export class CreateEncounterComponent implements OnInit {
     }
     this.UpdateLocalStorage();
   }
-  monsterTotalChange(event: string) {
+  monsterTotalChange(event: string): void {
     this.monsterTotal = event;
     this.UpdateLocalStorage();
     this.monsterService.monsterTotal = parseInt(this.monsterTotal, 10);
   }
-  encounterDifficultyChange(event: string) {
+  encounterDifficultyChange(event: string): void {
     this.difficulty = event;
     this.UpdateLocalStorage();
   }
 
-  geoLocationChange(event: RadioButtonChangeEvent) {
+  geoLocationChange(event: RadioButtonChangeEvent): void {
     this.geolocation = this.possibleGeoLocations[parseInt(event.id, 10)];
   }
 
-  private UpdateLocalStorage() {
+  private UpdateLocalStorage(): void {
     localStorage.setItem(
       "encounter_data",
       JSON.stringify({
@@ -97,32 +97,34 @@ export class CreateEncounterComponent implements OnInit {
     );
   }
 
-  onMonsterDuplicate(monster: Monster) {
+  onMonsterDuplicate(monster: Monster): void {
     this.monsterService.AddMonster(monster);
   }
 
-  onMonsterRemove(monster: Monster) {
+  onMonsterRemove(monster: Monster): void {
     this.monsterService.RemoveMonster(monster);
   }
 
-  private ReadLocalStorage() {
+  // PRIVATE FUNCTIONS
+
+  private ReadLocalStorage(): void {
     let storageJson = localStorage.getItem("encounter_data");
     if (!storageJson) {
       return;
     }
     storageJson = JSON.parse(storageJson);
     if (!!storageJson.hasOwnProperty("origins")) {
-      this.origins = storageJson["origins"];
+      this.origins = (storageJson as any).origins;
     }
     if (!!storageJson.hasOwnProperty("locations")) {
-      this.locations = storageJson["locations"];
+      this.locations = (storageJson as any).locations;
     }
     if (!!storageJson.hasOwnProperty("monsterTotal")) {
-      this.monsterTotal = storageJson["monsterTotal"];
+      this.monsterTotal = (storageJson as any).monsterTotal;
       this.monsterService.monsterTotal = parseInt(this.monsterTotal, 10);
     }
     if (!!storageJson.hasOwnProperty("difficulty")) {
-      this.difficulty = storageJson["difficulty"];
+      this.difficulty = (storageJson as any).difficulty;
     }
   }
 }

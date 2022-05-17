@@ -17,25 +17,25 @@ export class CreatePlayerComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  levelChanged(level: string) {
+  levelChanged(level: string): void {
     this.player.level = parseInt(level);
     this.playerChanged$.emit();
   }
 
-  nameChanged(name: string) {
+  nameChanged(name: string): void {
     this.player.name = name;
     this.playerChanged$.emit();
   }
 
-  initiativeChanged(init: string) {
+  initiativeChanged(init: string): void {
     this.player.initiative = parseInt(init);
     this.playerChanged$.emit();
   }
 
-  onDuplicatePlayer() {
+  onDuplicatePlayer(): void {
     this.playerDuplicated$.emit();
   }
-  onPlayerRemove() {
+  onPlayerRemove(): void {
     this.playerRemoved$.emit();
   }
 }

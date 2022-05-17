@@ -19,10 +19,10 @@ export class MonsterCardComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onRemoveMonster() {
+  onRemoveMonster(): void {
     this.remove$.emit(this.monster);
   }
-  onDuplicateMonster() {
+  onDuplicateMonster(): void {
     this.duplicate$.emit(this.monster);
   }
 }

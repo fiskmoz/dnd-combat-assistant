@@ -25,6 +25,26 @@ Navigate to project root
 `python app.py`
 
 navigate to front-end map:  
+`export NODE_OPTIONS=--openssl-legacy-provider`  
+`npm i`  
 `npm start`  
 or  
 `ng serve --proxy-config proxy.config.json`
+
+Create a firebase_creds.json with the following structure in the root map
+
+```
+{
+  "type": "---",
+  "project_id": "---",
+  "private_key_id": "---",
+  "private_key": "---",
+  "client_email": "---",
+  "client_id": "---",
+  "auth_uri": "---",
+  "token_uri": "---",
+  "auth_provider_x509_cert_url": "---",
+  "client_x509_cert_url": "---"
+}
+
+```

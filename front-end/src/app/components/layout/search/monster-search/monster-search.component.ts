@@ -33,9 +33,7 @@ export class MonsterSearchComponent implements OnInit {
           (m) => m.name
         ))
       : (this.localMonsterList = this.monsterService.monstersQuickSort
-          .filter((s) => {
-            return s.challenge_rating === this.crRequirement;
-          })
+          .filter((s) => s.challenge_rating === this.crRequirement)
           .map((s) => s.name));
   }
 

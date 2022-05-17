@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onModeToggle() {
+  onModeToggle(): void {
     this.lightdark$.emit();
   }
 

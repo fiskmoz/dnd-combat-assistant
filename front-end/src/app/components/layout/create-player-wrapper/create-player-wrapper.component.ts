@@ -15,18 +15,18 @@ export class CreatePlayerWrapperComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onPlayerAdd() {
+  onPlayerAdd(): void {
     this.playerService.AddNewPlayer();
   }
 
-  onPlayerRemove() {
+  onPlayerRemove(): void {
     if (!!this.playerService.playerList) {
       this.playerService.playerList.pop();
     }
     this.playerService.CalculateEncounterDifficulty();
   }
 
-  onPlayerChanged() {
+  onPlayerChanged(): void {
     this.playerService.CalculateEncounterDifficulty();
   }
 

@@ -19,11 +19,11 @@ export class InitiativeMonsterComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onInitiativeDamageTextChanged(damage: string) {
+  onInitiativeDamageTextChanged(damage: string): void {
     this.damageText = damage;
   }
 
-  onDamageDealt() {
+  onDamageDealt(): void {
     const damage: number = parseInt(this.damageText, 10);
     if (isNaN(damage)) {
       this.isTextValid = false;
@@ -39,15 +39,27 @@ export class InitiativeMonsterComponent implements OnInit {
     }
   }
 
-  onInitiativeChanged(initiative: string) {
+  onDamageHeal(): void {
+    const damage: number = parseInt(this.damageText, 10);
+    if (isNaN(damage)) {
+      this.isTextValid = false;
+      return;
+    }
+    this.isTextValid = true;
+    this.monster.hit_points = this.monster.hit_points + damage;
+    this.damageText = "";
+    this.changed$.emit(this.monster);
+  }
+
+  onInitiativeChanged(initiative: string): void {
     this.monster.initiative = parseInt(initiative, 10);
     this.changed$.emit(this.monster);
   }
 
-  onRemoveMonster() {
+  onRemoveMonster(): void {
     this.remove$.emit(this.monster);
   }
-  onDuplicateMonster() {
+  onDuplicateMonster(): void {
     this.duplicate$.emit(this.monster);
   }
 

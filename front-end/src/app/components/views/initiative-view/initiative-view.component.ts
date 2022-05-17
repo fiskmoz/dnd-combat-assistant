@@ -43,7 +43,7 @@ export class InitiativeViewComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
-  onInitiativeStart() {
+  onInitiativeStart(): void {
     this.initiativeList = [];
     if (!this.monsterService.currentEncounter) {
       return;
@@ -61,33 +61,33 @@ export class InitiativeViewComponent implements OnInit {
     this.RefreshIniativeState();
   }
 
-  onPlayerChanged() {
+  onPlayerChanged(): void {
     this.playerService.UpdateLocalStorage();
     this.RefreshIniativeState();
   }
 
-  onMonsterChanged(monster: Monster) {
+  onMonsterChanged(_monster: Monster): void {
     this.RefreshIniativeState();
   }
 
-  onNewSelected(monster: string) {
+  onNewSelected(monster: string): void {
     this.monsterService.GetMonsterDataByName(monster).then((data) => {
       this.monsterService.AddMonster(data[0]);
       this.RefreshIniativeState();
     });
   }
 
-  onDuplicateMonster(monster: Monster) {
+  onDuplicateMonster(monster: Monster): void {
     this.monsterService.AddMonster(monster);
     this.RefreshIniativeState();
   }
 
-  onRemoveMonster(monster: Monster) {
+  onRemoveMonster(monster: Monster): void {
     this.monsterService.RemoveMonster(monster);
     this.RefreshIniativeState();
   }
 
-  RefreshIniativeState() {
+  RefreshIniativeState(): void {
     this.initiativeList = [];
     this.monsterService.currentEncounter.forEach((m, index) => {
       m.index = index + 1;
@@ -128,9 +128,7 @@ export class InitiativeViewComponent implements OnInit {
   }
 
   SortInitiative(): void {
-    this.initiativeList.sort((a, b) => {
-      return b.initiative - a.initiative;
-    });
+    this.initiativeList.sort((a, b) => b.initiative - a.initiative);
   }
   DetermineInitiativeDuplicates(): void {
     this.initiativeList.forEach((ii) => {

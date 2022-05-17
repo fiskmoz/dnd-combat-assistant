@@ -58,7 +58,7 @@ export class PlayersService {
       return;
     }
     this.playerList.forEach((player: Player) => {
-      player.xpthreshhold = this.playerXpTable["levels"][player.level];
+      player.xpthreshhold = this.playerXpTable.levels[player.level];
     });
   }
 
@@ -120,7 +120,7 @@ export class PlayersService {
     }
     storageJson = JSON.parse(storageJson);
     if (!!storageJson.hasOwnProperty("playerList")) {
-      this.playerList = storageJson["playerList"];
+      this.playerList = (storageJson as any).playerList;
     }
   }
 }

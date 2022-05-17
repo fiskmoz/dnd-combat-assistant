@@ -17,16 +17,18 @@ export class DiceComponent implements OnInit {
 
   getTotal(): number {
     let total = 0;
-    if (!this.diceList) return 0;
+    if (!this.diceList) {
+      return 0;
+    }
     this.diceList.forEach((d) => {
       total += d;
     });
     return total;
   }
-  onRolledClick() {
+  onRolledClick(): void {
     this.rolled$.emit(this.dice);
   }
-  onClearedClick() {
+  onClearedClick(): void {
     this.cleared$.emit(this.dice);
   }
 }

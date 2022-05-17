@@ -54,8 +54,8 @@ export class TypeaheadComponent implements OnInit {
     );
   };
 
-  selectedItem($event: any) {
-    this.selected.emit($event["item"]);
+  selectedItem($event: any): void {
+    this.selected.emit($event.item);
   }
 
   ngOnInit(): void {}

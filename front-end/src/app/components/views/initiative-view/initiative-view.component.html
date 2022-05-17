@@ -24,7 +24,7 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-4 mt-3 col-12">
+    <div class="col-lg-3 mt-3 col-12">
       <span *ngFor="let player of playerService.playerList">
         <app-create-player
           [player]="player"
@@ -34,7 +34,7 @@
         </app-create-player>
       </span>
     </div>
-    <div class="col-lg-4 mt-3 col-12">
+    <div class="col-lg-5 mt-3 col-12">
       <span *ngFor="let monster of monsterService.currentEncounter">
         <app-initiative-monster
           [monster]="monster"

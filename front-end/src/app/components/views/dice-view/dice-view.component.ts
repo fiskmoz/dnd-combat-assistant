@@ -17,7 +17,7 @@ export class DiceViewComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  handleCleard(dice: string) {
+  handleCleard(dice: string): void {
     switch (dice) {
       case "D4":
         this.d4list = [];
@@ -40,7 +40,7 @@ export class DiceViewComponent implements OnInit {
     }
   }
 
-  handleRoll(dice: string) {
+  handleRoll(dice: string): void {
     switch (dice) {
       case "D4":
         this.d4list.push(this.randomService.GetRandomNumber(1, 4));

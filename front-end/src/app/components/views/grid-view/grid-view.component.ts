@@ -13,19 +13,19 @@ export class GridViewComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  handleGridIdChange(gridid: string) {
+  handleGridIdChange(gridid: string): void {
     this.gridService.gridid = gridid;
     this.gridService.status = "";
   }
 
-  handlePasswordChange(password: string) {
+  handlePasswordChange(password: string): void {
     this.gridService.password = password;
   }
 
-  handleLogin() {
+  handleLogin(): void {
     this.gridService.Authentivate();
   }
-  handleLeave() {
+  handleLeave(): void {
     this.gridService.Leave();
   }
 }

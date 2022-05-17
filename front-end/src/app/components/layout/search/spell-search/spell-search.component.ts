@@ -39,11 +39,11 @@ export class SpellSearchComponent implements OnInit {
       this.levelrequirement === -1
         ? this.spellService.spellsQuickSort.map((s) => s.name)
         : this.spellService.spellsQuickSort
-            .filter((s) => {
-              return this.levelrequirement === 0
+            .filter((s) =>
+              this.levelrequirement === 0
                 ? s.level === "cantrip"
-                : s.level === this.levelrequirement.toString();
-            })
+                : s.level === this.levelrequirement.toString()
+            )
             .map((s) => s.name);
   }
 

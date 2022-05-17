@@ -20,7 +20,7 @@ export class DropdownComponent implements OnInit {
     this.defaultSelection = this.list[parseInt(this.default, 10)];
   }
 
-  onChange(target: string) {
+  onChange(target: string): void {
     if (!target) {
       return;
     }

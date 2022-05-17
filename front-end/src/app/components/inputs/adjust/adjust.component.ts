@@ -15,11 +15,11 @@ export class AdjustComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onIncrease(event: Event) {
+  onIncrease(_event: Event): void {
     this.increased$.emit();
   }
 
-  onDecrease(event: Event) {
+  onDecrease(_event: Event) {
     this.decreased$.emit();
   }
 }

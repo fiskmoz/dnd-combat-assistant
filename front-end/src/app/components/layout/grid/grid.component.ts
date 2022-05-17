@@ -51,10 +51,12 @@ export class GridComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.gridService.GetGridChanges().subscribe(
       (res) => {
-        // tslint:disable-next-line: no-string-literal
+        // eslint-disable-next-line @typescript-eslint/dot-notation
         const data = JSON.parse(res.payload.data()["grid"]);
         for (let i = 0; i < this.boxes; i++) {
-          if (!!data[i]) this.battlefieldSquares[i] = data[i];
+          if (!!data[i]) {
+            this.battlefieldSquares[i] = data[i];
+          }
         }
       },
       (err) => {
@@ -73,9 +75,9 @@ export class GridComponent implements OnInit, AfterViewInit {
     this.modalService.dismissAll();
   }
 
-  ngAfterViewInit() {}
+  ngAfterViewInit(): void {}
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<string[]>): void {
     const currentIndex = parseInt(event.container.id, 10);
     const previousIndex = parseInt(event.previousContainer.id, 10);
     const toolboxIndex = event.previousIndex;
@@ -83,9 +85,8 @@ export class GridComponent implements OnInit, AfterViewInit {
       // HANDLE GRID TO GRID
       if (!isNaN(previousIndex)) {
         const tmp = this.battlefieldSquares[currentIndex];
-        this.battlefieldSquares[currentIndex] = this.battlefieldSquares[
-          previousIndex
-        ];
+        this.battlefieldSquares[currentIndex] =
+          this.battlefieldSquares[previousIndex];
         this.battlefieldSquares[previousIndex] = tmp;
       }
       // HANDLE TOOLBOX TO GRID
@@ -95,9 +96,8 @@ export class GridComponent implements OnInit, AfterViewInit {
             this.toolboxIds[toolboxIndex] ||
           this.battlefieldSquares[currentIndex].color !== this.selectedColor
         ) {
-          this.battlefieldSquares[currentIndex].text = this.toolboxIds[
-            toolboxIndex
-          ];
+          this.battlefieldSquares[currentIndex].text =
+            this.toolboxIds[toolboxIndex];
           this.battlefieldSquares[currentIndex].color = this.selectedColor;
           this.selectedText = this.toolboxIds[toolboxIndex];
         }

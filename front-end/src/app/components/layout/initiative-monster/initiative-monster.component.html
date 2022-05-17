@@ -1,6 +1,6 @@
 <div class="card bg-dynamic">
-  <div class="card-body row">
-    <div class="col-md-6 col-sm-12">
+  <div class="card-body row no-gutters">
+    <div class="col-lg-6 col-md-12">
       <a class="btn text-primary d-inline p-0" (click)="onNameClicked()"
         >{{ monster.name }}
         {{ !!monster.initiative_suffix ? monster.initiative_suffix : "" }}</a
@@ -23,7 +23,7 @@
         (increased$)="onDuplicateMonster()"
       ></app-adjust>
     </div>
-    <div class="col-md-6 col-sm-12">
+    <div class="col-lg-3 col-md-12">
       initiative:
       <app-dropdown
         [list]="[
@@ -66,33 +66,41 @@
         (change$)="onInitiativeChanged($event)"
       ></app-dropdown>
     </div>
-    <div class="col-md-6 col-sm-12">
+    <div class="col-lg-6 col-md-12 pl-2">
       <small *ngIf="!!isTextValid"
         ><i>Current HP: {{ monster.hit_points }}</i></small
       >
       <small class="text-danger" *ngIf="!isTextValid"
         ><i>Invalid damage!</i></small
       >
-      <div class="row">
-        <div class="col-md-9 col-sm-12">
-          <app-textbox
-            [text]="damageText"
-            [type]="'text'"
-            [id]="monster.index"
-            [placeholder]="'Damage:'"
-            (textChanged$)="onInitiativeDamageTextChanged($event)"
-          >
-          </app-textbox>
-        </div>
-        <div class="col-md-3 col-sm-12 pl-0 text-center">
-          <app-button
-            [text]="'Go!'"
-            [large]="false"
-            [small]="true"
-            [type]="'danger'"
-            (clicked$)="onDamageDealt()"
-          ></app-button>
-        </div>
+      <app-textbox
+        [text]="damageText"
+        [type]="'text'"
+        [id]="monster.index"
+        [placeholder]="'Damage:'"
+        (textChanged$)="onInitiativeDamageTextChanged($event)"
+        (inputSubmitted$)="onDamageDealt()"
+      >
+      </app-textbox>
+    </div>
+    <div class="col-lg-3 col-md-12 text-center flex-lg-column flex-row">
+      <div>
+        <app-button
+          [text]="'Heal!'"
+          [large]="false"
+          [small]="true"
+          [type]="'primary'"
+          (clicked$)="onDamageHeal()"
+        ></app-button>
+      </div>
+      <div class="mt-3">
+        <app-button
+          [text]="'Damage!'"
+          [large]="false"
+          [small]="true"
+          [type]="'danger'"
+          (clicked$)="onDamageDealt()"
+        ></app-button>
       </div>
     </div>
   </div>
