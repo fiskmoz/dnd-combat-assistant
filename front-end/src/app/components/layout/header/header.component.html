@@ -1,49 +1,35 @@
-<nav class="navbar navbar-expand-lg navbar-light">
-  <div class="">
-    <a class="navbar-brand">
-      <img class="img-fluid rounded" src="/assets/images/dnd-logo.png" alt="" />
-    </a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  </div>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <link />
-        <a class="nav-link" id="nav_search" [routerLink]="'search'">Search</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="nav_dice" [routerLink]="'dice'">Dice</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="nav_manage" [routerLink]="'manage'">Manage</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="nav_generate" [routerLink]="'generate'"
-          >Generate</a
-        >
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="nav_initiative" [routerLink]="'initiative'"
-          >Initiative</a
-        >
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="nav_grid" [routerLink]="'grid'">Grids</a>
-      </li>
-    </ul>
-    <a class="nav-link pl-0" (click)="onModeToggle()">{{
-      invertTheme + " theme"
-    }}</a>
+<nav class="container-fluid">
+  <div class="d-flex flex-wrap flex-sm-nowrap">
+    <img class="img-fluid rounded" src="/assets/images/dnd-logo.png" alt="" />
+    <div class="d-flex w-100">
+      <div class="d-flex flex-md-row flex-column">
+        <div class="mx-3 my-auto">
+          <link />
+          <a class="nav-link" id="nav_search" [routerLink]="'search'">Search</a>
+        </div>
+        <div class="mx-3 my-auto">
+          <a class="nav-link" id="nav_dice" [routerLink]="'dice'">Dice</a>
+        </div>
+        <div class="mx-3 my-auto">
+          <a class="nav-link" id="nav_manage" [routerLink]="'manage'">Manage</a>
+        </div>
+        <div class="mx-3 my-auto">
+          <a class="nav-link" id="nav_generate" [routerLink]="'generate'"
+            >Generate</a
+          >
+        </div>
+        <div class="mx-3 my-auto">
+          <a class="nav-link" id="nav_initiative" [routerLink]="'initiative'"
+            >Initiative</a
+          >
+        </div>
+        <div class="mx-3 my-auto">
+          <a class="nav-link" id="nav_grid" [routerLink]="'grid'">Grids</a>
+        </div>
+      </div>
+      <div class="my-auto ms-auto">
+        <a (click)="onModeToggle()">{{ invertTheme + " theme" }}</a>
+      </div>
+    </div>
   </div>
 </nav>

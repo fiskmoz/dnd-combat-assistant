@@ -89,6 +89,7 @@ export class InitiativeViewComponent implements OnInit {
 
   RefreshIniativeState(): void {
     this.initiativeList = [];
+    if (!this.monsterService.currentEncounter) return;
     this.monsterService.currentEncounter.forEach((m, index) => {
       m.index = index + 1;
       this.initiativeList.push({
@@ -100,6 +101,7 @@ export class InitiativeViewComponent implements OnInit {
         priority: !!m.prio ? m.prio : 0,
         monster: true,
         suffix: !!m.initiative_suffix ? m.initiative_suffix : null,
+        img_url: m.img_url,
       } as InitiativeEntity);
     });
     const prevLen = this.initiativeList.length;

@@ -18,16 +18,16 @@
         </app-button>
       </div>
     </div>
-    <div class="ml-auto d-flex">
+    <div class="ms-auto d-flex">
       <div class="img-container my-auto">
-        <summary *ngIf="entity.monster">
+        <div class="btn p-0" *ngIf="entity.monster">
           <img
-            src="https://i.imgur.com/OWTsHDl.jpeg"
+            [src]="entity.img_url"
             alt=""
             class="img-thumbnail img-fluid p-0"
             (click)="onImageClick()"
           />
-        </summary>
+        </div>
         <img
           *ngIf="entity.player"
           src="https://i.imgur.com/ZSH9ikY.jpg"

@@ -1,40 +1,44 @@
 <div class="container">
   <div class="row">
-    <div class="card bg-dynamic">
-      <div class="card-body">
-        <h4>Encounter difficulty</h4>
-        Easy:
-        {{ monsterService.GetMonsterMultiplier(playerService.easyEncounter) }}xp
-        Medium:
-        {{
-          monsterService.GetMonsterMultiplier(playerService.mediumEncounter)
-        }}xp Hard:
-        {{ monsterService.GetMonsterMultiplier(playerService.hardEncounter) }}xp
-        Deadly:
-        {{
-          monsterService.GetMonsterMultiplier(playerService.deadlyEncounter)
-        }}xp
-        <div class="d-flex">
-          <div class="pr-2 pt-2">
-            <app-button
-              [text]="'Add Player'"
-              [small]="true"
-              [type]="'primary'"
-              (clicked$)="onPlayerAdd()"
-            ></app-button>
+    <div class="col-md-6 col-sm-12">
+      <div class="card bg-dynamic">
+        <div class="card-body">
+          <h4>Encounter difficulty</h4>
+          Easy:
+          {{
+            monsterService.GetMonsterMultiplier(playerService.easyEncounter)
+          }}xp Medium:
+          {{
+            monsterService.GetMonsterMultiplier(playerService.mediumEncounter)
+          }}xp Hard:
+          {{
+            monsterService.GetMonsterMultiplier(playerService.hardEncounter)
+          }}xp Deadly:
+          {{
+            monsterService.GetMonsterMultiplier(playerService.deadlyEncounter)
+          }}xp
+          <div class="d-flex">
+            <div class="pr-2 pt-2">
+              <app-button
+                [text]="'Add Player'"
+                [small]="true"
+                [type]="'primary'"
+                (clicked$)="onPlayerAdd()"
+              ></app-button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div *ngFor="let player of playerService.playerList">
-      <app-create-player
-        [player]="player"
-        (playerChanged$)="onPlayerChanged()"
-        (playerDuplicated$)="playerService.AddNewPlayer(player)"
-        (playerRemoved$)="this.playerService.RemovePlayer(player)"
-      ></app-create-player>
+    <div class="col-md-6 col-sm-12">
+      <div *ngFor="let player of playerService.playerList">
+        <app-create-player
+          [player]="player"
+          (playerChanged$)="onPlayerChanged()"
+          (playerDuplicated$)="playerService.AddNewPlayer(player)"
+          (playerRemoved$)="this.playerService.RemovePlayer(player)"
+        ></app-create-player>
+      </div>
     </div>
   </div>
 </div>

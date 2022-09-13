@@ -2,8 +2,6 @@
 
 @import "bootstrap";
 
-/* Importing Bootstrap SCSS file. */
-@import "~bootstrap/scss/bootstrap";
 
 .bg-brown {
   background-color: #d9d1ba !important;
@@ -14,7 +12,7 @@
 }
 
 .dark .bg-dynamic {
-  background-color: #343a40 !important;
+  background-color: #212529 !important;
   color: #fff !important;
   border-color: #fff !important;
 }

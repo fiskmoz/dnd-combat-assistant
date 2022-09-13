@@ -6,7 +6,7 @@ import { HttpClient } from "@angular/common/http";
   providedIn: "root",
 })
 export class MonsterService {
-  public currentEncounter: Monster[];
+  public currentEncounter: Monster[] = [];
   public monstersQuickSort: MonsterQuickSearch[];
   public crToXpTable: CrToTable[];
   public monstersMultiplier: JSON;
@@ -44,6 +44,7 @@ export class MonsterService {
     });
     try {
       this.currentEncounter = JSON.parse(localStorage.getItem("monsters"));
+      if (!this.currentEncounter) this.currentEncounter = [];
     } catch (e) {
       console.log(e);
       this.currentEncounter = [];

@@ -8,4 +8,5 @@ export interface InitiativeEntity {
   hitpoints?: number;
   player?: boolean;
   monster?: boolean;
+  img_url?: string;
 }
