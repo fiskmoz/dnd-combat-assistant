@@ -31,7 +31,7 @@
     "tslib": "^2.4.0",
     "typescript": "~4.8.3",
     "zone.js": "~0.11.8",
-    "postinstall": "ng build --aot --prod"
+    "postinstall": "ng build --configuration production --aot"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.2.2",
