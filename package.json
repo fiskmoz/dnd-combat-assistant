@@ -4,6 +4,6 @@
     "npm": "8.19.2"
   },
   "scripts": {
-    "heroku-postbuild": "cd front-end && npm cache clean --force && npm install"
+    "heroku-postbuild": "cd front-end && npm cache clean --force && npm install --include=dev"
   }
 }
