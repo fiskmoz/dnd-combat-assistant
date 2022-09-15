@@ -4,9 +4,6 @@
     "npm": "6.14.4"
   },
   "scripts": {
-    "heroku-postbuild": "cd front-end && npm install"
-  },
-  "dependencies": {
-    "@typescript-eslint/eslint-plugin-tslint": "^5.37.0"
+    "heroku-postbuild": "cd front-end && npm cache clean --force && npm install"
   }
 }
