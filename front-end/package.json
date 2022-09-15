@@ -30,7 +30,8 @@
     "rxjs": "~7.5.6",
     "tslib": "^2.4.0",
     "typescript": "~4.8.3",
-    "zone.js": "~0.11.8"
+    "zone.js": "~0.11.8",
+    "postinstall": "ng build --aot --prod"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.2.2",
