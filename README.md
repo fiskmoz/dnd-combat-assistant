@@ -49,8 +49,9 @@ Create a firebase_creds.json with the following structure in the back-end map:
 
 ```
 
-
-py -3 -m venv venv
+cd back-end
+py -m venv venv
 start venv/Scripts/activate
 . venv/Scripts/activate
+pip i -r ../requirements.txt
 deactivate
