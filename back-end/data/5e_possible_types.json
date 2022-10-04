@@ -1,0 +1,47 @@
+{
+  "city": ["construct", "elemental", "humanoid, undead", "aberration", "fiend"],
+  "village": [
+    "construct",
+    "elemental",
+    "humanoid",
+    "dragon",
+    "monstrosity",
+    "giant",
+    "aberration",
+    "fiend"
+  ],
+  "mountain": ["giant", "dragon", "monstrosity", "humanoid", "celestial"],
+  "cave": [
+    "monstrosity",
+    "dragon",
+    "elemental",
+    "plant",
+    "giant",
+    "aberration",
+    "swarm of Tiny beasts",
+    "beasts",
+    "humanoid"
+  ],
+  "plain": [
+    "humanoid",
+    "fiend",
+    "beast",
+    "undead",
+    "ooze",
+    "dragon",
+    "elemental",
+    "humanoid",
+    "plant",
+    "swarm of Tiny beasts"
+  ],
+  "swamp": ["giant", "ooze", "monstrosity", "swarm of Tiny beasts", "humanoid"],
+  "forest": [
+    "beast",
+    "ooze",
+    "plant",
+    "swarm of tiny beasts,'monstrosity",
+    "humanoid",
+    "fey"
+  ],
+  "underdark": ["undead", "fiend", "humanoid", "dragon"]
+}

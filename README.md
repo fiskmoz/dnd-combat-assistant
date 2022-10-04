@@ -31,7 +31,7 @@ navigate to front-end map:
 or  
 `ng serve --proxy-config proxy.config.json`
 
-Create a firebase_creds.json with the following structure in the root map
+Create a firebase_creds.json with the following structure in the back-end map:
 
 ```
 {
@@ -48,3 +48,9 @@ Create a firebase_creds.json with the following structure in the root map
 }
 
 ```
+
+
+py -3 -m venv venv
+start venv/Scripts/activate
+. venv/Scripts/activate
+deactivate

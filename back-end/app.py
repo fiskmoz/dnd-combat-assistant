@@ -44,7 +44,8 @@ print("initialize creds..")
 
 firebase_admin.initialize_app(cred)
 db = firestore.client()
-grids_auth = {el.id: el.to_dict() for el in db.collection(u"Campaigns").stream()}
+grids_auth = {el.id: el.to_dict()
+              for el in db.collection(u"Campaigns").stream()}
 
 # LOAD MONSTER DATA
 with open("./data/monstersv2.json") as file:
@@ -74,6 +75,10 @@ with open("./data/5e_weapons.json") as file:
 with open("./data/5e_conditions.json") as file:
     conditions_data = json.load(file)
 
+# LOAD POSSIBLE TYPES
+with open("./data/5e_possible_types.json") as file:
+    possible_types_dict = json.load(file)
+
 # CONSTANTS
 possible_locations = [
     "city",
@@ -85,54 +90,6 @@ possible_locations = [
     "forest",
     "underdark",
 ]
-# Extend possible types
-possible_types_dict = {
-    "city": ["construct", "elemental", "humanoid, undead", "aberration", "fiend"],
-    "village": [
-        "construct",
-        "elemental",
-        "humanoid",
-        "dragon",
-        "monstrosity",
-        "giant",
-        "aberration",
-        "fiend",
-    ],
-    "mountain": ["giant", "dragon", "monstrosity", "humanoid", "celestial"],
-    "cave": [
-        "monstrosity",
-        "dragon",
-        "elemental",
-        "plant",
-        "giant",
-        "aberration",
-        "swarm of Tiny beasts",
-        "beasts",
-        "humanoid",
-    ],
-    "plain": [
-        "humanoid",
-        "fiend",
-        "beast",
-        "undead",
-        "ooze",
-        "dragon",
-        "elemental",
-        "humanoid",
-        "plant",
-        "swarm of Tiny beasts",
-    ],
-    "swamp": ["giant", "ooze", "monstrosity", "swarm of Tiny beasts", "humanoid"],
-    "forest": [
-        "beast",
-        "ooze",
-        "plant",
-        "swarm of tiny beasts,'monstrosity",
-        "humanoid",
-        "fey",
-    ],
-    "underdark": ["undead", "fiend", "humanoid", "dragon"],
-}
 
 possible_allignments = [
     "lawful good",
@@ -272,7 +229,8 @@ def name():
     if name is None:
         return SendBadRequest("name is not set propperly")
 
-    monster = [value for value in monster_data if name == value["name"].lower()]
+    monster = [value for value in monster_data if name ==
+               value["name"].lower()]
     if monster is None:
         return SendBadRequest("could not find monster with that name")
     response = app.response_class(
@@ -316,7 +274,8 @@ def generate():
         return SendBadRequest("Invalid request parameters")
 
     # should validate partyxp and monsters, non ints will not cause crash here.
-    challenge_ratings = GetChallengeRatings(int(partyxp), int(monsters), int(spread))
+    challenge_ratings = GetChallengeRatings(
+        int(partyxp), int(monsters), int(spread))
     response_json = {}
     response_index = 0
     possible_types = []
@@ -414,7 +373,8 @@ def GetChallengeRatings(partyxp, members, spread):
     remainingxp = partyxp
     for index in range(members):
         if index + 1 == members:
-            challenge_ratings.append(str(ChallengeRatingByExperience(remainingxp)))
+            challenge_ratings.append(
+                str(ChallengeRatingByExperience(remainingxp)))
             continue
         # Adjust these for more fair encounters.
         random_percentage = (random.randint(round(spread / 2), spread) / 100) / (
@@ -438,7 +398,8 @@ def ChallengeRatingByExperience(experience):
             if (
                 experience
                 <= int(cr_to_xp_table[cr])
-                + (int(cr_to_xp_table[cr]) - int(cr_to_xp_table[previous_cr])) / 1.5
+                + (int(cr_to_xp_table[cr]) -
+                   int(cr_to_xp_table[previous_cr])) / 1.5
             ):
                 return cr
 
