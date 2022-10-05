@@ -49,9 +49,31 @@ Create a firebase_creds.json with the following structure in the back-end map:
 
 ```
 
+## Gettings started python specific
+
+### vscode extensions
+Python   
+Pylint
+
+Start venv in terminal (bash)
+```
 cd back-end
 py -m venv venv
-start venv/Scripts/activate
-. venv/Scripts/activate
+source venv/Scripts/activate
+```
+Installing requirements and deactivating
+```
 pip i -r ../requirements.txt
 deactivate
+```
+
+If vscode fails to lint etc, select the virtual environment as the interpreter
+```
+ctrl+shift+p
+python select interpreter
+venv/Scripts/python  
+```
+To enable vscode formatting add this to user settings JSON
+```
+"python.formatting.autopep8Args": ["--max-line-length", "120", "--experimental"],
+```

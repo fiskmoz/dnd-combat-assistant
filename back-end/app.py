@@ -1,8 +1,12 @@
-from flask import Flask, request, send_from_directory
+""" backend starts here """
+
 import os
 import mimetypes
 import json
 import random
+from inspect import _void
+from flask import Flask, request, send_from_directory
+
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
@@ -15,7 +19,7 @@ mimetypes.add_type("image/vnd.microsoft.icon", ".ico", True)
 
 # LOAD FIREBASE ADMIN RIGHTS
 if os.path.isfile("./firebase_creds.json"):
-    with open("./firebase_creds.json") as file:
+    with open("./firebase_creds.json", encoding='UTF-8') as file:
         cred = credentials.Certificate(json.load(file))
         app.config["ENV"] = "development"
         app.config["DEBUG"] = True
@@ -38,45 +42,44 @@ else:
             ),
         }
     )
-if cred == None:
+if cred is None:
     raise RuntimeError("Failed to fetch firebase credentials")
 print("initialize creds..")
 
 firebase_admin.initialize_app(cred)
 db = firestore.client()
-grids_auth = {el.id: el.to_dict()
-              for el in db.collection(u"Campaigns").stream()}
+grids_auth = {el.id: el.to_dict() for el in db.collection("Campaigns").stream()}
 
 # LOAD MONSTER DATA
-with open("./data/monstersv2.json") as file:
+with open("./data/monstersv2.json", encoding='UTF-8') as file:
     monster_data = json.load(file)
 
 # LOAD CR TO XP TABLE
-with open("./data/challenge_rating_to_xp.json") as file:
+with open("./data/challenge_rating_to_xp.json", encoding='UTF-8') as file:
     cr_to_xp_table = json.load(file)
 
 # LOAD ENCOUNTER XP THRESHOLDS
-with open("./data/encounter_thresholds.json") as file:
+with open("./data/encounter_thresholds.json", encoding='UTF-8') as file:
     encounter_thresholds = json.load(file)
 
 # LOAD MONSTERS MULTIPLIER
-with open("./data/monsters_multiplier.json") as file:
+with open("./data/monsters_multiplier.json", encoding='UTF-8') as file:
     monsters_multiplier = json.load(file)
 
 # LOAD SPELLS
-with open("./data/spells.json") as file:
+with open("./data/spells.json", encoding='UTF-8') as file:
     spells_book = json.load(file)
 
 # LOAD WEAPONS
-with open("./data/5e_weapons.json") as file:
+with open("./data/5e_weapons.json", encoding='UTF-8') as file:
     weapons_data = json.load(file)
 
 # LOAD CONDITIONS
-with open("./data/5e_conditions.json") as file:
+with open("./data/5e_conditions.json", encoding='UTF-8') as file:
     conditions_data = json.load(file)
 
 # LOAD POSSIBLE TYPES
-with open("./data/5e_possible_types.json") as file:
+with open("./data/5e_possible_types.json", encoding='UTF-8') as file:
     possible_types_dict = json.load(file)
 
 # CONSTANTS
@@ -137,11 +140,13 @@ print("initialize static data..")
 @app.route("/grid")
 @app.route("/")
 def index():
-    return send_from_directory("static/", "index.html")
+    """returns static data for the angular application"""
+    return send_from_directory("../static/", "index.html")
 
 
 @app.route("/api/encounter/thresholds")
-def threshholds():
+def thresholds():
+    """returns the thresholds for different encounter difficulties"""
     return app.response_class(
         response=json.dumps(encounter_thresholds),
         status=200,
@@ -151,6 +156,7 @@ def threshholds():
 
 @app.route("/api/encounter/crtable")
 def crtable():
+    """returns the encounter challenge rating table"""
     return app.response_class(
         response=json.dumps(cr_to_xp_table), status=200, mimetype="application/json"
     )
@@ -158,6 +164,7 @@ def crtable():
 
 @app.route("/api/encounter/multiplier")
 def multipliers():
+    """returns the encounter multiplier"""
     return app.response_class(
         response=json.dumps(monsters_multiplier),
         status=200,
@@ -167,6 +174,7 @@ def multipliers():
 
 @app.route("/api/data/weapons")
 def get_weapons():
+    """returns all available weapons"""
     return app.response_class(
         response=json.dumps(weapons_data), status=200, mimetype="application/json"
     )
@@ -174,6 +182,7 @@ def get_weapons():
 
 @app.route("/api/data/conditions")
 def get_conditions():
+    """returns all available conditions"""
     return app.response_class(
         response=json.dumps(conditions_data), status=200, mimetype="application/json"
     )
@@ -181,6 +190,7 @@ def get_conditions():
 
 @app.route("/api/encounter/monster/quicksort")
 def monster_quicksort():
+    """returns a subset of all monster data as list"""
     return app.response_class(
         response=json.dumps(
             dict(
@@ -203,6 +213,7 @@ def monster_quicksort():
 
 @app.route("/api/spellbook/quicksort")
 def spell_quicksort():
+    """returns a subset of all spelldata as list"""
     return app.response_class(
         response=json.dumps(
             dict(
@@ -224,15 +235,16 @@ def spell_quicksort():
 
 
 @app.route("/api/encounter/monster")
-def name():
-    name = request.args.get("name").lower()
-    if name is None:
-        return SendBadRequest("name is not set propperly")
+def get_monster_by_name():
+    """gets monster by name"""
+    monster_name = request.args.get("name").lower()
+    if monster_name is None:
+        return send_bad_request("name is not set propperly")
 
-    monster = [value for value in monster_data if name ==
+    monster = [value for value in monster_data if monster_name ==
                value["name"].lower()]
     if monster is None:
-        return SendBadRequest("could not find monster with that name")
+        return send_bad_request("could not find monster with that name")
     response = app.response_class(
         response=json.dumps(monster), status=200, mimetype="application/json"
     )
@@ -240,14 +252,16 @@ def name():
 
 
 @app.route("/api/spellbook/spell")
-def get_spell():
-    name = request.args.get("name").lower()
-    if name is None:
-        return SendBadRequest("name is not set propperly")
+def get_spell_by_name():
+    """gets spell by name"""
+    spell_name = request.args.get("name").lower()
+    if spell_name is None:
+        return send_bad_request("name is not set propperly")
 
-    spell = [value for value in spells_book if name == value["name"].lower()]
+    spell = [value for value in spells_book if spell_name ==
+             value["name"].lower()]
     if spell is None:
-        return SendBadRequest("could not find monster with that name")
+        return send_bad_request("could not find spell with that name")
     response = app.response_class(
         response=json.dumps(spell), status=200, mimetype="application/json"
     )
@@ -256,6 +270,7 @@ def get_spell():
 
 @app.route("/api/encounter/generate")
 def generate():
+    """generates encounter by providing specificed params"""
     partyxp = request.args.get("partyxp")
     monsters = request.args.get("monsters")
     locations = request.args.get("locations")
@@ -264,17 +279,17 @@ def generate():
     spread = request.args.get("spread")
 
     if (
-        partyxp == None
-        or monsters == None
-        or locations == None
-        or origins == None
-        or geolocation == None
-        or spread == None
+        partyxp is None
+        or monsters is None
+        or locations is None
+        or origins is None
+        or geolocation is None
+        or spread is None
     ):
-        return SendBadRequest("Invalid request parameters")
+        return send_bad_request("Invalid request parameters")
 
     # should validate partyxp and monsters, non ints will not cause crash here.
-    challenge_ratings = GetChallengeRatings(
+    challenge_ratings = get_challenge_ratings(
         int(partyxp), int(monsters), int(spread))
     response_json = {}
     response_index = 0
@@ -290,7 +305,7 @@ def generate():
     possible_types = list(dict.fromkeys(possible_types))
     random.shuffle(monster_data)
 
-    for key in range(len(monster_data)):
+    for key in enumerate(monster_data):
         if (
             not monster_data[key]["challenge_rating"] in challenge_ratings
             or monster_data[key]["named"]
@@ -299,9 +314,9 @@ def generate():
             continue
         if monster_data[key]["type"] not in possible_types:
             continue
-        if not monsterFitsGeolocation(key, geolocation):
+        if not monster_fits_geolocation(key, geolocation):
             continue
-        if not monsterFitsPreviousType(key, previous_type):
+        if not monster_fits_previous_type(key, previous_type):
             if monster_data[key]["type"] != "humanoid":
                 continue
         if monster_data[key]["name"] in blacklisted_monsters:
@@ -319,7 +334,7 @@ def generate():
 
     if len(challenge_ratings) > 0:
         for rating in challenge_ratings:
-            for monster_key in range(len(response_json)):
+            for monster_key in enumerate(response_json):
                 if response_json[monster_key]["challenge_rating"] == rating:
                     response_json[response_index] = response_json[monster_key]
                     response_index += 1
@@ -332,26 +347,28 @@ def generate():
 
 @app.route("/api/grids/authenticate")
 def grid_auth():
+    """updates the firebase grid with provided data"""
     gridid = request.args.get("gridid")
     password = request.args.get("password")
-    if grids_auth.get(gridid) != None:
-        if grids_auth.get(gridid).get("password") == password:
-            return app.response_class(
-                response=json.dumps({"response": "success"}),
-                status=200,
-                mimetype="application/json",
-            )
-        return SendBadRequest("Invalid credentials")
-    return SendBadRequest("No grid with that ID was found")
+    if grids_auth[gridid] is None:
+        return send_bad_request("No grid with that ID was found")
+    if grids_auth.get(gridid).get("password") == password:
+        return app.response_class(
+            response=json.dumps({"response": "success"}),
+            status=200,
+            mimetype="application/json",
+        )
+    return send_bad_request("Invalid credentials")
 
 
 @app.route("/api/grids/update", methods=["POST"])
 def grid_update():
+    """updates the firebase grid with provided data"""
     gridid = request.args.get("gridid")
     data = request.data.decode("utf-8")
-    if grids_auth.get(gridid) == None:
-        return SendBadRequest("No such room")
-    db.collection(u"Grids").document(gridid).update({"grid": data})
+    if grids_auth[gridid] is None:
+        return send_bad_request("No grid with that ID was found")
+    db.collection("Grids").document(gridid).update({"grid": data})
     return app.response_class(
         response=json.dumps({"response": "success"}),
         status=200,
@@ -362,49 +379,60 @@ def grid_update():
 @app.route("/", defaults={"path": ""})
 @app.route("/<path:path>")
 def serve_static(path):
-    return send_from_directory("static/", path, mimetype=mimetypes.guess_type(path)[0])
+    """serves static files for the frontend"""
+    return send_from_directory("../static/", path, mimetype=mimetypes.guess_type(path)[0])
 
 
-def GetChallengeRatings(partyxp, members, spread):
+###
+
+# PRIVATE
+
+###
+
+def get_challenge_ratings(partyxp: int, members: int, spread: int) -> list[str]:
+    """gets a list of challenge ratings for a party adjusted by input params"""
     partyxp = partyxp / monsters_multiplier[str(members)]
     if members == 1:
-        return [ChallengeRatingByExperience(partyxp)]
+        return [challenge_ratings_by_experience(partyxp)]
     challenge_ratings = []
     remainingxp = partyxp
-    for index in range(members):
-        if index + 1 == members:
+    for m_index in range(members):
+        if m_index + 1 == members:
             challenge_ratings.append(
-                str(ChallengeRatingByExperience(remainingxp)))
+                str(challenge_ratings_by_experience(remainingxp)))
             continue
         # Adjust these for more fair encounters.
         random_percentage = (random.randint(round(spread / 2), spread) / 100) / (
             members / 2
         )
         challenge_ratings.append(
-            str(ChallengeRatingByExperience(remainingxp * random_percentage))
+            str(challenge_ratings_by_experience(
+                remainingxp * random_percentage))
         )
         remainingxp = remainingxp * (1 - random_percentage)
     return challenge_ratings
 
 
-def ChallengeRatingByExperience(experience):
-    previous_cr = None
-    for cr in cr_to_xp_table:
-        if previous_cr == None:
-            if experience <= int(cr_to_xp_table[cr]):
-                return cr
-            previous_cr = cr
+def challenge_ratings_by_experience(experience: int) -> str:
+    """determine callenge rating by the provided experience"""
+    previous_challenge_rating = None
+    for challenge_rating in cr_to_xp_table:
+        if previous_challenge_rating is None:
+            if experience <= int(cr_to_xp_table[challenge_rating]):
+                return challenge_rating
+            previous_challenge_rating = challenge_rating
         else:
             if (
                 experience
-                <= int(cr_to_xp_table[cr])
-                + (int(cr_to_xp_table[cr]) -
-                   int(cr_to_xp_table[previous_cr])) / 1.5
+                <= int(cr_to_xp_table[challenge_rating])
+                + (int(cr_to_xp_table[challenge_rating]) -
+                   int(cr_to_xp_table[previous_challenge_rating])) / 1.5
             ):
-                return cr
+                return challenge_rating
 
 
-def monsterFitsGeolocation(key, geolocation):
+def monster_fits_geolocation(key: int, geolocation: str) -> bool:
+    """determine if monster a specific geolocation as string"""
     if geolocation == "sea":
         if "swim" in monster_data[key]["speed_json"]:
             return True
@@ -433,7 +461,8 @@ def monsterFitsGeolocation(key, geolocation):
     return True
 
 
-def monsterFitsPreviousType(key, previous_type):
+def monster_fits_previous_type(key: int, previous_type: str) -> bool:
+    """determine if monster fits the previous geolocation type"""
     if previous_type == "":
         return True
     if monster_data[key]["type"] == previous_type:
@@ -441,7 +470,8 @@ def monsterFitsPreviousType(key, previous_type):
     return False
 
 
-def SendBadRequest(text):
+def send_bad_request(text: str) -> _void:
+    """Sends a bad request with the provided text"""
     return app.response_class(response=text, status=400, mimetype="application/text")
 
 
