@@ -307,7 +307,7 @@ def generate():
     possible_types = list(dict.fromkeys(possible_types))
     random.shuffle(monster_data)
 
-    for key in enumerate(monster_data):
+    for key in range(len(monster_data)):
         if (
             not monster_data[key]["challenge_rating"] in challenge_ratings
             or monster_data[key]["named"]
@@ -336,7 +336,7 @@ def generate():
 
     if len(challenge_ratings) > 0:
         for rating in challenge_ratings:
-            for monster_key in enumerate(response_json):
+            for monster_key in range(len(response_json)):
                 if response_json[monster_key]["challenge_rating"] == rating:
                     response_json[response_index] = response_json[monster_key]
                     response_index += 1
