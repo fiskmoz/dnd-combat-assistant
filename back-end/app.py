@@ -5,6 +5,7 @@ import mimetypes
 import json
 import random
 from inspect import _void
+from typing import List
 from flask import Flask, request, send_from_directory
 
 import firebase_admin
@@ -48,7 +49,8 @@ print("initialize creds..")
 
 firebase_admin.initialize_app(cred)
 db = firestore.client()
-grids_auth = {el.id: el.to_dict() for el in db.collection("Campaigns").stream()}
+grids_auth = {el.id: el.to_dict()
+              for el in db.collection("Campaigns").stream()}
 
 # LOAD MONSTER DATA
 with open("./data/monstersv2.json", encoding='UTF-8') as file:
@@ -389,7 +391,7 @@ def serve_static(path):
 
 ###
 
-def get_challenge_ratings(partyxp: int, members: int, spread: int) -> list[str]:
+def get_challenge_ratings(partyxp: int, members: int, spread: int) -> List[str]:
     """gets a list of challenge ratings for a party adjusted by input params"""
     partyxp = partyxp / monsters_multiplier[str(members)]
     if members == 1:
