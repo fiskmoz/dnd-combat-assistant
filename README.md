@@ -77,3 +77,13 @@ To enable vscode formatting add this to user settings JSON
 ```
 "python.formatting.autopep8Args": ["--max-line-length", "120", "--experimental"],
 ```
+
+Update requirements
+
+```
+pip install pip-upgrader
+```
+
+```
+pip-upgrade
+```

@@ -9,8 +9,7 @@ from typing import List
 from flask import Flask, request, send_from_directory
 
 import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import firestore
+from firebase_admin import credentials, firestore
 
 
 app = Flask(__name__)
