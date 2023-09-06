@@ -73972,5 +73972,53 @@
     "origin": "TOB",
     "named": true,
     "img_url": "https://i.imgur.com/ZSH9ikY.jpg"
+  },
+  {
+    "name": "Scholarly Agent",
+    "size": "Medium",
+    "type": "humanoid",
+    "subtype": "any race",
+    "alignment": "any alignment",
+    "armor_class": 11,
+    "hit_points": "22",
+    "hit_dice": "4d8 + 4",
+    "speed": "30 ft.",
+
+    "strength": 10,
+    "dexterity": 12,
+    "constitution": 12,
+    "intelligence": 16,
+    "wisdom": 12,
+    "charisma": 10,
+    "perception": 11,
+    "dexterity_save": "+5",
+    "stealth": "+5",
+    "intelligence_save": "+5",
+    "special_abilities": [
+      {
+        "name": "Spellcasting",
+        "desc": "The agent casts one of the following spells, using Intelligence as the spellcasting ability:\n\n- {@spell dancing lights}\n- {@spell mage hand}\n\n1/day: {@spell comprehend languages}, {@spell identify} (as an action), {@spell mage armor}",
+        "attack_bonus": 0,
+        "ability": "int",
+        "displayAs": "action"
+      }
+    ],
+    "actions": [
+      {
+        "name": "Arcane Shock",
+        "desc": "{@atk ms,rs} {@hit 5} to hit, reach 5 ft. or range 30 ft., one target. {@h}14 ({@damage 2d10 + 3}) lightning damage. If the target is a creature, it can't take reactions until the start of its next turn.",
+        "attack_bonus": 0
+      }
+    ],
+    "legendary_desc": "Glyph of Shielding. The agent adds 2 to its AC against one attack that would hit it. To do so, the agent must be able to see the attacker and have a free hand.",
+    "legendary_actions": [],
+    "languages": "Common plus one other language",
+    "challenge_rating": "1",
+    "origin": "SRD",
+    "speed_json": {
+      "walk": 30
+    },
+    "named": false,
+    "img_url": "https://vignette.wikia.nocookie.net/forgottenrealms/images/7/77/Acolyte.jpg/revision/latest/top-crop/width/720/height/900?cb=20190202025341"
   }
 ]
