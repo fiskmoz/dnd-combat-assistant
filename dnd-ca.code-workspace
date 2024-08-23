@@ -1,0 +1,18 @@
+{
+  "folders": [
+    {
+      "path": "back-end"
+    },
+    {
+      "path": "front-end"
+    },
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/venv": true
+    }
+  }
+}

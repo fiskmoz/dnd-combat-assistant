@@ -40,6 +40,8 @@ import { SpellCardComponent } from "./components/layout/cards/spell-card/spell-c
 import { SpellSearchComponent } from "./components/layout/search/spell-search/spell-search.component";
 import { WeaponCardComponent } from "./components/layout/cards/weapon-card/weapon-card.component";
 import { SliderComponent } from "./components/inputs/slider/slider.component";
+import { NpcGeneratorComponent } from './components/views/npc-generator/npc-generator.component';
+import { PlayerCardComponent } from './components/layout/cards/player-card/player-card.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +74,8 @@ import { SliderComponent } from "./components/inputs/slider/slider.component";
     DiceViewComponent,
     WeaponCardComponent,
     SliderComponent,
+    NpcGeneratorComponent,
+    PlayerCardComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),

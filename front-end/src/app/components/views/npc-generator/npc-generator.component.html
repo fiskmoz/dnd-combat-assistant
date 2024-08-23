@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-12">
+    <div class="my-3">
+      <app-textbox
+        [type]="'text'"
+        [placeholder]="'inspiration'"
+        [id]="'inspiration'"
+        (inputSubmitted$)="generateNewNpc($event)"
+      ></app-textbox>
+    </div>
+    <ng-container *ngIf="player">
+      <app-player-card [player]="player"></app-player-card>
+    </ng-container>
+  </div>
+</div>

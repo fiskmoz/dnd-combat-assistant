@@ -13,7 +13,8 @@ export const routeChangeAnimation = trigger("routeTransitionAnimations", [
     "search => dice, search => manage, search => generate, search => initiative, search => grid, \
     dice => manage, dice => generate, dice => initiative, dice => grid, \
     manage => generate, manage => initiative, manage => grid, \
-    generate => initiative, generate => grid, initiative => grid",
+    generate => initiative, generate => grid, initiative => grid, \
+    search => npc, dice => npc, manage => npc, generate => npc, initiative => npc, grid => npc",
     [
       style({ position: "relative" }),
       query(":enter, :leave", [
@@ -37,7 +38,8 @@ export const routeChangeAnimation = trigger("routeTransitionAnimations", [
     "dice => search, manage => search, generate => search, initiative => search, grid => search, \
     manage => dice, generate => dice, initiative => dice, grid => dice, \
     generate => manage, initiative => manage, grid => manage, \
-    initiative => generate, grid => generate, grid => initiative",
+    initiative => generate, grid => generate, grid => initiative, \
+    npc => search, npc => dice, npc => manage, npc => generate, npc => initiative, npc => grid",
     [
       style({ position: "relative" }),
       query(":enter, :leave", [

@@ -6,6 +6,7 @@ import { SearchViewComponent } from "src/app/components/views/search-view/search
 import { CreateEncounterComponent } from "../components/views/create-encounter/create-encounter.component";
 import { DiceViewComponent } from "../components/views/dice-view/dice-view.component";
 import { ManageComponent } from "../components/views/manage/manage.component";
+import { NpcGeneratorComponent } from "../components/views/npc-generator/npc-generator.component";
 
 const routes: Routes = [
   {
@@ -37,6 +38,11 @@ const routes: Routes = [
     path: "dice",
     component: DiceViewComponent,
     data: { animationState: "dice" },
+  },
+  {
+    path: "npc",
+    component: NpcGeneratorComponent,
+    data: { animationState: "npc" },
   },
   {
     path: "**",

@@ -12,6 +12,9 @@ export interface Player {
   constitution?: number;
   charisma?: number;
   prio?: number;
+  description?: string;
+  alignment?: string;
+  background?: string;
 }
 
 export interface PlayerXpTable {
